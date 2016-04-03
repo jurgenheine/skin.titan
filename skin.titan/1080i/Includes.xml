@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <includes>
     <include file="Defaults.xml" />
+	<include file="IncludesSubtitleVariables.xml" />
     <include file="IncludesVariables.xml" />
-    <include file="IncludesHomeTitanTiles.xml" />
+	<include file="IncludesHomeTitanTiles.xml" />
     <include file="IncludesHomeWidgets.xml" />
 	<include file="IncludesHomeTitanTilesSubMenu.xml" />
     <include file="IncludesNowPlaying.xml" />
@@ -428,5 +429,5 @@
             </control>
         </control>
     </include>
-
+    		
 </includes>

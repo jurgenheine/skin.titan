@@ -6,9 +6,10 @@
     <include>allViewIds</include>
 	<onload condition="System.HasAddon(script.tv.show.next.aired)">RunScript(script.tv.show.next.aired,backend=True)</onload>
 	<onload>ClearProperty(ShowViewSubMenu, Home)</onload>
+	<onload>RunScript(script.skinsubtitlechecker,availabereturnvalue=subavailable&notavailablereturnvalue=subnotavailable&searchreturnvalue=subunknown&backend=True)</onload>
 	<onunload>ClearProperty(ShowViewSubMenu, Home)</onunload>
 	<onunload>ClearProperty(SkinHelper.ExtraFanArtPath, Home)</onunload>
-    
+
     <controls>
         <!-- Video Background -->
         <include>GlobalBackground</include>

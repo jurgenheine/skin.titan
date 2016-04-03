@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <includes>
-
+  <include file="IncludesSubtitleVariables.xml" />
 <include name="allViewIds">
 	<views>10,50,51,52,500,501,502,503,504,505,53,54,55,506,56,57,58,59,507,508,509,510,511,512,513,514,515,516,517,518,519,520,521</views>
 </include>
@@ -2029,6 +2029,16 @@
             </control>
             <control type="image">
                 <include>mediaflags_large_layout</include>
+        <texture>$VAR[skinsubtitlechecker.available,flags/flags_large/subtitle/,.png]</texture>
+        <visible>!IsEmpty(window.Property(skinsubtitlechecker.language.iso_639_2t))</visible>
+      </control>
+      <control type="image">
+        <include>mediaflags_large_layout</include>
+        <texture>$VAR[skinsubtitlechecker.language.iso_639_1,special://skin/extras/flags/language/,.png]</texture>
+        <visible>!IsEmpty(window.Property(skinsubtitlechecker.language.iso_639_2t))</visible>
+      </control>
+      <control type="image">
+        <include>mediaflags_large_layout</include>
                 <texture fallback="flags/flags_large/mpaa/NR.png">$VAR[mediaflags_large_rating]</texture>
                 <visible>!IsEmpty(ListItem.MPAA) + ![Skin.HasSetting(EnableTouchSupport) + Skin.String(mediaflagsstyle,large_color) + !Skin.HasSetting(CompactHeader)]</visible>
             </control>
@@ -2085,6 +2095,16 @@
                 <texture>$INFO[Container(510).ListItem.SubtitleLanguage,special://skin/extras/flags/language/,.png]</texture>
                 <visible>!IsEmpty(Container(510).ListItem.SubtitleLanguage) + Skin.String(mediaflagsstyle,large_color)</visible>
             </control>
+      <control type="image">
+        <include>mediaflags_large_layout</include>
+        <texture>$VAR[skinsubtitlechecker.available,flags/flags_large/subtitle/,.png]</texture>
+        <visible>!IsEmpty(window.Property(skinsubtitlechecker.language.iso_639_2t))</visible>
+      </control>
+      <control type="image">
+        <include>mediaflags_large_layout</include>
+        <texture>$VAR[skinsubtitlechecker.language.iso_639_1,special://skin/extras/flags/language/,.png]</texture>
+        <visible>!IsEmpty(window.Property(skinsubtitlechecker.language.iso_639_2t))</visible>
+      </control>
             <control type="image" id="11510">
                 <include>mediaflags_large_layout</include>
                 <texture fallback="NR.png">$VAR[mediaflags_large_rating_widgets]</texture>
@@ -2139,6 +2159,16 @@
                 <texture>$INFO[Container(520).ListItem.SubtitleLanguage,special://skin/extras/flags/language/,.png]</texture>
                 <visible>!IsEmpty(Container(520).ListItem.SubtitleLanguage) + Skin.String(mediaflagsstyle,large_color)</visible>
             </control>
+      <control type="image">
+        <include>mediaflags_large_layout</include>
+        <texture>$VAR[skinsubtitlechecker.available,flags/flags_large/subtitle/,.png]</texture>
+        <visible>!IsEmpty(window.Property(skinsubtitlechecker.language.iso_639_2t))</visible>
+      </control>
+      <control type="image">
+        <include>mediaflags_large_layout</include>
+        <texture>$VAR[skinsubtitlechecker.language.iso_639_1,special://skin/extras/flags/language/,.png]</texture>
+        <visible>!IsEmpty(window.Property(skinsubtitlechecker.language.iso_639_2t))</visible>
+      </control>
             <control type="image" id="11520">
                 <include>mediaflags_large_layout</include>
                 <texture fallback="NR.png">$VAR[mediaflags_large_rating_widgets]</texture>
@@ -2193,6 +2223,16 @@
                 <texture>$INFO[Container(530).ListItem.SubtitleLanguage,special://skin/extras/flags/language/,.png]</texture>
                 <visible>!IsEmpty(Container(530).ListItem.SubtitleLanguage) + Skin.String(mediaflagsstyle,large_color)</visible>
             </control>
+      <control type="image">
+        <include>mediaflags_large_layout</include>
+        <texture>$VAR[skinsubtitlechecker.available,flags/flags_large/subtitle/,.png]</texture>
+        <visible>!IsEmpty(window.Property(skinsubtitlechecker.language.iso_639_2t))</visible>
+      </control>
+      <control type="image">
+        <include>mediaflags_large_layout</include>
+        <texture>$VAR[skinsubtitlechecker.language.iso_639_1,special://skin/extras/flags/language/,.png]</texture>
+        <visible>!IsEmpty(window.Property(skinsubtitlechecker.language.iso_639_2t))</visible>
+      </control>
             <control type="image" id="11530">
                 <include>mediaflags_large_layout</include>
                 <texture fallback="NR.png">$VAR[mediaflags_large_rating_widgets]</texture>
@@ -2247,6 +2287,16 @@
                 <texture>$INFO[Container(540).ListItem.SubtitleLanguage,special://skin/extras/flags/language/,.png]</texture>
                 <visible>!IsEmpty(Container(540).ListItem.SubtitleLanguage) + Skin.String(mediaflagsstyle,large_color)</visible>
             </control>
+      <control type="image">
+        <include>mediaflags_large_layout</include>
+        <texture>$VAR[skinsubtitlechecker.available,flags/flags_large/subtitle/,.png]</texture>
+        <visible>!IsEmpty(window.Property(skinsubtitlechecker.language.iso_639_2t))</visible>
+      </control>
+      <control type="image">
+        <include>mediaflags_large_layout</include>
+        <texture>$VAR[skinsubtitlechecker.language.iso_639_1,special://skin/extras/flags/language/,.png]</texture>
+        <visible>!IsEmpty(window.Property(skinsubtitlechecker.language.iso_639_2t))</visible>
+      </control>
             <control type="image" id="11540">
                 <include>mediaflags_large_layout</include>
                 <texture fallback="NR.png">$VAR[mediaflags_large_rating_widgets]</texture>
@@ -2298,6 +2348,16 @@
             </control>
             <control type="image">
                 <include>mediaflags_large_layout</include>
+        <texture>$VAR[skinsubtitlechecker.available,flags/flags_large/subtitle/,.png]</texture>
+        <visible>!IsEmpty(window.Property(skinsubtitlechecker.language.iso_639_2t))</visible>
+      </control>
+      <control type="image">
+        <include>mediaflags_large_layout</include>
+        <texture>$VAR[skinsubtitlechecker.language.iso_639_2t,special://skin/extras/flags/language/,.png]</texture>
+        <visible>!IsEmpty(window.Property(skinsubtitlechecker.language.iso_639_2t))</visible>
+      </control>
+      <control type="image">
+        <include>mediaflags_large_layout</include>
                 <texture fallback="flags/mpaa/NR.png">$VAR[mediaflags_large_rating]</texture>
             </control>
         </control>
@@ -2701,6 +2761,31 @@
                 <texture>flags/flags_classic/3dbd.png</texture>
                 <visible>ListItem.IsStereoScopic | !IsEmpty(ListItem.Property(Video3DFormat)) | substring(ListItem.FileName,.3d.)</visible>
             </control>
+
+
+      <!--subtitle-->
+      <control type="group">
+        <width>40</width>
+        <height>36</height>
+        <visible>![Window.IsActive(home) + !IsEmpty(window.Property(skinsubtitlechecker.language.iso_639_2t))</visible>
+        <control type="image">
+          <posx>-6</posx>
+          <colordiffuse>$VAR[mediaFlagsFontColor]</colordiffuse>
+          <texture border="0,0,2,0">$VAR[skinsubtitlechecker.available,flags/subtitles/,.png]</texture>
+          <visible>![Window.IsActive(home) + !IsEmpty(window.Property(skinsubtitlechecker.language.iso_639_2t))</visible>
+        </control>
+        <control type="label">
+          <font>flags</font>
+          <posx>-6</posx>
+          <textcolor>$VAR[mediaFlagsFontColor]</textcolor>
+          <label>$INFO[window.Property(skinsubtitlechecker.language.iso_639_2t)]</label>
+          <visible>![Window.IsActive(home) + !IsEmpty(window.Property(skinsubtitlechecker.language.iso_639_2t))</visible>
+          <align>center</align>
+          <aligny>center</aligny>
+          <height>36</height>
+        </control>
+      </control>
+
             <!-- mpaa rating -->
             <control type="group">
                 <posx>270</posx>
@@ -2965,6 +3050,35 @@
 				<visible>!IsEmpty(Control.GetLabel(44228))</visible>
 			</control>
 			
+      <!--subtitle-->
+      <control type="group">
+        <width>40</width>
+        <height>36</height>
+        <visible>![Window.IsActive(home) + !IsEmpty(window.Property(skinsubtitlechecker.language.iso_639_2t))</visible>
+        <control type="image">
+          <posx>-6</posx>
+          <colordiffuse>$VAR[mediaFlagsFontColor]</colordiffuse>
+          <texture border="0,0,2,0">$VAR[skinsubtitlechecker.available,flags/subtitles/,.png]</texture>
+          <visible>![Window.IsActive(home) + !IsEmpty(window.Property(skinsubtitlechecker.language.iso_639_2t))</visible>
+        </control>
+        <control type="label">
+          <font>flags</font>
+          <posx>-6</posx>
+          <textcolor>$VAR[mediaFlagsFontColor]</textcolor>
+          <label>$INFO[window.Property(skinsubtitlechecker.language.iso_639_2t)]</label>
+          <visible>![Window.IsActive(home) + !IsEmpty(window.Property(skinsubtitlechecker.language.iso_639_2t))</visible>
+          <align>center</align>
+          <aligny>center</aligny>
+          <height>36</height>
+        </control>
+      </control>
+
+      <control type="group">
+        <width>8</width>
+        <height>36</height>
+        <visible>![Window.IsActive(home) + !IsEmpty(window.Property(skinsubtitlechecker.language.iso_639_2t))</visible>
+      </control>
+
 			<!-- mpaa rating -->
 			<control type="group">
 				<width>170</width>
@@ -3136,6 +3250,24 @@
                 <visible>!IsEmpty(Control.GetLabel(44230))</visible>
                 <visible>![Window.IsActive(home) + Skin.String(widgetstyle, single box)]</visible>
             </control>
+
+      <control type="image">
+        <width>36</width>
+        <height>36</height>
+        <colordiffuse>$VAR[mediaFlagsFontColor]</colordiffuse>
+        <texture>$VAR[skinsubtitlechecker.available,flags/subtitles/,.png]</texture>
+        <bordersize>3</bordersize>
+        <visible>![Window.IsActive(home) + Skin.String(widgetstyle, single box)] + !IsEmpty(window.Property(skinsubtitlechecker.language.iso_639_2t))</visible>
+      </control>
+      <control type="label">
+        <font>flags</font>
+        <width>auto</width>
+        <height>30</height>
+        <textcolor>$VAR[mediaFlagsFontColor]</textcolor>
+        <label>$INFO[window.Property(skinsubtitlechecker.language.iso_639_2t)]</label>
+        <visible>![Window.IsActive(home) + Skin.String(widgetstyle, single box)] + !IsEmpty(window.Property(skinsubtitlechecker.language.iso_639_2t))</visible>
+      </control>
+
                  <control type="label">
                 <!-- whitespace -->
                 <width>8</width>

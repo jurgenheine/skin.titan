@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
-	id="skin.titan"
-	version="3.6.46"
-	name="Titan"
-	provider-name="marcelveldt">
+	id="skin.titan_with_sub"
+	version="3.6.46-0.1"
+	name="Titan with subtitle support"
+	provider-name="marcelveldt, changed for skin subtitle check by j.heine">
 	<requires>
 		<import version="5.10.0" addon="xbmc.gui"/>		
 		<import addon="script.skinshortcuts" version="0.6.5"/>
 		<import addon="script.skin.helper.service" version="1.0.0"/>
         <import addon="resource.uisounds.titan.modern" version="1.0.0"/>
+    <import addon="script.skinsubtitlechecker" version="0.8"/>
 	</requires>
 	<extension
     point="xbmc.gui.skin"

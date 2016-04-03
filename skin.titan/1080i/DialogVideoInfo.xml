@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--Titan-->
 <window>
-    
+    <onload>RunScript(script.skinsubtitlechecker,availabereturnvalue=subavailable&notavailablereturnvalue=subnotavailable&searchreturnvalue=subunknown&year=$INFO[ListItem.Year]&season=$INFO[ListItem.Season]&episode=$INFO[ListItem.Episode]&tvshow=$INFO[ListItem.TVShowTitle]&originaltitle=$INFO[ListItem.OriginalTitle]&title=$INFO[ListItem.Title]&filename=$INFO[ListItem.FileName])</onload>
     <defaultcontrol always="true">9005</defaultcontrol>
     <onunload condition="!IsEmpty(Window(Home).Property(TrailerPlaying))">PlayerControl(Stop)</onunload>
 	<onunload>ClearProperty(AdditionalInfo)</onunload>
-    <onload>ClearProperty(AdditionalInfo)</onload>
+  <onload>ClearProperty(AdditionalInfo)</onload>
 	<onunload>ClearProperty(TrailerPlaying,Home)</onunload>
     <onunload>ClearProperty(filename_formatted,Home)</onunload>
-    <controls>
-    
+	<controls>
+		<include file="IncludesSubtitleVariables.xml" />
         <!-- fake button with actions -->
         <control type="button" id="9005">
             <visible allowhiddenfocus="true">false</visible>
@@ -22,7 +22,7 @@
             <onfocus condition="![System.HasAddon(script.extendedinfo) + Skin.HasSetting(UseExtendedInfoDialog)] + SubString(Skin.String(videoinfo_traileraction),auto) + IsEmpty(ListItem.Trailer) + !Player.HasMedia + [Container.Content(movies) | Container.Content(tvshows)]">RunScript(script.skin.helper.service,action=searchyoutube,windowed=true,autoplay=true,title=$INFO[ListItem.Title] Trailer,header=YouTube $LOCALIZE[20410])</onfocus>
             <onfocus condition="![System.HasAddon(script.extendedinfo) + Skin.HasSetting(UseExtendedInfoDialog)] + SubString(Skin.String(videoinfo_traileraction),auto) + !IsEmpty(ListItem.Trailer) + !Player.HasMedia">SetProperty(TrailerPlaying,Playing,Home)</onfocus>
             <onfocus condition="System.HasAddon(script.extendedinfo) + Skin.HasSetting(UseExtendedInfoDialog)">close</onfocus>
-            <onfocus condition="![System.HasAddon(script.extendedinfo) + Skin.HasSetting(UseExtendedInfoDialog)]">SetFocus(8000)</onfocus>
+          <onfocus condition="![System.HasAddon(script.extendedinfo) + Skin.HasSetting(UseExtendedInfoDialog)]">SetFocus(8000)</onfocus>
         </control>
     
 		<control type="group">
@@ -125,18 +125,18 @@
 						<animation effect="fade" start="100" end="0" time="10" condition="true">Conditional</animation>
 					</control>
 
-					<!--Butons 8000-->			
-					<control type="grouplist" id="8000">
-						<posx>60</posx>
+          <!--Butons 8000-->
+          <control type="grouplist" id="8000">
+            <posx>60</posx>
 						<bottom>15</bottom>
 						<width>1800</width>
 						<height>60</height>
 						<itemgap>15</itemgap>
 						<onup condition="!IsEmpty(Window.Property(AdditionalInfo))">SetFocus(9001)</onup>
 						<ondown>noop</ondown>
-						<onleft>8000</onleft>
-						<onright>8000</onright>
-						<pagecontrol>60</pagecontrol>
+            <onleft>8000</onleft>
+            <onright>8000</onright>
+            <pagecontrol>60</pagecontrol>
 						<orientation>horizontal</orientation>
 						<visible>!Skin.HasSetting(UseExtendedInfoDialog)</visible>
 						
@@ -204,7 +204,7 @@
 							<visible>Skin.HasSetting(videoinfo_button_youtubetrailer)</visible>
                             <visible>[Container.Content(movies) | Container.Content(tvshows) | stringcompare(ListItem.Property(ItemType),Movie)] + IsEmpty(Window(Home).Property(TrailerPlaying))</visible>
 						</control>
-                        
+            
 						<control type="button" id="114">
 							<!--Cast Button-->
 							<label>206</label>
@@ -643,7 +643,7 @@
 								<!--MPAA RATING and SUBTITLES-->
 								<width>1150</width>
 								<height>40</height>
-								<visible>!IsEmpty(Window(Home).Property(SkinHelper.ListItemSubtitles)) | !IsEmpty(ListItem.mpaa) | !IsEmpty(ListItem.Rating)</visible>
+								<visible>!IsEmpty(Window(Home).Property(SkinHelper.ListItemSubtitles)) | !IsEmpty(ListItem.mpaa) | !IsEmpty(ListItem.Rating) | !IsEmpty(window.Property(skinsubtitlechecker.language.iso_639_2t))</visible>
 								<control type="image">
 									<posx>8</posx>
 									<posy>15</posy>
@@ -664,6 +664,27 @@
 									<shadowcolor>$INFO[Skin.String(ViewDetailsTextShadowColor)]</shadowcolor>
 									<scroll>false</scroll>
 								</control>
+								<control type="image">
+									<posx>8</posx>
+									<posy>15</posy>
+									<width>36</width>
+									<height>36</height>
+                                    <colordiffuse>$INFO[Skin.String(ViewDetailsTextColor)]</colordiffuse>
+									<texture>$VAR[skinsubtitlechecker.available,flags/subtitles/,.png]</texture>
+                                    <visible>!IsEmpty(window.Property(skinsubtitlechecker.language.iso_639_2t))</visible>
+								</control>
+								<control type="label">
+									<posx>60</posx>
+									<posy>0</posy>
+									<width>500</width>
+									<font>Reg26</font>
+									<align>left</align>
+									<label>[UPPERCASE]$INFO[window.Property(skinsubtitlechecker.language.iso_639_2t)][/UPPERCASE]</label>
+									<textcolor>$INFO[Skin.String(ViewDetailsTextColor)]</textcolor>
+									<shadowcolor>$INFO[Skin.String(ViewDetailsTextShadowColor)]</shadowcolor>
+									<scroll>false</scroll>
+									<visible>!IsEmpty(window.Property(skinsubtitlechecker.language.iso_639_2t))</visible>
+								</control>								
                                 <control type="image">
 									<posx>560</posx>
 									<posy>15</posy>
@@ -706,8 +727,8 @@
 									<width>500</width>
 									<font>Reg26</font>
 									<align>left</align>
-									<label>$INFO[ListItem.RatingAndVotes,$LOCALIZE[563]: ]$INFO[Window(Home).Property(SkinHelper.IMDB.Top250),  •  $LOCALIZE[13409]: ]</label>
-									<textcolor>$INFO[Skin.String(ViewDetailsTextColor)]</textcolor>
+                  <label>$INFO[ListItem.RatingAndVotes,$LOCALIZE[563]: ]$INFO[Window(Home).Property(SkinHelper.IMDB.Top250),  •  $LOCALIZE[13409]: ]</label>
+                  <textcolor>$INFO[Skin.String(ViewDetailsTextColor)]</textcolor>
 									<shadowcolor>$INFO[Skin.String(ViewDetailsTextShadowColor)]</shadowcolor>
                                     <visible>!IsEmpty(ListItem.RatingAndVotes)</visible>
 									<scroll>false</scroll>
@@ -874,7 +895,7 @@
                                 <top>235</top>
                                 <right>580</right>
                                 <include>ImdbTop250</include>
-                                <visible>!IsEmpty(Window(Home).Property(SkinHelper.IMDB.Top250))</visible>
+                              <visible>!IsEmpty(Window(Home).Property(SkinHelper.IMDB.Top250))</visible>
                             </control>
                             <control type="group">
                                 <right>50</right>
