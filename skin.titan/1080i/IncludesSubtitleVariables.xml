@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Titan-->
+<includes>
+	<variable name="skinsubtitlechecker.available">
+		<value condition="System.HasAddon(script.skinsubtitlechecker)">$INFO[window.Property(skinsubtitlechecker.available)]</value>
+		<value></value>
+	</variable>
+	
+	<variable name="Sskinsubtitlechecker.language.full">
+    <value condition="System.HasAddon(script.skinsubtitlechecker)">$INFO[window.Property(skinsubtitlechecker.language.full)]</value>
+    <value></value>
+  </variable>
+
+  <variable name="skinsubtitlechecker.language.iso_639_1">
+    <value condition="System.HasAddon(script.skinsubtitlechecker)">$INFO[window.Property(skinsubtitlechecker.language.iso_639_1)]</value>
+    <value></value>
+  </variable>
+
+  <variable name="skinsubtitlechecker.language.iso_639_2b">
+    <value condition="System.HasAddon(script.skinsubtitlechecker)">$INFO[window.Property(skinsubtitlechecker.language.iso_639_2b)]</value>
+    <value></value>
+  </variable>
+
+  <variable name="skinsubtitlechecker.language.iso_639_2t">
+    <value condition="System.HasAddon(script.skinsubtitlechecker)">$INFO[window.Property(skinsubtitlechecker.language.iso_639_2t)]</value>
+    <value></value>
+  </variable>
+
+  <variable name="skinsubtitlechecker.language.iso_639_2_kodi">
+    <value condition="System.HasAddon(script.skinsubtitlechecker)">$INFO[window.Property(skinsubtitlechecker.language.iso_639_2_kodi)]</value>
+    <value></value>
+  </variable>
+</includes>

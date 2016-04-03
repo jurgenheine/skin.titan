@@ -1,3 +1,6 @@
+v 3.5.81-0.2
+- Inital mod to support skin.skinsubtitlechecker
+
 v.3.5.84
 - several fixes for home widgets
 - fix season artwork
