@@ -209,7 +209,8 @@
           <movement>1</movement>
           <preloaditems>4</preloaditems>
           <orientation>horizontal</orientation>
-          <itemlayout height="70" width="519">
+          <animation effect="slide" time="0" start="0" end="0,-10" delay="0" condition="Skin.HasSetting(UseSingleShortcut)">Conditional</animation>
+          <itemlayout height="70" width="519" condition="!Skin.HasSetting(UseSingleShortcut)">
             <control type="label">
               <posx>0</posx>
               <posy>0</posy>
@@ -225,7 +226,7 @@
               <font>Reg50</font>
             </control>
           </itemlayout>
-          <focusedlayout height="70" width="519">
+          <focusedlayout height="70" width="519" condition="!Skin.HasSetting(UseSingleShortcut)">
             <control type="label">
                   <posx>0</posx>
                   <posy>0</posy>
@@ -239,12 +240,43 @@
                   <label>[B][UPPERCASE]$INFO[ListItem.Label][/UPPERCASE][/B]</label>
                   <font>Reg50</font>
             </control>
-            <control type="button">
-                <visible>false</visible>
-                <onfocus condition="!Skin.HasSetting(DisableAllSubmenus) + Skin.HasSetting(AutoShowSubmenu) + skin.hastheme(classic)">SetFocus(4444)</onfocus>
-                <onfocus condition="!Skin.HasSetting(DisableAllSubmenus) + Skin.HasSetting(AutoShowSubmenu) + !skin.hastheme(classic)">SetProperty(submenu,show,home)</onfocus>
-            </control>
+            <include>HiddenHomeMenuButton</include>
           </focusedlayout>
+          
+          <itemlayout height="70" width="1920" condition="Skin.HasSetting(UseSingleShortcut)">
+            <control type="label">
+              <posx>0</posx>
+              <posy>0</posy>
+              <width>100%</width>
+              <textcolor>grey</textcolor>
+              <shadowcolor>black</shadowcolor>
+              <height>70</height>
+              <align>center</align>
+              <aligny>top</aligny>
+              <textoffsety>2</textoffsety>
+              <scroll>false</scroll>
+              <label>[B][UPPERCASE]$INFO[ListItem.Label][/UPPERCASE][/B]</label>
+              <font>Reg64</font>
+            </control>
+          </itemlayout>
+          <focusedlayout height="70" width="1920" condition="Skin.HasSetting(UseSingleShortcut)">
+            <control type="label">
+                  <posx>0</posx>
+                  <posy>0</posy>
+                  <width>100%</width>
+                  <textcolor>$VAR[ViewDetailsFocusColor]</textcolor>
+                  <shadowcolor>black</shadowcolor>
+                  <height>70</height>
+                  <align>center</align>
+                  <aligny>top</aligny>
+                  <textoffsety>2</textoffsety>
+                  <label>[B][UPPERCASE]$INFO[ListItem.Label][/UPPERCASE][/B]</label>
+                  <font>Reg64</font>
+            </control>
+            <include>HiddenHomeMenuButton</include>
+          </focusedlayout>
+          
+          
           <content><include>skinshortcuts-mainmenu</include></content>
     </include>
     
@@ -301,11 +333,69 @@
             <include condition="!Skin.HasSetting(EnhancedHome_Circular) + !Skin.HasSetting(UseFixedHomeFocus)">HomeLowHorizontalNormal</include>
             <include condition="!Skin.HasSetting(EnhancedHome_Circular) + Skin.HasSetting(UseFixedHomeFocus)">HomeLowHorizontalFixed</include>
 			
+            <!-- touch controls -->
+            <control type="group">
+                <height>60</height>
+                <bottom>-20</bottom>
+                <include condition="Skin.HasSetting(EnableTouchSupport)">TouchControlsFooter</include>
+                <visible>!Control.IsVisible(4444)</visible>
+            </control>
+            <!-- rss feed -->
+            <control type="rss">	
+                <description>RSS Feed without touch controls</description>
+                <posx>0</posx>
+                <bottom>20</bottom>
+                <width>100%</width>
+                <height>30</height>
+                <font>Light28</font>
+                <urlset>1</urlset>
+                <titlecolor>$INFO[Skin.String(GeneralHighlightTextColor)]</titlecolor>
+                <headlinecolor>$INFO[Skin.String(GeneralTextColor)]</headlinecolor>
+                <textcolor>$INFO[Skin.String(GeneralHighlightTextColor)]</textcolor>
+                <visible>System.getbool(lookandfeel.enablerssfeeds)</visible>
+                <visible>!Window.IsVisible(shutdownmenu)</visible>
+                <visible>!Control.IsVisible(4444) + IsEmpty(Container(300).ListItem.Property(infoline))</visible>
+                <visible>![Skin.HasSetting(AutoShowSubmenu) + IntegerGreaterThan(Container(4444).NumItems,0)]</visible>
+                <visible>!Skin.HasSetting(EnableTouchSupport)</visible>
+            </control>
+            <!-- rss feed -->
+            <control type="rss">	
+                <description>RSS Feed with touch controls</description>
+                <posx>400</posx>
+                <bottom>20</bottom>
+                <width>1120</width>
+                <height>30</height>
+                <font>Light28</font>
+                <urlset>1</urlset>
+                <titlecolor>$INFO[Skin.String(GeneralHighlightTextColor)]</titlecolor>
+                <headlinecolor>$INFO[Skin.String(GeneralTextColor)]</headlinecolor>
+                <textcolor>$INFO[Skin.String(GeneralHighlightTextColor)]</textcolor>
+                <visible>System.getbool(lookandfeel.enablerssfeeds)</visible>
+                <visible>!Window.IsVisible(shutdownmenu)</visible>
+                <visible>!Control.IsVisible(4444) + IsEmpty(Container(300).ListItem.Property(infoline))</visible>
+                <visible>![Skin.HasSetting(AutoShowSubmenu) + IntegerGreaterThan(Container(4444).NumItems,0)]</visible>
+                <visible>Skin.HasSetting(EnableTouchSupport)</visible>
+            </control>
+            <!--infoline-->
+            <control type="label">	
+                <description>InfoLine</description>
+                <posx>0</posx>
+                <bottom>20</bottom>
+                <width>100%</width>
+                <height>30</height>
+                <font>Light28</font>
+                <font>Reg28</font>
+                <align>center</align>
+                <label>[UPPERCASE]$VAR[infolinevar][/UPPERCASE]</label>
+                <textcolor>$INFO[Skin.String(GeneralTextColor)]</textcolor>
+                <visible>!Window.IsVisible(shutdownmenu)</visible>
+                <visible>!Control.HasFocus(4444)</visible>
+                <include>animation_fade_visible_hidden</include>
+            </control>
+		
             
             <!-- submenu -->
             <control type="group" id="9001">
-				<animation effect="fade" start="100" end="0" time="200" condition="[system.getbool(lookandfeel.enablerssfeeds) + !Control.HasFocus(4444) + !Skin.HasSetting(AutoShowSubmenu)] | [!IsEmpty(Container(300).ListItem.Property(infoline)) + !Control.HasFocus(4444)] | [!Skin.HasSetting(AutoShowSubmenu) + !Control.HasFocus(4444)]">Conditional</animation>
-                <animation effect="fade" start="100" end="50" time="300" condition="!Control.HasFocus(4444)">conditional</animation>
                 <control type="fixedlist" id="4444">
 					<include>animation_fade_visible_hidden</include>
 					<left>0</left>
@@ -318,7 +408,9 @@
 					<scrolltime tween="quadratic" easing="out">300</scrolltime>
 					<focusposition>2</focusposition>
 					<movement>2</movement>
-					<orientation>Horizontal</orientation>
+					<orientation>horizontal</orientation>
+                    <animation effect="slide" tween="cubic" time="0" start="0" end="0,150" reversible="true" condition="!Control.IsVisible(4444)">Conditional</animation>
+                    <visible allowhiddenfocus="true">[SubString(Window(Home).Property(submenu),show) | Control.HasFocus(4444) | Skin.HasSetting(AutoShowSubmenu)] + !Control.HasFocus(2) + IntegerGreaterThan(Container(4444).NumItems,0)</visible>
 					<itemlayout height="70" width="384">
                         <control type="label">
                             <width>94%</width>
@@ -337,7 +429,7 @@
                         <control type="image">
                             <!-- focus sub menu -->
                             <texture>colors/color_white.png</texture>
-                            <colordiffuse>$INFO[Skin.String(HomeViewDetailsFocusColor)]</colordiffuse>
+                            <colordiffuse>$INFO[Skin.String(ButtonFocusColor)]</colordiffuse>
                             <visible>Control.HasFocus(4444)</visible>
                         </control>
                         <control type="label">
@@ -351,6 +443,20 @@
                             <aligny>center</aligny>
                             <scroll>true</scroll>
                             <label>[UPPERCASE]$INFO[ListItem.Label][/UPPERCASE]</label>
+                            <visible>!Control.HasFocus(4444)</visible>
+                        </control>
+                        <control type="label">
+                            <width>94%</width>
+                            <height>100%</height>
+                            <left>3%</left>
+                            <font>Light26</font>
+                            <textcolor>$INFO[Skin.String(ButtonFocusTextColor)]</textcolor>
+                            <textoffsetx>0</textoffsetx>
+                            <align>center</align>
+                            <aligny>center</aligny>
+                            <scroll>true</scroll>
+                            <label>[UPPERCASE]$INFO[ListItem.Label][/UPPERCASE]</label>
+                            <visible>Control.HasFocus(4444)</visible>
                         </control>
                     </focusedlayout>
                     <content>
@@ -364,7 +470,7 @@
 					<height>30</height>
 					<texturefocus colordiffuse="$INFO[Skin.String(GeneralHighlightTextColor)]">home/home_arrow_left.png</texturefocus>
 					<texturenofocus>home/home_arrow_left.png</texturenofocus>
-					<visible>Container(4444).HasPrevious</visible>
+					<visible>Container(4444).HasPrevious + Control.IsVisible(4444)</visible>
 					<onclick>Control.Move(4444,-1)</onclick>
 				</control>
 				<control type="button">
@@ -374,43 +480,12 @@
 					<height>30</height>
 					<texturefocus colordiffuse="$INFO[Skin.String(GeneralHighlightTextColor)]">home/home_arrow_right.png</texturefocus>
 					<texturenofocus>home/home_arrow_right.png</texturenofocus>
-					<visible>Container(4444).HasNext</visible>
+					<visible>Container(4444).HasNext+ Control.IsVisible(4444)</visible>
 					<onclick>Control.Move(4444,1)</onclick>
 				</control>
 			</control>
-            <control type="rss">	
-                <description>RSS Feed</description>
-                <posx>0</posx>
-                <bottom>20</bottom>
-                <width>100%</width>
-                <height>30</height>
-                <font>Light28</font>
-                <urlset>1</urlset>
-                <titlecolor>$INFO[Skin.String(GeneralHighlightTextColor)]</titlecolor>
-                <headlinecolor>$INFO[Skin.String(GeneralTextColor)]</headlinecolor>
-                <textcolor>$INFO[Skin.String(GeneralHighlightTextColor)]</textcolor>
-                <visible>System.getbool(lookandfeel.enablerssfeeds)</visible>
-                <visible>!Window.IsVisible(shutdownmenu)</visible>
-                <visible>!Control.HasFocus(4444) + IsEmpty(Container(300).ListItem.Property(infoline))</visible>
-                <visible>![Skin.HasSetting(AutoShowSubmenu) + IntegerGreaterThan(Container(4444).NumItems,0)]</visible>
-            </control>
-            <!--infoline-->
-            <control type="label">	
-                <description>InfoLine</description>
-                <posx>0</posx>
-                <bottom>20</bottom>
-                <width>100%</width>
-                <height>30</height>
-                <font>Light28</font>
-                <font>Reg28</font>
-                <align>center</align>
-                <label>[UPPERCASE]$VAR[infolinevar][/UPPERCASE]</label>
-                <textcolor>$INFO[Skin.String(GeneralTextColor)]</textcolor>
-                <visible>!Window.IsVisible(shutdownmenu)</visible>
-                <visible>!Control.HasFocus(4444)</visible>
-                <include>animation_fade_visible_hidden</include>
-            </control>
-		</control>
+
+        </control>
 	</include>
     <include name="HomeLowHorizontalBig">
         <focusposition>1</focusposition>
@@ -445,7 +520,7 @@
 		<width>100%</width>
 		<height>120</height>
 		<onup>$VAR[HomeButtonUpAction]</onup>
-		<ondown>4444</ondown>
+		<ondown>Control.SetFocus(4444,0)</ondown>
 		<pagecontrol>-</pagecontrol>
 		<movement>1</movement>
 		<scrolltime tween="sine" easing="inout">300</scrolltime>
@@ -480,10 +555,7 @@
                 <scroll>true</scroll>
 				<label>[UPPERCASE]$INFO[ListItem.Label][/UPPERCASE]</label>
 			</control>
-            <control type="button">
-                <visible>false</visible>
-                <onfocus>ClearProperty(SkinHelper.WidgetContainer)</onfocus>
-            </control>
+            <include>HiddenHomeMenuButton</include>
 		</focusedlayout>
 		<itemlayout height="120" width="590" condition="Skin.HasSetting(HomeLowHorizontal.LargeMenu)">
 			<control type="group">
@@ -522,10 +594,7 @@
 					<label>[UPPERCASE]$INFO[ListItem.Label][/UPPERCASE]</label>
 				</control>
 			</control>
-            <control type="button">
-                <visible>false</visible>
-                <onfocus>ClearProperty(SkinHelper.WidgetContainer)</onfocus>
-            </control>
+            <include>HiddenHomeMenuButton</include>
 		</focusedlayout>
         <content><include>skinshortcuts-mainmenu</include></content>
 	</include>
