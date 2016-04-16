@@ -270,14 +270,29 @@
 				<visible>Player.HasAudio</visible>
 				<visible>![[Skin.String(HomeLayout, simplever) | Skin.String(HomeLayout, simplever_tiles) | Skin.String(HomeLayout, verticalbig)] + window.isactive(home)]</visible>
 			</control>
+            
+            <control type="image">
+				<posx>85</posx>
+				<posy>10</posy>
+				<width>123</width>
+				<height>123</height>
+				<aligny>center</aligny>
+				<aspectratio scalediffuse="false" align="center" aligny="center">scale</aspectratio>
+				<fadetime>300</fadetime>
+				<animation effect="rotate" end="-360" center="auto" time="4800" loop="true" reversible="false" condition="!Player.Paused">Conditional</animation>
+				<texture background="true" fallback="defaultcovers/cd_small.png" diffuse="diffuse/cdmask_small.png">$INFO[Player.Art(discart)]</texture>
+				<visible>Player.HasVideo + !Skin.HasSetting(DisableNowPlayingDiscArt)</visible>
+				<visible>![[Skin.String(HomeLayout, simplever) | Skin.String(HomeLayout, simplever_tiles) | Skin.String(HomeLayout, verticalbig)] + window.isactive(home)]</visible>
+			</control>
+            
 			<control type="image">
 				<!--Cover for all other-->
 				<posx>60</posx>
-                <posy>20</posy>
-				<width>200</width>
-				<height>110</height>
+                <posy>5</posy>
+				<width>100</width>
+				<height>130</height>
 				<fadetime>200</fadetime>
-				<texture background="true">$VAR[VideoPlayerCover]</texture>
+				<texture background="true">$VAR[VideoPlayerPoster]</texture>
 				<aspectratio align="left" aligny="top">keep</aspectratio>
 				<visible>Player.HasVideo</visible>
 				<visible>![[Skin.String(HomeLayout, simplever) | Skin.String(HomeLayout, simplever_tiles) | Skin.String(HomeLayout, verticalbig)] + window.isactive(home)]</visible>
@@ -300,108 +315,120 @@
 				<onclick condition="player.hasaudio">ActivateWindow(visualisation)</onclick>
 				<onclick condition="player.hasvideo">ActivateWindow(fullscreenvideo)</onclick>
 			</control>
+            <!-- clearart -->
+            <control type="image" id="884455">
+				<right>60</right>
+                <posy>5</posy>
+				<width>300</width>
+				<height>130</height>
+				<fadetime>200</fadetime>
+				<texture background="true">$VAR[VideoPlayerClearArt]</texture>
+				<aspectratio align="right" aligny="center">keep</aspectratio>
+				<visible>!IsEmpty(Control.GetLabel(884455))</visible>
+			</control>
+            
             <!-- clock -->
             <control type="group">
-			<animation type="Conditional" condition="Window.IsActive(mutebug) | Window.IsActive(volumebar)">
-                <effect type="slide" start="0,0" end="-120,0" time="400" tween="cubic" easing="inout" delay="0" />
-            </animation>
-            <visible>!Skin.HasSetting(EnableTouchSupport)</visible>
-            <control type="grouplist">
-                <!--Time Grouplist Line 1-->
-                <posx>1260</posx>
-                <posy>10</posy>
-                <width>600</width>
-                <height>100</height>
-                <align>right</align>
-                <itemgap>4</itemgap>
-                <orientation>horizontal</orientation>
-                <usecontrolcoords>true</usecontrolcoords>
-                <control type="label">
-                    <!--Time-->
-                    <width min="0" max="300">auto</width>
+                <animation type="Conditional" condition="Window.IsActive(mutebug) | Window.IsActive(volumebar)">
+                    <effect type="slide" start="0,0" end="-120,0" time="400" tween="cubic" easing="inout" delay="0" />
+                </animation>
+                <visible>!Skin.HasSetting(EnableTouchSupport) + !Control.IsVisible(884455)</visible>
+                <control type="grouplist">
+                    <!--Time Grouplist Line 1-->
+                    <posx>1260</posx>
+                    <posy>10</posy>
+                    <width>600</width>
                     <height>100</height>
-                    <info>System.Time(hh:mm)</info>
-                    <font>Bold55</font>
-                    <textcolor>$INFO[Skin.String(GeneralTextColor)]</textcolor>
+                    <align>right</align>
+                    <itemgap>4</itemgap>
+                    <orientation>horizontal</orientation>
+                    <usecontrolcoords>true</usecontrolcoords>
+                    <control type="label">
+                        <!--Time-->
+                        <width min="0" max="300">auto</width>
+                        <height>100</height>
+                        <info>System.Time(hh:mm)</info>
+                        <font>Bold55</font>
+                        <textcolor>$INFO[Skin.String(GeneralTextColor)]</textcolor>
+                    </control>
+                    <control type="label">
+                        <!--AM-->
+                        <visible>substring(system.time,AM,right)</visible>
+                        <width min="0" max="150">auto</width>
+                        <height>100</height>
+                        <label>378</label>
+                        <font>Bold55</font>
+                        <textcolor>$INFO[Skin.String(GeneralTextColor)]</textcolor>
+                    </control>
+                    <control type="label">
+                        <!--PM-->
+                        <visible>substring(system.time,PM,right)</visible>
+                        <width min="0" max="150">auto</width>
+                        <height>100</height>
+                        <label>379</label>
+                        <font>Bold55</font>
+                        <textcolor>$INFO[Skin.String(GeneralTextColor)]</textcolor>
+                    </control>
                 </control>
-                <control type="label">
-                    <!--AM-->
-                    <visible>substring(system.time,AM,right)</visible>
-                    <width min="0" max="150">auto</width>
-                    <height>100</height>
-                    <label>378</label>
-                    <font>Bold55</font>
-                    <textcolor>$INFO[Skin.String(GeneralTextColor)]</textcolor>
-                </control>
-                <control type="label">
-                    <!--PM-->
-                    <visible>substring(system.time,PM,right)</visible>
-                    <width min="0" max="150">auto</width>
-                    <height>100</height>
-                    <label>379</label>
-                    <font>Bold55</font>
-                    <textcolor>$INFO[Skin.String(GeneralTextColor)]</textcolor>
+                <control type="grouplist">
+                    <!--Date Grouplist Line 2-->
+                    <posx>1260</posx>
+                    <posy>85</posy>
+                    <width>600</width>
+                    <height>50</height>
+                    <align>right</align>
+                    <itemgap>4</itemgap>
+                    <orientation>horizontal</orientation>
+                    <usecontrolcoords>true</usecontrolcoords>
+                    <control type="label">
+                        <!--Day-->
+                        <width min="0" max="400">auto</width>
+                        <height>50</height>
+                        <info>System.Date(DDD)</info>
+                        <font>Reg30</font>
+                        <textcolor>$INFO[Skin.String(GeneralTextColor)]</textcolor>
+                    </control>
+                    <control type="label">
+                        <width min="0" max="400">auto</width>
+                        <height>50</height>
+                        <label>, </label>
+                        <font>Reg30</font>
+                        <textcolor>$INFO[Skin.String(GeneralTextColor)]</textcolor>
+                    </control>
+                    <control type="label">
+                        <!--Date-->
+                        <width min="0" max="400">auto</width>
+                        <height>50</height>
+                        <info>System.Date(d)</info>
+                        <font>Reg30</font>
+                        <textcolor>$INFO[Skin.String(GeneralTextColor)]</textcolor>
+                    </control>
+                    <control type="label">
+                        <visible>SubString(System.Language,German)</visible>
+                        <width min="0" max="400">auto</width>
+                        <height>50</height>
+                        <label>. </label>
+                        <font>Reg30</font>
+                        <textcolor>$INFO[Skin.String(GeneralTextColor)]</textcolor>
+                    </control>
+                    <control type="label">
+                        <label></label>
+                        <visible>!SubString(System.Language,German)</visible>
+                        <width min="0" max="400">auto</width>
+                        <height>50</height>
+                        <font>Reg30</font>
+                        <textcolor>$INFO[Skin.String(GeneralTextColor)]</textcolor>
+                    </control>
+                    <control type="label">
+                        <!--Month-->
+                        <width min="0" max="400">auto</width>
+                        <height>50</height>
+                        <info>System.Date(MMM)</info>
+                        <font>Reg30</font>
+                        <textcolor>$INFO[Skin.String(GeneralTextColor)]</textcolor>
+                    </control>
                 </control>
             </control>
-            <control type="grouplist">
-                <!--Date Grouplist Line 2-->
-                <posx>1260</posx>
-                <posy>85</posy>
-                <width>600</width>
-                <height>50</height>
-                <align>right</align>
-                <itemgap>4</itemgap>
-                <orientation>horizontal</orientation>
-                <usecontrolcoords>true</usecontrolcoords>
-                <control type="label">
-                    <!--Day-->
-                    <width min="0" max="400">auto</width>
-                    <height>50</height>
-                    <info>System.Date(DDD)</info>
-                    <font>Reg30</font>
-                    <textcolor>$INFO[Skin.String(GeneralTextColor)]</textcolor>
-                </control>
-                <control type="label">
-                    <width min="0" max="400">auto</width>
-                    <height>50</height>
-                    <label>, </label>
-                    <font>Reg30</font>
-                    <textcolor>$INFO[Skin.String(GeneralTextColor)]</textcolor>
-                </control>
-                <control type="label">
-                    <!--Date-->
-                    <width min="0" max="400">auto</width>
-                    <height>50</height>
-                    <info>System.Date(d)</info>
-                    <font>Reg30</font>
-                    <textcolor>$INFO[Skin.String(GeneralTextColor)]</textcolor>
-                </control>
-                <control type="label">
-                    <visible>SubString(System.Language,German)</visible>
-                    <width min="0" max="400">auto</width>
-                    <height>50</height>
-                    <label>. </label>
-                    <font>Reg30</font>
-                    <textcolor>$INFO[Skin.String(GeneralTextColor)]</textcolor>
-                </control>
-                <control type="label">
-                    <label></label>
-                    <visible>!SubString(System.Language,German)</visible>
-                    <width min="0" max="400">auto</width>
-                    <height>50</height>
-                    <font>Reg30</font>
-                    <textcolor>$INFO[Skin.String(GeneralTextColor)]</textcolor>
-                </control>
-                <control type="label">
-                    <!--Month-->
-                    <width min="0" max="400">auto</width>
-                    <height>50</height>
-                    <info>System.Date(MMM)</info>
-                    <font>Reg30</font>
-                    <textcolor>$INFO[Skin.String(GeneralTextColor)]</textcolor>
-                </control>
-            </control>
-        </control>
             <!-- OSD for touch mode -->
 			<control type="grouplist">
                 <!--OSD-->
@@ -499,9 +526,9 @@
                     <visible>IsEmpty(Window(10025).Property(PlayingBackgroundMedia)) + Skin.HasSetting(enableMusicWall) + !IsEmpty(Window(Home).Property(SkinHelper.AllMusicSongsBackground.Wall))</visible>
                     <visible>![Control.IsVisible(3333) + !IsEmpty(Control.GetLabel(3333))]</visible>
                     <animation effect="fade" start="100" end="20" time="0" condition="![StringCompare(Visualisation.Name,waveform) | StringCompare(Visualisation.Name,opengl spectrum) | StringCompare(Visualisation.Name,directx spectrum) | IsEmpty(Visualisation.Name)]">Conditional</animation>
-                    <animation effect="zoom" start="110" end="160" center="auto" time="20000" tween="cubic" easing="inout" pulse="true" condition="Skin.HasSetting(animateMusicWall)">Skin.HasSetting(animateMusicWall)</animation>
-                    <animation effect="slide" start="-100,0" end="100,0" time="10000" tween="cubic" easing="inout" pulse="true" condition="Skin.HasSetting(animateMusicWall)">Skin.HasSetting(animateMusicWall)</animation>
-                    <animation effect="slide" start="0,-100" end="0,100" time="15000" tween="cubic" easing="inout" pulse="true" condition="Skin.HasSetting(animateMusicWall)">Skin.HasSetting(animateMusicWall)</animation>
+                    <animation effect="zoom" start="110" end="160" center="auto" time="20000" tween="cubic" easing="inout" pulse="true" condition="Skin.HasSetting(animateMusicArt)">Skin.HasSetting(animateMusicArt)</animation>
+                    <animation effect="slide" start="-100,0" end="100,0" time="10000" tween="cubic" easing="inout" pulse="true" condition="Skin.HasSetting(animateMusicArt)">Skin.HasSetting(animateMusicArt)</animation>
+                    <animation effect="slide" start="0,-100" end="0,100" time="15000" tween="cubic" easing="inout" pulse="true" condition="Skin.HasSetting(animateMusicArt)">Skin.HasSetting(animateMusicArt)</animation>
                 </control>
 			</control>
             <!-- artist (extra)fanart -->
@@ -514,8 +541,8 @@
 				<loop>yes</loop>
 				<imagepath background="true">$VAR[artist_fanart]</imagepath>
 				<animation effect="fade" start="100" end="20" time="0" condition="![StringCompare(Visualisation.Name,waveform) | StringCompare(Visualisation.Name,opengl spectrum) | StringCompare(Visualisation.Name,directx spectrum) | IsEmpty(Visualisation.Name)]">Conditional</animation>
-                <animation effect="zoom" start="110" end="130" center="auto" time="15000" tween="cubic" easing="inout" pulse="true" condition="Skin.HasSetting(BackgroundAnimation)">Conditional</animation>
-				<animation effect="slide" start="-10,-10" end="10,10" time="8000" tween="cubic" easing="inout" pulse="true" condition="Skin.HasSetting(BackgroundAnimation)">Conditional</animation>
+                <animation effect="zoom" start="110" end="130" center="auto" time="15000" tween="cubic" easing="inout" pulse="true" condition="Skin.HasSetting(animateMusicArt)">Conditional</animation>
+				<animation effect="slide" start="-10,-10" end="10,10" time="8000" tween="cubic" easing="inout" pulse="true" condition="Skin.HasSetting(animateMusicArt)">Conditional</animation>
 				<visible>Player.HasAudio + !Skin.String(MusicArtistFanart,disabled)</visible>
 				<visible>IsEmpty(Window(10025).Property(PlayingBackgroundMedia))</visible>
 			</control>

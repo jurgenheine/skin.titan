@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
 	id="skin.titan_with_sub"
-	version="3.6.47-0.1"
+	version="3.6.48-0.1"
 	name="Titan with subtitle support"
 	provider-name="marcelveldt, changed for skin subtitle check by j.heine">
 	<requires>

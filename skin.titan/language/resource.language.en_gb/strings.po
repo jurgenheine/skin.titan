@@ -2165,7 +2165,7 @@ msgid "Enable mini guide on fullscreen Live TV"
 msgstr ""
 
 msgctxt "#31617"
-msgid "Animate music wall background"
+msgid "Animate music background"
 msgstr ""
 
 msgctxt "#31618"
@@ -2564,4 +2564,68 @@ msgstr ""
 
 msgctxt "#31717"
 msgid "Enable widget force refresh"
+msgstr ""
+
+msgctxt "#31718"
+msgid "Apply the per-shortcut background to homescreen only"
+msgstr ""
+
+msgctxt "#31719"
+msgid "Enable info overlay"
+msgstr ""
+
+msgctxt "#31720"
+msgid "Use small context/sidebar menu"
+msgstr ""
+
+msgctxt "#31721"
+msgid "Only show one shortcut at a time in the menu"
+msgstr ""
+
+msgctxt "#31722"
+msgid "Right List"
+msgstr ""
+
+msgctxt "#31723"
+msgid "Enable auto rotate"
+msgstr ""
+
+msgctxt "#31724"
+msgid "Do not display hour representation of the duration"
+msgstr ""
+
+msgctxt "#31725"
+msgid "Focus the homemenu when entering homescreen"
+msgstr ""
+
+msgctxt "#31726"
+msgid "Enable playlist at startup"
+msgstr ""
+
+msgctxt "#31727"
+msgid "Default position to focus in home menu"
+msgstr ""
+
+msgctxt "#31728"
+msgid "Position %s"
+msgstr ""
+
+msgctxt "#31729"
+msgid "%s pixels"
+msgstr ""
+
+msgctxt "#31730"
+msgid "All widgets"
+msgstr ""
+
+msgctxt "#31731"
+msgid "Configure individually per-widget"
+msgstr ""
+
+msgctxt "#31732"
+msgid "Show large scrolling text while music playback"
+msgstr ""
+
+msgctxt "#31733"
+msgid "Show clearart (if available) above the OSD-panel"
 msgstr ""
