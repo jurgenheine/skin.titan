@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--Titan-->
-<window id="20">
+<window>
     <defaultcontrol always="true">5000</defaultcontrol>
-    <allowoverlay>yes</allowoverlay>
+    <allowoverlay>no</allowoverlay>
 	<include>allViewIds</include>
 	<onunload>ClearProperty(ShowViewSubMenu, Home)</onunload>
 	<include>DefaultSkinSettings</include>
@@ -105,13 +105,6 @@
 					<description>Check for repo updates</description>
 					<include>SideBladeMenuButton</include>
 					<label>24034</label>
-				</control>
-                <control type="button" id="400">
-                    <!--Set View-->
-                    <include>SideBladeMenuButton</include>
-                    <label>$LOCALIZE[31305]: $INFO[Container.Viewmode]</label>
-					<onclick>XBMC.RunScript(script.skin.helper.service,action=SETVIEW)</onclick>
-                    <onclick>ActivateWindow(busydialog)</onclick>
 				</control>
 				<include>SideBladeViewCommands</include>
             </control>

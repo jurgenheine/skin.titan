@@ -12,7 +12,7 @@
 			<!-- movie details -->
 			<control type="group">
 				<visible>Skin.HasSetting(LandscapeViewShowInfo)</visible>
-				<include>MovieDetails</include>
+				<include>MovieDetailsTop</include>
 			</control>
             
             <!--cdart image-->
@@ -35,7 +35,7 @@
 				<height>325</height>
 				<bottom>16%</bottom>
 				<onup>9000</onup>
-				<ondown>60</ondown>
+				<ondown>7000</ondown>
 				<onleft>502</onleft>
 				<onright>502</onright>
 				<pagecontrol>60</pagecontrol>
@@ -89,8 +89,8 @@
 					<onleft>60</onleft>
 					<onright>60</onright>
 					<orientation>horizontal</orientation>
-					<animation effect="fade" start="0" end="100" time="400" condition="Control.HasFocus(60) | Skin.HasSetting(EnableTouchSupport) | Container.Scrolling | Skin.HasSetting(alwaysShowScrollbars)">Conditional</animation>
-					<animation effect="fade" start="100" end="0" time="400" condition="![Control.HasFocus(60) | Skin.HasSetting(EnableTouchSupport) | Container.Scrolling | Skin.HasSetting(alwaysShowScrollbars)]">Conditional</animation>
+					<animation effect="fade" start="0" end="100" time="400" condition="[Control.HasFocus(60) | Skin.HasSetting(EnableTouchSupport) | Container.Scrolling | Skin.HasSetting(alwaysShowScrollbars)] + !Control.IsVisible(6002)">Conditional</animation>
+					<animation effect="fade" start="100" end="0" time="400" condition="![Control.HasFocus(60) | Skin.HasSetting(EnableTouchSupport) | Container.Scrolling | Skin.HasSetting(alwaysShowScrollbars)] | Control.IsVisible(6002)">Conditional</animation>
 				</control>
 			</control>
 			

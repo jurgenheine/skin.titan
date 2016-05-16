@@ -191,7 +191,7 @@
                             <onclick condition="!Skin.String(videoinfo_traileraction,fullscreen)">PlayMedia($ESCINFO[Container(999).ListItem.Trailer],1)</onclick>
                             <onclick condition="!Skin.String(videoinfo_traileraction,fullscreen)">SetProperty(TrailerPlaying,Playing,Home)</onclick>
 							<visible>Skin.HasSetting(videoinfo_button_trailer)</visible>
-                            <visible>!IsEmpty(Container(999).ListItem.Trailer) + Container.Content(movies) + IsEmpty(Window(Home).Property(TrailerPlaying))</visible>
+                            <visible>!IsEmpty(Container(999).ListItem.Trailer) + [StringCompare(Container(999).ListItem.Property(type),movie) | stringcompare(Container(999).ListItem.Property(ItemType),Movie)] + IsEmpty(Window(Home).Property(TrailerPlaying))</visible>
 						</control>
                         
                         <control type="button" id="100">
@@ -266,10 +266,10 @@
 							<align>center</align>
 							<textoffsetx>0</textoffsetx>
 							<onclick condition="!System.HasAddon(script.extendedinfo)">RunPlugin(plugin://script.extendedinfo)</onclick>
-							<onclick condition="System.HasAddon(script.extendedinfo) + StringCompare(Window(Home).Property(contenttype),movies)">RunScript(script.extendedinfo,info=extendedinfo,dbid=$INFO[Container(999).ListItem.DBID],name=$INFO[Container(999).ListItem.Title])</onclick>
-                            <onclick condition="System.HasAddon(script.extendedinfo) + StringCompare(Window(Home).Property(contenttype),tvshows)">RunScript(script.extendedinfo,info=extendedtvinfo,dbid=$INFO[Container(999).ListItem.DBID],name=$INFO[Container(999).ListItem.TvShowTitle])</onclick>
+							<onclick condition="System.HasAddon(script.extendedinfo) + StringCompare(Window(Home).Property(contenttype),movies)">RunScript(script.extendedinfo,info=extendedinfo,dbid=$INFO[Container(999).ListItem.Property(DBID)],name=$INFO[Container(999).ListItem.Title])</onclick>
+                            <onclick condition="System.HasAddon(script.extendedinfo) + StringCompare(Window(Home).Property(contenttype),tvshows)">RunScript(script.extendedinfo,info=extendedtvinfo,dbid=$INFO[Container(999).ListItem.Property(DBID)],name=$INFO[Container(999).ListItem.Title])</onclick>
                             <onclick condition="System.HasAddon(script.extendedinfo) + StringCompare(Window(Home).Property(contenttype),seasons)">RunScript(script.extendedinfo,info=seasoninfo,tvshow=$INFO[Container(999).ListItem.TvShowTitle],season=$INFO[Container(999).ListItem.Season],silent=True)</onclick>
-                            <onclick condition="System.HasAddon(script.extendedinfo) + StringCompare(Window(Home).Property(contenttype),episodes)">RunScript(script.extendedinfo,info=extendedepisodeinfo,dbid=$INFO[Container(999).ListItem.DBID],tvshow=$INFO[Container(999).ListItem.TvShowTitle],season=$INFO[Container(999).ListItem.Season],episode=$INFO[Container(999).ListItem.Episode],silent=True)</onclick>
+                            <onclick condition="System.HasAddon(script.extendedinfo) + StringCompare(Window(Home).Property(contenttype),episodes)">RunScript(script.extendedinfo,info=extendedepisodeinfo,dbid=$INFO[Container(999).ListItem.Property(DBID)],tvshow=$INFO[Container(999).ListItem.TvShowTitle],season=$INFO[Container(999).ListItem.Season],episode=$INFO[Container(999).ListItem.Episode],silent=True)</onclick>
                             <visible>Skin.HasSetting(videoinfo_button_extendedinfo)</visible>
                             <visible>StringCompare(Window(Home).Property(contenttype),movies) | StringCompare(Window(Home).Property(contenttype),tvshows) | StringCompare(Window(Home).Property(contenttype),seasons) | StringCompare(Window(Home).Property(contenttype),episodes)</visible>
                         </control>
@@ -726,20 +726,8 @@
 									<textcolor>$INFO[Skin.String(ViewDetailsTextColor)]</textcolor>
 									<shadowcolor>$INFO[Skin.String(ViewDetailsTextShadowColor)]</shadowcolor>
 									<scroll>false</scroll>
-                                    <visible>![!IsEmpty(Window(Home).Property(TrailerPlaying)) + SubString(Skin.String(videoinfo_traileraction),windowed)]</visible>
 								</control>
-                                <control type="textbox">
-									<posx>0</posx>
-									<posy>15</posy>
-									<width>1790</width>
-									<font>Light26</font>
-									<align>left</align>
-									<label>[B]$LOCALIZE[31610]: [/B]$INFO[Window(Home).Property(SkinHelper.RottenTomatoesAwards)] [B]$LOCALIZE[31611]: [/B]$INFO[Window(Home).Property(SkinHelper.RottenTomatoesConsensus)]</label>
-									<textcolor>$INFO[Skin.String(ViewDetailsTextColor)]</textcolor>
-									<shadowcolor>$INFO[Skin.String(ViewDetailsTextShadowColor)]</shadowcolor>
-									<scroll>false</scroll>
-                                    <visible>!IsEmpty(Window(Home).Property(TrailerPlaying)) + SubString(Skin.String(videoinfo_traileraction),windowed)</visible>
-								</control>                                
+                              
                             </control>
                             <control type="image">
 								<width>1150</width>
@@ -806,7 +794,7 @@
                                 <posy>310</posy>
                                 <width>500</width>
                                 <height>500</height>
-                                <texture background="true" diffuse="diffuse/cdmask_big.png" fallback="defaultcovers/cd_big.png">$INFO[Container(999).ListItem.Art(discart)]</texture>
+                                <texture background="true" diffuse="diffuse/cdmask_new.png" fallback="defaultcovers/cd_big.png">$INFO[Container(999).ListItem.Art(discart)]</texture>
                                 <aspectratio scalediffuse="false" align="center" aligny="center">scale</aspectratio>
                                 <animation effect="fade" start="100" end="0" delay="0" time="150" pulse="false" condition="!Skin.HasSetting(VideoInfo_ShowCDart)">Conditional</animation>
                                 <animation effect="rotate" end="-90" center="auto" time="600" loop="false" reversible="false" condition="!Skin.HasSetting(AnimateDiscArt)">Conditional</animation>
@@ -968,7 +956,7 @@
                                 <height>120</height>
                                 <bordersize>0</bordersize>
                                 <texture diffuse="diffuse/poster.png">colors/color_white.png</texture>
-                                <colordiffuse>$INFO[Skin.String(LabelOverlaysPanelColor)]</colordiffuse>
+                                <colordiffuse>$INFO[Skin.String(TagOverlaysPanelColor)]</colordiffuse>
                             </control>
                             <control type="label">
                                 <left>10</left>
@@ -978,7 +966,7 @@
                                 <align>left</align>
                                 <label>$INFO[Container(998).ListItem.Label2,[B],[/B][CR]]$INFO[Container(998).ListItem.Label]</label>
                                 <font>Reg32</font>
-                                <textcolor>$INFO[Skin.String(LabelOverlaysTextColor)]</textcolor>
+                                <textcolor>$INFO[Skin.String(TagOverlaysTextColor)]</textcolor>
                             </control>
                         </control>
                     </control>
@@ -1034,7 +1022,7 @@
                                 <height>120</height>
                                 <bordersize>0</bordersize>
                                 <texture diffuse="diffuse/poster.png">colors/color_white.png</texture>
-                                <colordiffuse>$INFO[Skin.String(LabelOverlaysPanelColor)]</colordiffuse>
+                                <colordiffuse>$INFO[Skin.String(TagOverlaysPanelColor)]</colordiffuse>
                             </control>
                             <control type="label">
                                 <left>10</left>
@@ -1044,7 +1032,7 @@
                                 <align>left</align>
                                 <label>$INFO[Container(997).ListItem.Label2,[B],[/B][CR]]$INFO[Container(997).ListItem.Label]</label>
                                 <font>Reg32</font>
-                                <textcolor>$INFO[Skin.String(LabelOverlaysTextColor)]</textcolor>
+                                <textcolor>$INFO[Skin.String(TagOverlaysTextColor)]</textcolor>
                             </control>
                         </control>
                     </control>

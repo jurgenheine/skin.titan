@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--Titan-->
-<window id="2">
+<window>
     <defaultcontrol always="true">5000</defaultcontrol>
-    <allowoverlay>yes</allowoverlay>
+    <allowoverlay>no</allowoverlay>
 	
 	<onunload>ClearProperty(ShowViewSubMenu, Home)</onunload>
     <include>allViewIds</include>
@@ -30,9 +30,9 @@
             <!--Grouplist 9000-->
             <control type="grouplist" id="9000">
                 <posx>21</posx>
-                <posy>190</posy>
+                <posy>185</posy>
                 <width>458</width>
-                <height>750</height>
+                <height>770</height>
                 <itemgap>3</itemgap>
                 <onleft>5000</onleft>
                 <onright>5000</onright>
@@ -108,13 +108,6 @@
                     <include>SideBladeMenuButton</include>
                     <label>13319</label>
                 </control>
-                <control type="button" id="400">
-                    <!--Set View-->
-                    <include>SideBladeMenuButton</include>
-                    <label>$LOCALIZE[31305]: $INFO[Container.Viewmode]</label>
-					<onclick>XBMC.RunScript(script.skin.helper.service,action=SETVIEW)</onclick>
-                    <onclick>ActivateWindow(busydialog)</onclick>
-				</control>
 				<include>SideBladeViewCommands</include>
             </control>
         </control>

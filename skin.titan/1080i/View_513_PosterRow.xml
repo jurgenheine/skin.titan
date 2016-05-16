@@ -6,20 +6,26 @@
 			<visible>Control.IsVisible(513)</visible>
 			<include>animation_view_change</include>
 			
-			<!-- movie details -->
-			<control type="group">
-				<include>MovieDetails</include>
-				<animation type="Conditional" condition="StringCompare(Window(Home).Property(showinfopanel),show)">
-					<effect type="slide" start="0,1100" end="0,-50" time="800" tween="cubic" easing="inout" />
-				</animation>
-                <animation type="Conditional" condition="!StringCompare(Window(Home).Property(showinfopanel),show)">
-					<effect type="slide" start="0,0" end="0,1100" time="800" tween="cubic" easing="inout" />
-				</animation>
+			<!-- movie details normal -->
+			<control type="group" id="88882">
+				<include>MovieDetailsTop</include>
+                <top>-140</top>
+                <visible>Control.IsVisible(513)</visible>
+                <visible>Skin.String(View513_DisplayInfo,normal) | [Skin.String(View513_DisplayInfo,normal_delayed) + System.IdleTime(3)]</visible>
+				<animation effect="slide" start="0,-1100" end="0" time="550" tween="cubic" easing="inout">Visible</animation>
+			</control>
+            
+            <!-- movie details small -->
+			<control type="group" id="88883">
+				<include>MovieDetailsTop2</include>
+                <visible>Control.IsVisible(513)</visible>
+                <visible>Skin.String(View513_DisplayInfo,small) | [Skin.String(View513_DisplayInfo,small_delayed) + System.IdleTime(3)]</visible>
+				<animation effect="slide" start="0,-350" end="0" time="350" tween="cubic" easing="inout">Visible</animation>
 			</control>
 				
 			<control type="group">
-				<animation type="Conditional" condition="StringCompare(Window(Home).Property(showinfopanel),show)">
-					<effect type="slide" start="0,-0" end="0,250" time="800" tween="cubic" easing="inout" />
+				<animation type="Conditional" condition="Control.IsVisible(88882)">
+					<effect type="slide" start="0,-0" end="0,250" time="550" tween="cubic" easing="inout" />
 				</animation>
 				<bottom>11%</bottom>
 				<height>1000</height>
@@ -1337,12 +1343,12 @@
 									<height>420</height>
 									<posx>80</posx>
 									<posy>-100</posy>
-									<texture background="true" diffuse="diffuse/cdmask_big.png" fallback="defaultcovers/cd_big.png">$VAR[DiscArtImage]</texture>
+									<texture background="true" diffuse="diffuse/cdmask_new.png" fallback="defaultcovers/cd_big.png">$VAR[DiscArtImage]</texture>
 									<aspectratio scalediffuse="false" align="center" aligny="center">scale</aspectratio>
 									<animation effect="slide" start="0,200" end="0" tween="cubic" easing="inout" time="1200" delay="800">Visible</animation>
 									<animation effect="fade" start="0" end="100" delay="800" time="800" pulse="false">Visible</animation>
 									<animation effect="rotate" end="-360" center="auto" time="20000" loop="true" reversible="false" condition="Skin.HasSetting(AnimateDiscArt)">Conditional</animation>
-									<visible>Skin.HasSetting(View513_ShowCDart) + !StringCompare(Window(Home).Property(showinfopanel),show) + ![SubString(ListItem.Thumb,Default,left) | IsEmpty(ListItem.Thumb)]  + !Container(513).IsScrolling + !Container(513).OnScrollNext + !Container(513).OnScrollPrevious</visible>
+									<visible>Skin.HasSetting(View513_ShowCDart) + !Control.IsVisible(88882) + !Control.IsVisible(88883) + ![SubString(ListItem.Thumb,Default,left) | IsEmpty(ListItem.Thumb)]  + !Container(513).IsScrolling + !Container(513).OnScrollNext + !Container(513).OnScrollPrevious</visible>
 								</control>
 								
 								<control type="image">
@@ -1388,15 +1394,11 @@
 					<posy>460</posy>
 					<width>1890</width>
 					<height>560</height>
-					<onup condition="!StringCompare(Window(Home).Property(showinfopanel),show)">9000</onup>
-					<onup condition="StringCompare(Window(Home).Property(showinfopanel),show)">SetProperty(showinfopanel, hide, Home)</onup>
-					
-					<ondown condition="!StringCompare(Window(Home).Property(showinfopanel),show)">SetProperty(showinfopanel, show, Home)</ondown>
-					<ondown condition="StringCompare(Window(Home).Property(showinfopanel),show)">SetProperty(showinfopanel, hide, Home)</ondown>
-
+					<onup>9000</onup>
+					<ondown>7000</ondown>
 					<orientation>horizontal</orientation>
 					<viewtype label="31440">bigwrap</viewtype>
-					<pagecontrol>61</pagecontrol>
+					<pagecontrol>60</pagecontrol>
 					<focusposition>1</focusposition>
 					<preloaditems>2</preloaditems>
 					<visible>StringCompare(Window(Home).Property(SkinHelper.ForcedView),513) | IsEmpty(Window(Home).Property(SkinHelper.ForcedView))</visible>
@@ -1408,6 +1410,21 @@
 			
             </control>
 			
+            <!--horizontal Scrollbar-->
+			<control type="scrollbar" id="60">
+                <visible>Control.IsVisible(513)</visible>
+                <left>60</left>
+                <bottom>11%</bottom>
+                <width>1800</width>
+                <height>15</height>
+                <onup>513</onup>
+                <onleft>60</onleft>
+                <onright>60</onright>
+                <orientation>horizontal</orientation>
+                <animation effect="fade" start="0" end="100" time="400" condition="[Control.HasFocus(60) | Skin.HasSetting(EnableTouchSupport) | Container.Scrolling | Skin.HasSetting(alwaysShowScrollbars)] + !Control.IsVisible(6002)">Conditional</animation>
+                <animation effect="fade" start="100" end="0" time="400" condition="![Control.HasFocus(60) | Skin.HasSetting(EnableTouchSupport) | Container.Scrolling | Skin.HasSetting(alwaysShowScrollbars)] | Control.IsVisible(6002)">Conditional</animation>
+            </control>
+            
 		</control>
 	</include>
 	
@@ -1501,729 +1518,217 @@
 	<include name="WatchedIndicatorNormal1">
 		<control type="group">
 			<animation effect="zoom" end="95" time="0" center="70,0" condition="control.isvisible(513)">Conditional</animation>
-			<control type="group">
-				<visible>StringCompare(ListItem(1).Overlay,OverlayWatched.png) + Skin.HasSetting(WatchedIndicator.Watched)</visible>
-				<visible>!StringCompare(ListItem(1).Label,..)</visible>
-				<include>indicator_watched_normal</include>
-			</control>
-			<control type="group">
-				<visible>ListItem(1).IsResumable + Skin.HasSetting(WatchedIndicator.Progress)</visible>
-				<visible>!StringCompare(ListItem(1).Label,..)</visible>
-				<include>indicator_progress_normal_image</include>
-				<control type="label">
-					<!--Progress Overlay Text-->
-					<right>0</right>
-					<top>-13</top>
-					<align>center</align>
-					<width>50</width>
-					<label>$INFO[ListItem(1).PercentPlayed]%</label>
-					<font>Reg24</font>
-					<textcolor>$INFO[Skin.String(WatchedIndicator.Progress.TextColor)]</textcolor>
-				</control>
-			</control>
-			<control type="group">
-				<visible>IntegerGreaterThan(ListItem(1).Property(UnWatchedEpisodes),0) + Skin.HasSetting(WatchedIndicator.Episodes)</visible>
-				<visible>!SubString(ListItem(1).Label,..)</visible>
-				<include>indicator_episodes_normal_image</include>
-				<control type="label">
-					<!--Episodes Overlay Text-->
-					<right>0</right>
-					<top>-13</top>
-					<align>center</align>
-					<width>50</width>
-					<label>$INFO[ListItem(1).Property(UnWatchedEpisodes)]</label>
-					<font>Reg24</font>
-					<textcolor>$INFO[Skin.String(WatchedIndicator.Episodes.TextColor)]</textcolor>
-				</control>
-			</control>
-			<control type="group">
-				<visible>[ListItem(1).IsCollection | SubString(ListItem(1).Path,videodb://movies/sets/)] + Skin.HasSetting(WatchedIndicator.Sets)</visible>
-				<visible>!SubString(ListItem(1).Label,..)</visible>
-				<include>indicator_sets_normal</include>
-			</control>
+			<include name="WatchedIndicatorLayout" content="WatchedIndicatorLayout">
+                <param name="width" value="80" />
+                <param name="height" value="80" />
+                <param name="font" value="indicator_normal" />
+                <param name="overlay" value="normal" />
+                <param name="overlay_texture" value="diffuse/icon_overlay.png" />
+                <param name="listitem" value="(1)" />
+            </include>
 		</control>
 	</include>
 	
 	<include name="WatchedIndicatorNormal2">
 		<control type="group">
 			<animation effect="zoom" end="90" time="0" center="65,0" condition="control.isvisible(513)">Conditional</animation>
-			<control type="group">
-				<visible>StringCompare(ListItem(2).Overlay,OverlayWatched.png) + Skin.HasSetting(WatchedIndicator.Watched)</visible>
-				<visible>!StringCompare(ListItem(2).Label,..)</visible>
-				<include>indicator_watched_normal</include>
-			</control>
-			<control type="group">
-				<visible>ListItem(2).IsResumable + Skin.HasSetting(WatchedIndicator.Progress)</visible>
-				<visible>!StringCompare(ListItem(2).Label,..)</visible>
-				<include>indicator_progress_normal_image</include>
-				<control type="label">
-					<!--Progress Overlay Text-->
-					<right>0</right>
-					<top>-13</top>
-					<align>center</align>
-					<width>50</width>
-					<label>$INFO[ListItem(2).PercentPlayed]%</label>
-					<font>Reg24</font>
-					<textcolor>$INFO[Skin.String(WatchedIndicator.Progress.TextColor)]</textcolor>
-				</control>
-			</control>
-			<control type="group">
-				<visible>IntegerGreaterThan(ListItem(2).Property(UnWatchedEpisodes),0) + Skin.HasSetting(WatchedIndicator.Episodes)</visible>
-				<visible>!SubString(ListItem(2).Label,..)</visible>
-				<include>indicator_episodes_normal_image</include>
-				<control type="label">
-					<!--Episodes Overlay Text-->
-					<right>0</right>
-					<top>-13</top>
-					<align>center</align>
-					<width>50</width>
-					<label>$INFO[ListItem(2).Property(UnWatchedEpisodes)]</label>
-					<font>Reg24</font>
-					<textcolor>$INFO[Skin.String(WatchedIndicator.Episodes.TextColor)]</textcolor>
-				</control>
-			</control>
-			<control type="group">
-				<visible>[ListItem(2).IsCollection | SubString(ListItem(2).Path,videodb://movies/sets/)] + Skin.HasSetting(WatchedIndicator.Sets)</visible>
-				<visible>!SubString(ListItem(2).Label,..)</visible>
-				<include>indicator_sets_normal</include>
-			</control>
+			<include name="WatchedIndicatorLayout" content="WatchedIndicatorLayout">
+                <param name="width" value="80" />
+                <param name="height" value="80" />
+                <param name="font" value="indicator_normal" />
+                <param name="overlay" value="normal" />
+                <param name="overlay_texture" value="diffuse/icon_overlay.png" />
+                <param name="listitem" value="(2)" />
+            </include>
 		</control>
 	</include>
 	
 	<include name="WatchedIndicatorNormal3">
 		<control type="group">
 			<animation effect="zoom" end="85" time="0" center="60,0" condition="control.isvisible(513)">Conditional</animation>
-			<control type="group">
-				<visible>StringCompare(ListItem(3).Overlay,OverlayWatched.png) + Skin.HasSetting(WatchedIndicator.Watched)</visible>
-				<visible>!StringCompare(ListItem(3).Label,..)</visible>
-				<include>indicator_watched_normal</include>
-			</control>
-			<control type="group">
-				<visible>ListItem(3).IsResumable + Skin.HasSetting(WatchedIndicator.Progress)</visible>
-				<visible>!StringCompare(ListItem(3).Label,..)</visible>
-				<include>indicator_progress_normal_image</include>
-				<control type="label">
-					<!--Progress Overlay Text-->
-					<right>0</right>
-					<top>-13</top>
-					<align>center</align>
-					<width>50</width>
-					<label>$INFO[ListItem(3).PercentPlayed]%</label>
-					<font>Reg24</font>
-					<textcolor>$INFO[Skin.String(WatchedIndicator.Progress.TextColor)]</textcolor>
-				</control>
-			</control>
-			<control type="group">
-				<visible>IntegerGreaterThan(ListItem(3).Property(UnWatchedEpisodes),0) + Skin.HasSetting(WatchedIndicator.Episodes)</visible>
-				<visible>!SubString(ListItem(3).Label,..)</visible>
-				<include>indicator_episodes_normal_image</include>
-				<control type="label">
-					<!--Episodes Overlay Text-->
-					<right>0</right>
-					<top>-13</top>
-					<align>center</align>
-					<width>50</width>
-					<label>$INFO[ListItem(3).Property(UnWatchedEpisodes)]</label>
-					<font>Reg24</font>
-					<textcolor>$INFO[Skin.String(WatchedIndicator.Episodes.TextColor)]</textcolor>
-				</control>
-			</control>
-			<control type="group">
-				<visible>[ListItem(3).IsCollection | SubString(ListItem(3).Path,videodb://movies/sets/)] + Skin.HasSetting(WatchedIndicator.Sets)</visible>
-				<visible>!SubString(ListItem(3).Label,..)</visible>
-				<include>indicator_sets_normal</include>
-			</control>
+			<include name="WatchedIndicatorLayout" content="WatchedIndicatorLayout">
+                <param name="width" value="80" />
+                <param name="height" value="80" />
+                <param name="font" value="indicator_normal" />
+                <param name="overlay" value="normal" />
+                <param name="overlay_texture" value="diffuse/icon_overlay.png" />
+                <param name="listitem" value="(3)" />
+            </include>
 		</control>
 	</include>
 	
 	<include name="WatchedIndicatorNormal4">
 		<control type="group">
 			<animation effect="zoom" end="80" time="0" center="55,0" condition="control.isvisible(513)">Conditional</animation>
-			<control type="group">
-				<visible>StringCompare(ListItem(4).Overlay,OverlayWatched.png) + Skin.HasSetting(WatchedIndicator.Watched)</visible>
-				<visible>!StringCompare(ListItem(4).Label,..)</visible>
-				<include>indicator_watched_normal</include>
-			</control>
-			<control type="group">
-				<visible>ListItem(4).IsResumable + Skin.HasSetting(WatchedIndicator.Progress)</visible>
-				<visible>!StringCompare(ListItem(4).Label,..)</visible>
-				<include>indicator_progress_normal_image</include>
-				<control type="label">
-					<!--Progress Overlay Text-->
-					<right>0</right>
-					<top>-13</top>
-					<align>center</align>
-					<width>50</width>
-					<label>$INFO[ListItem(4).PercentPlayed]%</label>
-					<font>Reg24</font>
-					<textcolor>$INFO[Skin.String(WatchedIndicator.Progress.TextColor)]</textcolor>
-				</control>
-			</control>
-			<control type="group">
-				<visible>IntegerGreaterThan(ListItem(4).Property(UnWatchedEpisodes),0) + Skin.HasSetting(WatchedIndicator.Episodes)</visible>
-				<visible>!SubString(ListItem(4).Label,..)</visible>
-				<include>indicator_episodes_normal_image</include>
-				<control type="label">
-					<!--Episodes Overlay Text-->
-					<right>0</right>
-					<top>-13</top>
-					<align>center</align>
-					<width>50</width>
-					<label>$INFO[ListItem(4).Property(UnWatchedEpisodes)]</label>
-					<font>Reg24</font>
-					<textcolor>$INFO[Skin.String(WatchedIndicator.Episodes.TextColor)]</textcolor>
-				</control>
-			</control>
-			<control type="group">
-				<visible>[ListItem(4).IsCollection | SubString(ListItem(4).Path,videodb://movies/sets/)] + Skin.HasSetting(WatchedIndicator.Sets)</visible>
-				<visible>!SubString(ListItem(4).Label,..)</visible>
-				<include>indicator_sets_normal</include>
-			</control>
+			<include name="WatchedIndicatorLayout" content="WatchedIndicatorLayout">
+                <param name="width" value="80" />
+                <param name="height" value="80" />
+                <param name="font" value="indicator_normal" />
+                <param name="overlay" value="normal" />
+                <param name="overlay_texture" value="diffuse/icon_overlay.png" />
+                <param name="listitem" value="(4)" />
+            </include>
 		</control>
 	</include>
 	
 	<include name="WatchedIndicatorNormal5">
 		<control type="group">
 			<animation effect="zoom" end="75" time="0" center="55,0" condition="control.isvisible(513)">Conditional</animation>
-			<control type="group">
-				<visible>StringCompare(ListItem(5).Overlay,OverlayWatched.png) + Skin.HasSetting(WatchedIndicator.Watched)</visible>
-				<visible>!StringCompare(ListItem(5).Label,..)</visible>
-				<include>indicator_watched_normal</include>
-			</control>
-			<control type="group">
-				<visible>ListItem(5).IsResumable + Skin.HasSetting(WatchedIndicator.Progress)</visible>
-				<visible>!StringCompare(ListItem(5).Label,..)</visible>
-				<include>indicator_progress_normal_image</include>
-				<control type="label">
-					<!--Progress Overlay Text-->
-					<right>0</right>
-					<top>-13</top>
-					<align>center</align>
-					<width>50</width>
-					<label>$INFO[ListItem(5).PercentPlayed]%</label>
-					<font>Reg24</font>
-					<textcolor>$INFO[Skin.String(WatchedIndicator.Progress.TextColor)]</textcolor>
-				</control>
-			</control>
-			<control type="group">
-				<visible>IntegerGreaterThan(ListItem(5).Property(UnWatchedEpisodes),0) + Skin.HasSetting(WatchedIndicator.Episodes)</visible>
-				<visible>!SubString(ListItem(5).Label,..)</visible>
-				<include>indicator_episodes_normal_image</include>
-				<control type="label">
-					<!--Episodes Overlay Text-->
-					<right>0</right>
-					<top>-13</top>
-					<align>center</align>
-					<width>50</width>
-					<label>$INFO[ListItem(5).Property(UnWatchedEpisodes)]</label>
-					<font>Reg24</font>
-					<textcolor>$INFO[Skin.String(WatchedIndicator.Episodes.TextColor)]</textcolor>
-				</control>
-			</control>
-			<control type="group">
-				<visible>[ListItem(5).IsCollection | SubString(ListItem(5).Path,videodb://movies/sets/)] + Skin.HasSetting(WatchedIndicator.Sets)</visible>
-				<visible>!SubString(ListItem(5).Label,..)</visible>
-				<include>indicator_sets_normal</include>
-			</control>
+			<include name="WatchedIndicatorLayout" content="WatchedIndicatorLayout">
+                <param name="width" value="80" />
+                <param name="height" value="80" />
+                <param name="font" value="indicator_normal" />
+                <param name="overlay" value="normal" />
+                <param name="overlay_texture" value="diffuse/icon_overlay.png" />
+                <param name="listitem" value="(5)" />
+            </include>
 		</control>
 	</include>
 	
 	<include name="WatchedIndicatorNormal6">
 		<control type="group">
 			<animation effect="zoom" end="70" time="0" center="40,0" condition="control.isvisible(513)">Conditional</animation>
-			<control type="group">
-				<visible>StringCompare(ListItem(6).Overlay,OverlayWatched.png) + Skin.HasSetting(WatchedIndicator.Watched)</visible>
-				<visible>!StringCompare(ListItem(6).Label,..)</visible>
-				<include>indicator_watched_normal</include>
-			</control>
-			<control type="group">
-				<visible>ListItem(6).IsResumable + Skin.HasSetting(WatchedIndicator.Progress)</visible>
-				<visible>!StringCompare(ListItem(6).Label,..)</visible>
-				<include>indicator_progress_normal_image</include>
-				<control type="label">
-					<!--Progress Overlay Text-->
-					<right>0</right>
-					<top>-13</top>
-					<align>center</align>
-					<width>50</width>
-					<label>$INFO[ListItem(6).PercentPlayed]%</label>
-					<font>Reg24</font>
-					<textcolor>$INFO[Skin.String(WatchedIndicator.Progress.TextColor)]</textcolor>
-				</control>
-			</control>
-			<control type="group">
-				<visible>IntegerGreaterThan(ListItem(6).Property(UnWatchedEpisodes),0) + Skin.HasSetting(WatchedIndicator.Episodes)</visible>
-				<visible>!SubString(ListItem(6).Label,..)</visible>
-				<include>indicator_episodes_normal_image</include>
-				<control type="label">
-					<!--Episodes Overlay Text-->
-					<right>0</right>
-					<top>-13</top>
-					<align>center</align>
-					<width>50</width>
-					<label>$INFO[ListItem(6).Property(UnWatchedEpisodes)]</label>
-					<font>Reg24</font>
-					<textcolor>$INFO[Skin.String(WatchedIndicator.Episodes.TextColor)]</textcolor>
-				</control>
-			</control>
-			<control type="group">
-				<visible>[ListItem(6).IsCollection | SubString(ListItem(6).Path,videodb://movies/sets/)] + Skin.HasSetting(WatchedIndicator.Sets)</visible>
-				<visible>!SubString(ListItem(6).Label,..)</visible>
-				<include>indicator_sets_normal</include>
-			</control>
+			<include name="WatchedIndicatorLayout" content="WatchedIndicatorLayout">
+                <param name="width" value="80" />
+                <param name="height" value="80" />
+                <param name="font" value="indicator_normal" />
+                <param name="overlay" value="normal" />
+                <param name="overlay_texture" value="diffuse/icon_overlay.png" />
+                <param name="listitem" value="(6)" />
+            </include>
 		</control>
 	</include>
 	
 	<include name="WatchedIndicatorNormal7">
 		<control type="group">
 			<animation effect="zoom" end="60" time="0" center="35,0" condition="control.isvisible(513)">Conditional</animation>
-			<control type="group">
-				<visible>StringCompare(ListItem(7).Overlay,OverlayWatched.png) + Skin.HasSetting(WatchedIndicator.Watched)</visible>
-				<visible>!StringCompare(ListItem(7).Label,..)</visible>
-				<include>indicator_watched_normal</include>
-			</control>
-			<control type="group">
-				<visible>ListItem(7).IsResumable + Skin.HasSetting(WatchedIndicator.Progress)</visible>
-				<visible>!StringCompare(ListItem(7).Label,..)</visible>
-				<include>indicator_progress_normal_image</include>
-				<control type="label">
-					<!--Progress Overlay Text-->
-					<right>0</right>
-					<top>-13</top>
-					<align>center</align>
-					<width>50</width>
-					<label>$INFO[ListItem(7).PercentPlayed]%</label>
-					<font>Reg24</font>
-					<textcolor>$INFO[Skin.String(WatchedIndicator.Progress.TextColor)]</textcolor>
-				</control>
-			</control>
-			<control type="group">
-				<visible>IntegerGreaterThan(ListItem(7).Property(UnWatchedEpisodes),0) + Skin.HasSetting(WatchedIndicator.Episodes)</visible>
-				<visible>!SubString(ListItem(7).Label,..)</visible>
-				<include>indicator_episodes_normal_image</include>
-				<control type="label">
-					<!--Episodes Overlay Text-->
-					<right>0</right>
-					<top>-13</top>
-					<align>center</align>
-					<width>50</width>
-					<label>$INFO[ListItem(7).Property(UnWatchedEpisodes)]</label>
-					<font>Reg24</font>
-					<textcolor>$INFO[Skin.String(WatchedIndicator.Episodes.TextColor)]</textcolor>
-				</control>
-			</control>
-			<control type="group">
-				<visible>[ListItem(7).IsCollection | SubString(ListItem(7).Path,videodb://movies/sets/)] + Skin.HasSetting(WatchedIndicator.Sets)</visible>
-				<visible>!SubString(ListItem(7).Label,..)</visible>
-				<include>indicator_sets_normal</include>
-			</control>
+			<include name="WatchedIndicatorLayout" content="WatchedIndicatorLayout">
+                <param name="width" value="80" />
+                <param name="height" value="80" />
+                <param name="font" value="indicator_normal" />
+                <param name="overlay" value="normal" />
+                <param name="overlay_texture" value="diffuse/icon_overlay.png" />
+                <param name="listitem" value="(7)" />
+            </include>
 		</control>
 	</include>
 	
 	<include name="WatchedIndicatorNormal8">
 		<control type="group">
 			<animation effect="zoom" end="50" time="0" center="30,0" condition="control.isvisible(513)">Conditional</animation>
-			<control type="group">
-				<visible>StringCompare(ListItem(8).Overlay,OverlayWatched.png) + Skin.HasSetting(WatchedIndicator.Watched)</visible>
-				<visible>!StringCompare(ListItem(8).Label,..)</visible>
-				<include>indicator_watched_normal</include>
-			</control>
-			<control type="group">
-				<visible>ListItem(8).IsResumable + Skin.HasSetting(WatchedIndicator.Progress)</visible>
-				<visible>!StringCompare(ListItem(8).Label,..)</visible>
-				<include>indicator_progress_normal_image</include>
-				<control type="label">
-					<!--Progress Overlay Text-->
-					<right>0</right>
-					<top>-13</top>
-					<align>center</align>
-					<width>50</width>
-					<label>$INFO[ListItem(8).PercentPlayed]%</label>
-					<font>Reg24</font>
-					<textcolor>$INFO[Skin.String(WatchedIndicator.Progress.TextColor)]</textcolor>
-				</control>
-			</control>
-			<control type="group">
-				<visible>IntegerGreaterThan(ListItem(8).Property(UnWatchedEpisodes),0) + Skin.HasSetting(WatchedIndicator.Episodes)</visible>
-				<visible>!SubString(ListItem(8).Label,..)</visible>
-				<include>indicator_episodes_normal_image</include>
-				<control type="label">
-					<!--Episodes Overlay Text-->
-					<right>0</right>
-					<top>-13</top>
-					<align>center</align>
-					<width>50</width>
-					<label>$INFO[ListItem(8).Property(UnWatchedEpisodes)]</label>
-					<font>Reg24</font>
-					<textcolor>$INFO[Skin.String(WatchedIndicator.Episodes.TextColor)]</textcolor>
-				</control>
-			</control>
-			<control type="group">
-				<visible>[ListItem(8).IsCollection | SubString(ListItem(8).Path,videodb://movies/sets/)] + Skin.HasSetting(WatchedIndicator.Sets)</visible>
-				<visible>!SubString(ListItem(8).Label,..)</visible>
-				<include>indicator_sets_normal</include>
-			</control>
+			<include name="WatchedIndicatorLayout" content="WatchedIndicatorLayout">
+                <param name="width" value="80" />
+                <param name="height" value="80" />
+                <param name="font" value="indicator_normal" />
+                <param name="overlay" value="normal" />
+                <param name="overlay_texture" value="diffuse/icon_overlay.png" />
+                <param name="listitem" value="(8)" />
+            </include>
 		</control>
 	</include>
 	
 	<include name="WatchedIndicatorNormal9">
 		<control type="group">
 			<animation effect="zoom" end="35" time="0" condition="control.isvisible(513)">Conditional</animation>
-			<control type="group">
-				<visible>StringCompare(ListItem(9).Overlay,OverlayWatched.png) + Skin.HasSetting(WatchedIndicator.Watched)</visible>
-				<visible>!StringCompare(ListItem(9).Label,..)</visible>
-				<include>indicator_watched_normal</include>
-			</control>
-			<control type="group">
-				<visible>ListItem(9).IsResumable + Skin.HasSetting(WatchedIndicator.Progress)</visible>
-				<visible>!StringCompare(ListItem(9).Label,..)</visible>
-				<include>indicator_progress_normal_image</include>
-				<control type="label">
-					<!--Progress Overlay Text-->
-					<right>0</right>
-					<top>-13</top>
-					<align>center</align>
-					<width>50</width>
-					<label>$INFO[ListItem(9).PercentPlayed]%</label>
-					<font>Reg24</font>
-					<textcolor>$INFO[Skin.String(WatchedIndicator.Progress.TextColor)]</textcolor>
-				</control>
-			</control>
-			<control type="group">
-				<visible>IntegerGreaterThan(ListItem(9).Property(UnWatchedEpisodes),0) + Skin.HasSetting(WatchedIndicator.Episodes)</visible>
-				<visible>!SubString(ListItem(9).Label,..)</visible>
-				<include>indicator_episodes_normal_image</include>
-				<control type="label">
-					<!--Episodes Overlay Text-->
-					<right>0</right>
-					<top>-13</top>
-					<align>center</align>
-					<width>50</width>
-					<label>$INFO[ListItem(9).Property(UnWatchedEpisodes)]</label>
-					<font>Reg24</font>
-					<textcolor>$INFO[Skin.String(WatchedIndicator.Episodes.TextColor)]</textcolor>
-				</control>
-			</control>
-			<control type="group">
-				<visible>[ListItem(9).IsCollection | SubString(ListItem(9).Path,videodb://movies/sets/)] + Skin.HasSetting(WatchedIndicator.Sets)</visible>
-				<visible>!SubString(ListItem(9).Label,..)</visible>
-				<include>indicator_sets_normal</include>
-			</control>
+            <include name="WatchedIndicatorLayout" content="WatchedIndicatorLayout">
+                <param name="width" value="80" />
+                <param name="height" value="80" />
+                <param name="font" value="indicator_normal" />
+                <param name="overlay" value="normal" />
+                <param name="overlay_texture" value="diffuse/icon_overlay.png" />
+                <param name="listitem" value="(9)" />
+            </include>
 		</control>
 	</include>
 
 	<include name="WatchedIndicatorNormal-1">
 		<control type="group">
-			<control type="group">
-				<visible>StringCompare(ListItem(-1).Overlay,OverlayWatched.png) + Skin.HasSetting(WatchedIndicator.Watched)</visible>
-				<visible>!StringCompare(ListItem(-1).Label,..)</visible>
-				<include>indicator_watched_normal</include>
-			</control>
-			<control type="group">
-				<visible>ListItem(-1).IsResumable + Skin.HasSetting(WatchedIndicator.Progress)</visible>
-				<visible>!StringCompare(ListItem(-1).Label,..)</visible>
-				<include>indicator_progress_normal_image</include>
-				<control type="label">
-					<!--Progress Overlay Text-->
-					<right>0</right>
-					<top>-13</top>
-					<align>center</align>
-					<width>50</width>
-					<label>$INFO[ListItem(-1).PercentPlayed]%</label>
-					<font>Reg24</font>
-					<textcolor>$INFO[Skin.String(WatchedIndicator.Progress.TextColor)]</textcolor>
-				</control>
-			</control>
-			<control type="group">
-				<visible>IntegerGreaterThan(ListItem(-1).Property(UnWatchedEpisodes),0) + Skin.HasSetting(WatchedIndicator.Episodes)</visible>
-				<visible>!SubString(ListItem(-1).Label,..)</visible>
-				<include>indicator_episodes_normal_image</include>
-				<control type="label">
-					<!--Episodes Overlay Text-->
-					<right>0</right>
-					<top>-13</top>
-					<align>center</align>
-					<width>50</width>
-					<label>$INFO[ListItem(-1).Property(UnWatchedEpisodes)]</label>
-					<font>Reg24</font>
-					<textcolor>$INFO[Skin.String(WatchedIndicator.Episodes.TextColor)]</textcolor>
-				</control>
-			</control>
-			<control type="group">
-				<visible>[ListItem(-1).IsCollection | SubString(ListItem(-1).Path,videodb://movies/sets/)] + Skin.HasSetting(WatchedIndicator.Sets)</visible>
-				<visible>!SubString(ListItem(-1).Label,..)</visible>
-				<include>indicator_sets_normal</include>
-			</control>
+			<include name="WatchedIndicatorLayout" content="WatchedIndicatorLayout">
+                <param name="width" value="80" />
+                <param name="height" value="80" />
+                <param name="font" value="indicator_normal" />
+                <param name="overlay" value="normal" />
+                <param name="overlay_texture" value="diffuse/icon_overlay.png" />
+                <param name="listitem" value="(-1)" />
+            </include>
 		</control>
 	</include>
 	
 	<include name="WatchedIndicatorNormal-2">
 		<control type="group">
-			<control type="group">
-				<visible>StringCompare(ListItem(-2).Overlay,OverlayWatched.png) + Skin.HasSetting(WatchedIndicator.Watched)</visible>
-				<visible>!StringCompare(ListItem(-2).Label,..)</visible>
-				<include>indicator_watched_normal</include>
-			</control>
-			<control type="group">
-				<visible>ListItem(-2).IsResumable + Skin.HasSetting(WatchedIndicator.Progress)</visible>
-				<visible>!StringCompare(ListItem(-2).Label,..)</visible>
-				<include>indicator_progress_normal_image</include>
-				<control type="label">
-					<!--Progress Overlay Text-->
-					<right>0</right>
-					<top>-13</top>
-					<align>center</align>
-					<width>50</width>
-					<label>$INFO[ListItem(-2).PercentPlayed]%</label>
-					<font>Reg24</font>
-					<textcolor>$INFO[Skin.String(WatchedIndicator.Progress.TextColor)]</textcolor>
-				</control>
-			</control>
-			<control type="group">
-				<visible>IntegerGreaterThan(ListItem(-2).Property(UnWatchedEpisodes),0) + Skin.HasSetting(WatchedIndicator.Episodes)</visible>
-				<visible>!SubString(ListItem(-2).Label,..)</visible>
-				<include>indicator_episodes_normal_image</include>
-				<control type="label">
-					<!--Episodes Overlay Text-->
-					<right>0</right>
-					<top>-13</top>
-					<align>center</align>
-					<width>50</width>
-					<label>$INFO[ListItem(-2).Property(UnWatchedEpisodes)]</label>
-					<font>Reg24</font>
-					<textcolor>$INFO[Skin.String(WatchedIndicator.Episodes.TextColor)]</textcolor>
-				</control>
-			</control>
-			<control type="group">
-				<visible>[ListItem(-2).IsCollection | SubString(ListItem(-2).Path,videodb://movies/sets/)] + Skin.HasSetting(WatchedIndicator.Sets)</visible>
-				<visible>!SubString(ListItem(-2).Label,..)</visible>
-				<include>indicator_sets_normal</include>
-			</control>
+			<include name="WatchedIndicatorLayout" content="WatchedIndicatorLayout">
+                <param name="width" value="80" />
+                <param name="height" value="80" />
+                <param name="font" value="indicator_normal" />
+                <param name="overlay" value="normal" />
+                <param name="overlay_texture" value="diffuse/icon_overlay.png" />
+                <param name="listitem" value="(-2)" />
+            </include>
 		</control>
 	</include>
 	
 	<include name="WatchedIndicatorNormal-3">
 		<control type="group">
-			<control type="group">
-				<visible>StringCompare(ListItem(-3).Overlay,OverlayWatched.png) + Skin.HasSetting(WatchedIndicator.Watched)</visible>
-				<visible>!StringCompare(ListItem(-3).Label,..)</visible>
-				<include>indicator_watched_normal</include>
-			</control>
-			<control type="group">
-				<visible>ListItem(-3).IsResumable + Skin.HasSetting(WatchedIndicator.Progress)</visible>
-				<visible>!StringCompare(ListItem(-3).Label,..)</visible>
-				<include>indicator_progress_normal_image</include>
-				<control type="label">
-					<!--Progress Overlay Text-->
-					<right>0</right>
-					<top>-13</top>
-					<align>center</align>
-					<width>50</width>
-					<label>$INFO[ListItem(-3).PercentPlayed]%</label>
-					<font>Reg24</font>
-					<textcolor>$INFO[Skin.String(WatchedIndicator.Progress.TextColor)]</textcolor>
-				</control>
-			</control>
-			<control type="group">
-				<visible>IntegerGreaterThan(ListItem(-3).Property(UnWatchedEpisodes),0) + Skin.HasSetting(WatchedIndicator.Episodes)</visible>
-				<visible>!SubString(ListItem(-3).Label,..)</visible>
-				<include>indicator_episodes_normal_image</include>
-				<control type="label">
-					<!--Episodes Overlay Text-->
-					<right>0</right>
-					<top>-13</top>
-					<align>center</align>
-					<width>50</width>
-					<label>$INFO[ListItem(-3).Property(UnWatchedEpisodes)]</label>
-					<font>Reg24</font>
-					<textcolor>$INFO[Skin.String(WatchedIndicator.Episodes.TextColor)]</textcolor>
-				</control>
-			</control>
-			<control type="group">
-				<visible>[ListItem(-3).IsCollection | SubString(ListItem(-3).Path,videodb://movies/sets/)] + Skin.HasSetting(WatchedIndicator.Sets)</visible>
-				<visible>!SubString(ListItem(-3).Label,..)</visible>
-				<include>indicator_sets_normal</include>
-			</control>
+			<include name="WatchedIndicatorLayout" content="WatchedIndicatorLayout">
+                <param name="width" value="80" />
+                <param name="height" value="80" />
+                <param name="font" value="indicator_normal" />
+                <param name="overlay" value="normal" />
+                <param name="overlay_texture" value="diffuse/icon_overlay.png" />
+                <param name="listitem" value="(-3)" />
+            </include>
 		</control>
 	</include>
 	
 	<include name="WatchedIndicatorNormal-4">
 		<control type="group">
-			<control type="group">
-				<visible>StringCompare(ListItem(-4).Overlay,OverlayWatched.png) + Skin.HasSetting(WatchedIndicator.Watched)</visible>
-				<visible>!StringCompare(ListItem(-4).Label,..)</visible>
-				<include>indicator_watched_normal</include>
-			</control>
-			<control type="group">
-				<visible>ListItem(-4).IsResumable + Skin.HasSetting(WatchedIndicator.Progress)</visible>
-				<visible>!StringCompare(ListItem(-4).Label,..)</visible>
-				<include>indicator_progress_normal_image</include>
-				<control type="label">
-					<!--Progress Overlay Text-->
-					<right>0</right>
-					<top>-13</top>
-					<align>center</align>
-					<width>50</width>
-					<label>$INFO[ListItem(-4).PercentPlayed]%</label>
-					<font>Reg24</font>
-					<textcolor>$INFO[Skin.String(WatchedIndicator.Progress.TextColor)]</textcolor>
-				</control>
-			</control>
-			<control type="group">
-				<visible>IntegerGreaterThan(ListItem(-4).Property(UnWatchedEpisodes),0) + Skin.HasSetting(WatchedIndicator.Episodes)</visible>
-				<visible>!SubString(ListItem(-4).Label,..)</visible>
-				<include>indicator_episodes_normal_image</include>
-				<control type="label">
-					<!--Episodes Overlay Text-->
-					<right>0</right>
-					<top>-13</top>
-					<align>center</align>
-					<width>50</width>
-					<label>$INFO[ListItem(-4).Property(UnWatchedEpisodes)]</label>
-					<font>Reg24</font>
-					<textcolor>$INFO[Skin.String(WatchedIndicator.Episodes.TextColor)]</textcolor>
-				</control>
-			</control>
-			<control type="group">
-				<visible>[ListItem(-4).IsCollection | SubString(ListItem(-4).Path,videodb://movies/sets/)] + Skin.HasSetting(WatchedIndicator.Sets)</visible>
-				<visible>!SubString(ListItem(-4).Label,..)</visible>
-				<include>indicator_sets_normal</include>
-			</control>
+			<include name="WatchedIndicatorLayout" content="WatchedIndicatorLayout">
+                <param name="width" value="80" />
+                <param name="height" value="80" />
+                <param name="font" value="indicator_normal" />
+                <param name="overlay" value="normal" />
+                <param name="overlay_texture" value="diffuse/icon_overlay.png" />
+                <param name="listitem" value="(-4)" />
+            </include>
 		</control>
 	</include>
 	
 	<include name="WatchedIndicatorNormal-5">
 		<control type="group">
-			<control type="group">
-				<visible>StringCompare(ListItem(-5).Overlay,OverlayWatched.png) + Skin.HasSetting(WatchedIndicator.Watched)</visible>
-				<visible>!StringCompare(ListItem(-5).Label,..)</visible>
-				<include>indicator_watched_normal</include>
-			</control>
-			<control type="group">
-				<visible>ListItem(-5).IsResumable + Skin.HasSetting(WatchedIndicator.Progress)</visible>
-				<visible>!StringCompare(ListItem(-5).Label,..)</visible>
-				<include>indicator_progress_normal_image</include>
-				<control type="label">
-					<!--Progress Overlay Text-->
-					<right>0</right>
-					<top>-13</top>
-					<align>center</align>
-					<width>50</width>
-					<label>$INFO[ListItem(-5).PercentPlayed]%</label>
-					<font>Reg24</font>
-					<textcolor>$INFO[Skin.String(WatchedIndicator.Progress.TextColor)]</textcolor>
-				</control>
-			</control>
-			<control type="group">
-				<visible>IntegerGreaterThan(ListItem(-5).Property(UnWatchedEpisodes),0) + Skin.HasSetting(WatchedIndicator.Episodes)</visible>
-				<visible>!SubString(ListItem(-5).Label,..)</visible>
-				<include>indicator_episodes_normal_image</include>
-				<control type="label">
-					<!--Episodes Overlay Text-->
-					<right>0</right>
-					<top>-13</top>
-					<align>center</align>
-					<width>50</width>
-					<label>$INFO[ListItem(-5).Property(UnWatchedEpisodes)]</label>
-					<font>Reg24</font>
-					<textcolor>$INFO[Skin.String(WatchedIndicator.Episodes.TextColor)]</textcolor>
-				</control>
-			</control>
-			<control type="group">
-				<visible>[ListItem(-5).IsCollection | SubString(ListItem(-5).Path,videodb://movies/sets/)] + Skin.HasSetting(WatchedIndicator.Sets)</visible>
-				<visible>!SubString(ListItem(-5).Label,..)</visible>
-				<include>indicator_sets_normal</include>
-			</control>
+			<include name="WatchedIndicatorLayout" content="WatchedIndicatorLayout">
+                <param name="width" value="80" />
+                <param name="height" value="80" />
+                <param name="font" value="indicator_normal" />
+                <param name="overlay" value="normal" />
+                <param name="overlay_texture" value="diffuse/icon_overlay.png" />
+                <param name="listitem" value="(-5)" />
+            </include>
 		</control>
 	</include>
 	
 	<include name="WatchedIndicatorNormal-6">
 		<control type="group">
-			<control type="group">
-				<visible>StringCompare(ListItem(-6).Overlay,OverlayWatched.png) + Skin.HasSetting(WatchedIndicator.Watched)</visible>
-				<visible>!StringCompare(ListItem(-6).Label,..)</visible>
-				<include>indicator_watched_normal</include>
-			</control>
-			<control type="group">
-				<visible>ListItem(-6).IsResumable + Skin.HasSetting(WatchedIndicator.Progress)</visible>
-				<visible>!StringCompare(ListItem(-6).Label,..)</visible>
-				<include>indicator_progress_normal_image</include>
-				<control type="label">
-					<!--Progress Overlay Text-->
-					<right>0</right>
-					<top>-13</top>
-					<align>center</align>
-					<width>50</width>
-					<label>$INFO[ListItem(-6).PercentPlayed]%</label>
-					<font>Reg24</font>
-					<textcolor>$INFO[Skin.String(WatchedIndicator.Progress.TextColor)]</textcolor>
-				</control>
-			</control>
-			<control type="group">
-				<visible>IntegerGreaterThan(ListItem(-6).Property(UnWatchedEpisodes),0) + Skin.HasSetting(WatchedIndicator.Episodes)</visible>
-				<visible>!SubString(ListItem(-6).Label,..)</visible>
-				<include>indicator_episodes_normal_image</include>
-				<control type="label">
-					<!--Episodes Overlay Text-->
-					<right>0</right>
-					<top>-13</top>
-					<align>center</align>
-					<width>50</width>
-					<label>$INFO[ListItem(-6).Property(UnWatchedEpisodes)]</label>
-					<font>Reg24</font>
-					<textcolor>$INFO[Skin.String(WatchedIndicator.Episodes.TextColor)]</textcolor>
-				</control>
-			</control>
-			<control type="group">
-				<visible>[ListItem(-6).IsCollection | SubString(ListItem(-6).Path,videodb://movies/sets/)] + Skin.HasSetting(WatchedIndicator.Sets)</visible>
-				<visible>!SubString(ListItem(-6).Label,..)</visible>
-				<include>indicator_sets_normal</include>
-			</control>
+			<include name="WatchedIndicatorLayout" content="WatchedIndicatorLayout">
+                <param name="width" value="80" />
+                <param name="height" value="80" />
+                <param name="font" value="indicator_normal" />
+                <param name="overlay" value="normal" />
+                <param name="overlay_texture" value="diffuse/icon_overlay.png" />
+                <param name="listitem" value="(-6)" />
+            </include>
 		</control>
 	</include>
 	
 	<include name="WatchedIndicatorNormal-7">
 		<control type="group">
-			<control type="group">
-				<visible>StringCompare(ListItem(-7).Overlay,OverlayWatched.png) + Skin.HasSetting(WatchedIndicator.Watched)</visible>
-				<visible>!StringCompare(ListItem(-7).Label,..)</visible>
-				<include>indicator_watched_normal</include>
-			</control>
-			<control type="group">
-				<visible>ListItem(-7).IsResumable + Skin.HasSetting(WatchedIndicator.Progress)</visible>
-				<visible>!StringCompare(ListItem(-7).Label,..)</visible>
-				<include>indicator_progress_normal_image</include>
-				<control type="label">
-					<!--Progress Overlay Text-->
-					<right>0</right>
-					<top>-13</top>
-					<align>center</align>
-					<width>50</width>
-					<label>$INFO[ListItem(-7).PercentPlayed]%</label>
-					<font>Reg24</font>
-					<textcolor>$INFO[Skin.String(WatchedIndicator.Progress.TextColor)]</textcolor>
-				</control>
-			</control>
-			<control type="group">
-				<visible>IntegerGreaterThan(ListItem(-7).Property(UnWatchedEpisodes),0) + Skin.HasSetting(WatchedIndicator.Episodes)</visible>
-				<visible>!SubString(ListItem(-7).Label,..)</visible>
-				<include>indicator_episodes_normal_image</include>
-				<control type="label">
-					<!--Episodes Overlay Text-->
-					<right>0</right>
-					<top>-13</top>
-					<align>center</align>
-					<width>50</width>
-					<label>$INFO[ListItem(-7).Property(UnWatchedEpisodes)]</label>
-					<font>Reg24</font>
-					<textcolor>$INFO[Skin.String(WatchedIndicator.Episodes.TextColor)]</textcolor>
-				</control>
-			</control>
-			<control type="group">
-				<visible>[ListItem(-7).IsCollection | SubString(ListItem(-7).Path,videodb://movies/sets/)] + Skin.HasSetting(WatchedIndicator.Sets)</visible>
-				<visible>!SubString(ListItem(-7).Label,..)</visible>
-				<include>indicator_sets_normal</include>
-			</control>
+			<include name="WatchedIndicatorLayout" content="WatchedIndicatorLayout">
+                <param name="width" value="80" />
+                <param name="height" value="80" />
+                <param name="font" value="indicator_normal" />
+                <param name="overlay" value="normal" />
+                <param name="overlay_texture" value="diffuse/icon_overlay.png" />
+                <param name="listitem" value="(-7)" />
+            </include>
 		</control>
 	</include>
 	

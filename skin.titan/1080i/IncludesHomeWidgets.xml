@@ -211,11 +211,20 @@
                 <effect type="slide" start="0,0" end="0,-300" time="300" tween="cubic" easing="inout" delay="0"/>
             </animation>
             <!-- show widget above menu when big horizontal home -->
-            <animation type="Conditional" condition="Skin.String(HomeLayout, lowhorizontal) + Skin.HasSetting(AutoShowWidgets) + !StringCompare(Window(Home).Property(ShowWidget),show) + SubString(Control.GetLabel(17888),landscape)">
+            <animation type="Conditional" condition="Skin.String(HomeLayout, lowhorizontal) + Skin.HasSetting(AutoShowWidgets) + !StringCompare(Window(Home).Property(ShowWidget),show) + StringCompare(Control.GetLabel(17888),landscape)">
                 <effect type="slide" start="0,0" end="0,150" time="300" tween="cubic" easing="inout" delay="0"/>
             </animation>
-            <animation type="Conditional" condition="Skin.String(HomeLayout, lowhorizontal) + Skin.HasSetting(AutoShowWidgets) + !StringCompare(Window(Home).Property(ShowWidget),show) + SubString(Control.GetLabel(17888),small)">
+            <animation type="Conditional" condition="Skin.String(HomeLayout, lowhorizontal) + Skin.HasSetting(AutoShowWidgets) + !StringCompare(Window(Home).Property(ShowWidget),show) + StringCompare(Control.GetLabel(17888),smallposter)">
                 <effect type="slide" start="0,0" end="0,120" time="300" tween="cubic" easing="inout" delay="0"/>
+            </animation>
+            <animation type="Conditional" condition="Skin.String(HomeLayout, lowhorizontal) + Skin.HasSetting(AutoShowWidgets) + !StringCompare(Window(Home).Property(ShowWidget),show) + StringCompare(Control.GetLabel(17888),minisquare)">
+                <effect type="slide" start="0,0" end="0,120" time="300" tween="cubic" easing="inout" delay="0"/>
+            </animation>
+            <animation type="Conditional" condition="Skin.String(HomeLayout, lowhorizontal) + Skin.HasSetting(AutoShowWidgets) + !StringCompare(Window(Home).Property(ShowWidget),show) + StringCompare(Control.GetLabel(17888),landscapesmall)">
+                <effect type="slide" start="0,0" end="0,180" time="300" tween="cubic" easing="inout" delay="0"/>
+            </animation>
+            <animation type="Conditional" condition="Skin.String(HomeLayout, lowhorizontal) + Skin.HasSetting(AutoShowWidgets) + !StringCompare(Window(Home).Property(ShowWidget),show) + StringCompare(Control.GetLabel(17888),banner)">
+                <effect type="slide" start="0,0" end="0,180" time="300" tween="cubic" easing="inout" delay="0"/>
             </animation>
             <animation type="Conditional" condition="Skin.String(HomeLayout, lowhorizontal) + SubString(Control.GetLabel(17888),box)">
                 <effect type="slide" start="0,0" end="0,-200" time="0" tween="cubic" easing="inout" delay="0"/>
@@ -240,7 +249,12 @@
                 <colordiffuse>$INFO[Skin.String(SpinnerTextureColor)]</colordiffuse>
                 <fadetime>0</fadetime>
 				<visible>!Skin.String(SkinHelper.SpinnerTexturePath,None)</visible>
-                <visible>[[StringCompare(Window(Home).Property(SkinHelper.WidgetContainer),510) | IsEmpty(Window(Home).Property(SkinHelper.WidgetContainer))] + Container(510).IsUpdating]</visible>
+                <visible>
+                [Control.IsVisible(510) + Container(510).IsUpdating] | 
+                [Control.IsVisible(520) + Container(520).IsUpdating] | 
+                [Control.IsVisible(530) + Container(530).IsUpdating] | 
+                [Control.IsVisible(540) + Container(540).IsUpdating]
+                </visible>
             </control>
              </control>
 
@@ -362,7 +376,7 @@
 			<property name="plot">$INFO[Window(Weather).Property(Day5.Outlook)]</property>
 			<onclick>ActivateWindow(weather)</onclick>
 			<visible>!IsEmpty(Window(Weather).Property(Day5.Title))</visible>
-			<visible>![Skin.String(widgetstyle, poster) + [Skin.String(HomeLayout, simplever) | Skin.String(HomeLayout, simplever_tiles) | Skin.String(HomeLayout, verticalbig)]]</visible>
+			<visible>![Skin.String(widgetstyle, poster) + SubString(Skin.String(HomeLayout),ver)]</visible>
 		</item>
 		<item>
 			<label>[UPPERCASE]$INFO[Window(Weather).Property(Day6.Title)][/UPPERCASE]</label>
@@ -373,7 +387,7 @@
 			<property name="plot">$INFO[Window(Weather).Property(Day6.Outlook)]</property>
 			<onclick>ActivateWindow(weather)</onclick>
 			<visible>!IsEmpty(Window(Weather).Property(Day6.Title))</visible>
-			<visible>![Skin.String(widgetstyle, poster) + [Skin.String(HomeLayout, simplever) | Skin.String(HomeLayout, simplever_tiles) | Skin.String(HomeLayout, verticalbig)]]</visible>
+			<visible>![Skin.String(widgetstyle, poster) + SubString(Skin.String(HomeLayout),ver)]</visible>
 		</item>
 		
 	</include>
@@ -1090,8 +1104,7 @@
         <value condition="StringCompare(Window(Home).Property(SkinHelper.WidgetContainer),614) + !IsEmpty(Container(614).ListItem.Artist) + !IsEmpty(Container(614).ListItem.Album)">[B]$INFO[Container(614).ListItem.Artist,, • ]$INFO[Container(614).ListItem.Album,, • ]$INFO[Container(614).ListItem.Duration][/B][CR]$VAR[HomeMenuWidgetInfoPlot]</value>
         <value condition="StringCompare(Window(Home).Property(SkinHelper.WidgetContainer),614) + !IsEmpty(Container(614).ListItem.Property(StartDateTime))">[B]$INFO[Container(614).ListItem.Property(Channel),, • ]$INFO[Container(614).ListItem.Property(StartDateTime),, • ]$INFO[Container(614).ListItem.Duration,, min. • ]$INFO[Container(614).ListItem.Genre][/B][CR]$VAR[HomeMenuWidgetInfoPlot]</value>
         <value condition="StringCompare(Window(Home).Property(SkinHelper.WidgetContainer),614) + !IsEmpty(Container(614).ListItem.ChannelName)">[B]$INFO[Container(614).ListItem.ChannelName,, • ]$INFO[Container(614).ListItem.Date,, • ]$INFO[Container(614).ListItem.Duration,, min. • ]$INFO[Container(614).ListItem.Genre][/B][CR]$VAR[HomeMenuWidgetInfoPlot]</value>
-       
-        
+
         <value>$VAR[HomeMenuWidgetInfoPlot]</value>
     </variable>
 	
@@ -1147,14 +1160,14 @@
         <value>ListItem.Thumb</value>
     </variable>
     
-    <include name="WidgetLabelOverlayEnable">
+    <include name="WidgetTagOverlayEnable">
         <visible>true</visible>
     </include>
-    <include name="WidgetLabelOverlayDisable">
+    <include name="WidgetTagOverlayDisable">
         <visible>false</visible>
     </include>
-    <include name="WidgetLabelOverlayAuto">
-        <include>$PARAM[prefix]LabelOverlayVisibility</include>
+    <include name="WidgetTagOverlayAuto">
+        <include>$PARAM[prefix]TagOverlayVisibility</include>
     </include>
     
     <include name="widgetlayout">
@@ -1164,6 +1177,11 @@
             <param name="widgetLabelVisibility" value="$PARAM[widgetLabelVisibility]" />
         </include>
         <include name="widget_layout_landscape" content="widget_layout_landscape" condition="Skin.String(widgetstyle, landscape)">
+            <param name="widgetid" value="$PARAM[widgetid]" />
+            <param name="multiprefix" value="$PARAM[multiprefix]" />
+            <param name="widgetLabelVisibility" value="$PARAM[widgetLabelVisibility]" />
+        </include>
+        <include name="widget_layout_landscapesmall" content="widget_layout_landscape" condition="Skin.String(widgetstyle, landscapesmall)">
             <param name="widgetid" value="$PARAM[widgetid]" />
             <param name="multiprefix" value="$PARAM[multiprefix]" />
             <param name="widgetLabelVisibility" value="$PARAM[widgetLabelVisibility]" />
@@ -1193,15 +1211,22 @@
             <param name="multiprefix" value="$PARAM[multiprefix]" />
             <param name="widgetLabelVisibility" value="$PARAM[widgetLabelVisibility]" />
         </include>
+        <include name="widget_layout_banner" content="widget_layout_banner" condition="Skin.String(widgetstyle, banner)">
+            <param name="widgetid" value="$PARAM[widgetid]" />
+            <param name="multiprefix" value="$PARAM[multiprefix]" />
+            <param name="widgetLabelVisibility" value="$PARAM[widgetLabelVisibility]" />
+        </include>
     </include>
     
     <!-- widget poster layout -->
 	<include name="widget_layout_poster">
-        <include condition="[Skin.String(HomeLayout, simplever) | Skin.String(HomeLayout, simplever_tiles) | Skin.String(HomeLayout, verticalbig)]">widget_layout_vertical_poster$PARAM[multiprefix]</include>
-        <include condition="![Skin.String(HomeLayout, simplever) | Skin.String(HomeLayout, simplever_tiles) | Skin.String(HomeLayout, verticalbig)]">widget_layout_horizontal_poster</include>
+        <include condition="SubString(Skin.String(HomeLayout),ver)" name="widget_layout_vertical_poster$PARAM[multiprefix]" content="widget_layout_vertical_poster$PARAM[multiprefix]">
+            <param name="widgetid" value="$PARAM[widgetid]" />
+        </include>
+        <include condition="!SubString(Skin.String(HomeLayout),ver)">widget_layout_horizontal_poster</include>
         <include>widget_layout_general</include>
-        <animation effect="slide" start="0" end="261" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,6) + ![Skin.String(HomeLayout, simplever) | Skin.String(HomeLayout, simplever_tiles) | Skin.String(HomeLayout, verticalbig)]">Conditional</animation>
-        <animation effect="slide" start="0" end="261" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,5) + ![Skin.String(HomeLayout, simplever) | Skin.String(HomeLayout, simplever_tiles) | Skin.String(HomeLayout, verticalbig)]">Conditional</animation>
+        <animation effect="slide" start="0" end="261" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,6) + !SubString(Skin.String(HomeLayout),ver)">Conditional</animation>
+        <animation effect="slide" start="0" end="261" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,5) + !SubString(Skin.String(HomeLayout),ver)">Conditional</animation>
         <animation effect="slide" start="0" end="261" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) +  !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,4)">Conditional</animation>
 		<animation effect="slide" start="0" end="261" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,3)">Conditional</animation>
 		<animation effect="slide" start="0" end="261" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,2)">Conditional</animation>
@@ -1213,11 +1238,11 @@
             <include>PosterPanelLayout</include>
             <control type="group">
                 <description>widget label overlay</description>
-                <include condition="!Skin.String(Widgets_DisplayTags,disable)">PanelLabelOverlay</include>
+                <include condition="!Skin.String(Widgets_DisplayTags,disable)">PosterTagOverlay</include>
                 <include name="$PARAM[widgetLabelVisibility]" content="$PARAM[widgetLabelVisibility]" condition="Skin.String(Widgets_DisplayTags,override)">
                     <param name="prefix" value="Poster" />
                 </include>
-                <include condition="Skin.String(Widgets_DisplayTags,auto)">PosterLabelOverlayVisibility</include>
+                <include condition="Skin.String(Widgets_DisplayTags,auto)">PosterTagOverlayVisibility</include>
             </control>
           </control>
         </itemlayout>
@@ -1228,8 +1253,8 @@
             <include>PosterPanelLayoutFocus</include>
             <control type="group">
                 <description>widget label overlay</description>
-                <include condition="!Skin.String(Widgets_DisplayTags,disable)">PanelLabelOverlay</include>
-                <include condition="Skin.String(Widgets_DisplayTags,auto)">PosterLabelOverlayVisibility</include>
+                <include condition="!Skin.String(Widgets_DisplayTags,disable)">PosterTagOverlay</include>
+                <include condition="Skin.String(Widgets_DisplayTags,auto)">PosterTagOverlayVisibility</include>
                 <include name="$PARAM[widgetLabelVisibility]" content="$PARAM[widgetLabelVisibility]" condition="Skin.String(Widgets_DisplayTags,override)">
                     <param name="prefix" value="Poster" />
                 </include>
@@ -1242,22 +1267,17 @@
         </focusedlayout>
 	</include>
     <include name="widget_layout_vertical_poster">
-        <top>50</top>
         <right>40</right>
 		<width>1305</width>
 		<height>760</height>
 		<orientation>vertical</orientation>
-        <onleft>300</onleft>
-        <ondown>300</ondown>
-        <onup>511</onup>
+        <animation effect="slide" start="0" end="0,380" time="0" condition="Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).Numitems,5) + StringCompare(Container(300).ListItem.Property(lowerwidgets),enable) + !SubString(Container(300).ListItem.Property(multiwidget),multi)">Conditional</animation>
 	</include>
     <include name="widget_layout_vertical_poster_multi">
         <right>45</right>
 		<width>1305</width>
 		<height>380</height>
 		<orientation>horizontal</orientation>
-        <onleft>300</onleft>
-        <ondown>511</ondown>
 	</include>
     <include name="widget_layout_horizontal_poster">
         <posx>50</posx>
@@ -1273,12 +1293,14 @@
     
     <!-- widget small poster layout -->
 	<include name="widget_layout_small_poster">
-        <include condition="[Skin.String(HomeLayout, simplever) | Skin.String(HomeLayout, simplever_tiles) | Skin.String(HomeLayout, verticalbig)]">widget_layout_vertical_small_poster$PARAM[multiprefix]</include>
-        <include condition="![Skin.String(HomeLayout, simplever) | Skin.String(HomeLayout, simplever_tiles) | Skin.String(HomeLayout, verticalbig)]">widget_layout_horizontal_small_poster</include>
+        <include condition="SubString(Skin.String(HomeLayout),ver)" name="widget_layout_vertical_small_poster$PARAM[multiprefix]" content="widget_layout_vertical_small_poster$PARAM[multiprefix]">
+            <param name="widgetid" value="$PARAM[widgetid]" />
+        </include>
+        <include condition="!SubString(Skin.String(HomeLayout),ver)">widget_layout_horizontal_small_poster</include>
         <include>widget_layout_general</include>
-        <animation effect="slide" start="0" end="182" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,9) + ![Skin.String(HomeLayout, simplever) | Skin.String(HomeLayout, simplever_tiles) | Skin.String(HomeLayout, verticalbig)]">Conditional</animation>
-        <animation effect="slide" start="0" end="182" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,8) + ![Skin.String(HomeLayout, simplever) | Skin.String(HomeLayout, simplever_tiles) | Skin.String(HomeLayout, verticalbig)]">Conditional</animation>
-        <animation effect="slide" start="0" end="182" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,7) + ![Skin.String(HomeLayout, simplever) | Skin.String(HomeLayout, simplever_tiles) | Skin.String(HomeLayout, verticalbig)]">Conditional</animation>
+        <animation effect="slide" start="0" end="182" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,9) + !SubString(Skin.String(HomeLayout),ver)">Conditional</animation>
+        <animation effect="slide" start="0" end="182" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,8) + !SubString(Skin.String(HomeLayout),ver)">Conditional</animation>
+        <animation effect="slide" start="0" end="182" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,7) + !SubString(Skin.String(HomeLayout),ver)">Conditional</animation>
         <animation effect="slide" start="0" end="182" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,6)">Conditional</animation>
         <animation effect="slide" start="0" end="182" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,5)">Conditional</animation>
         <animation effect="slide" start="0" end="182" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,4)">Conditional</animation>
@@ -1293,8 +1315,8 @@
                 <include>SmallPosterPanelLayout</include>
                 <control type="group">
                     <description>widget label overlay</description>
-                    <include condition="!Skin.String(Widgets_DisplayTags,disable)">SmallPanelLabelOverlay</include>
-                    <include condition="Skin.String(Widgets_DisplayTags,auto)">PosterLabelOverlayVisibility</include>
+                    <include condition="!Skin.String(Widgets_DisplayTags,disable)">SmallPosterTagOverlay</include>
+                    <include condition="Skin.String(Widgets_DisplayTags,auto)">PosterTagOverlayVisibility</include>
                     <include name="$PARAM[widgetLabelVisibility]" content="$PARAM[widgetLabelVisibility]" condition="Skin.String(Widgets_DisplayTags,override)">
                         <param name="prefix" value="Poster" />
                     </include>
@@ -1308,8 +1330,8 @@
             <include>SmallPosterPanelLayoutFocus</include>
             <control type="group">
                 <description>widget label overlay</description>
-                <include condition="!Skin.String(Widgets_DisplayTags,disable)">SmallPanelLabelOverlay</include>
-                <include condition="Skin.String(Widgets_DisplayTags,auto)">PosterLabelOverlayVisibility</include>
+                <include condition="!Skin.String(Widgets_DisplayTags,disable)">SmallPosterTagOverlay</include>
+                <include condition="Skin.String(Widgets_DisplayTags,auto)">PosterTagOverlayVisibility</include>
                 <include name="$PARAM[widgetLabelVisibility]" content="$PARAM[widgetLabelVisibility]" condition="Skin.String(Widgets_DisplayTags,override)">
                     <param name="prefix" value="Poster" />
                 </include>
@@ -1322,14 +1344,15 @@
         </focusedlayout>
 	</include>
     <include name="widget_layout_vertical_small_poster">
-        <top>50</top>
-        <right>40</right>
+        <right>30</right>
 		<width>1274</width>
-		<height>760</height>
+		<height>759</height>
 		<orientation>vertical</orientation>
         <onleft>300</onleft>
         <ondown>300</ondown>
         <onup>511</onup>
+        <animation effect="slide" start="0" end="0,253" time="0" condition="Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).Numitems,14) + StringCompare(Container(300).ListItem.Property(lowerwidgets),enable) + !SubString(Container(300).ListItem.Property(multiwidget),multi)">Conditional</animation>
+        <animation effect="slide" start="0" end="0,253" time="0" condition="Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).Numitems,7) + StringCompare(Container(300).ListItem.Property(lowerwidgets),enable) + !SubString(Container(300).ListItem.Property(multiwidget),multi)">Conditional</animation>
 	</include>
     <include name="widget_layout_vertical_small_poster_multi">
         <right>30</right>
@@ -1350,11 +1373,13 @@
     
     <!-- widget square layout -->
     <include name="widget_layout_square">
-        <include condition="[Skin.String(HomeLayout, simplever) | Skin.String(HomeLayout, simplever_tiles) | Skin.String(HomeLayout, verticalbig)]">widget_layout_vertical_square$PARAM[multiprefix]</include>
-        <include condition="![Skin.String(HomeLayout, simplever) | Skin.String(HomeLayout, simplever_tiles) | Skin.String(HomeLayout, verticalbig)]">widget_layout_horizontal_square</include>
+        <include condition="SubString(Skin.String(HomeLayout),ver)" name="widget_layout_vertical_square$PARAM[multiprefix]" content="widget_layout_vertical_square$PARAM[multiprefix]">
+            <param name="widgetid" value="$PARAM[widgetid]" />
+        </include>
+        <include condition="!SubString(Skin.String(HomeLayout),ver)">widget_layout_horizontal_square</include>
         <include>widget_layout_general</include>
-        <animation effect="slide" start="0" end="263" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,6) + ![Skin.String(HomeLayout, simplever) | Skin.String(HomeLayout, simplever_tiles) | Skin.String(HomeLayout, verticalbig)]">Conditional</animation>
-        <animation effect="slide" start="0" end="263" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,5) + ![Skin.String(HomeLayout, simplever) | Skin.String(HomeLayout, simplever_tiles) | Skin.String(HomeLayout, verticalbig)]">Conditional</animation>
+        <animation effect="slide" start="0" end="263" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,6) + !SubString(Skin.String(HomeLayout),ver)">Conditional</animation>
+        <animation effect="slide" start="0" end="263" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,5) + !SubString(Skin.String(HomeLayout),ver)">Conditional</animation>
         <animation effect="slide" start="0" end="263" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) +  !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,4)">Conditional</animation>
 		<animation effect="slide" start="0" end="263" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,3)">Conditional</animation>
 		<animation effect="slide" start="0" end="263" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,2)">Conditional</animation>
@@ -1366,8 +1391,8 @@
                 <include>SquarePosterPanelLayout</include>
                 <control type="group">
                     <description>widget label overlay</description>
-                    <include condition="!Skin.String(Widgets_DisplayTags,disable)">SquarePosterLabelOverlay</include>
-                    <include condition="Skin.String(Widgets_DisplayTags,auto)">SquarePosterLabelOverlayVisibility</include>
+                    <include condition="!Skin.String(Widgets_DisplayTags,disable)">SquarePosterTagOverlay</include>
+                    <include condition="Skin.String(Widgets_DisplayTags,auto)">SquarePosterTagOverlayVisibility</include>
                     <include name="$PARAM[widgetLabelVisibility]" content="$PARAM[widgetLabelVisibility]" condition="Skin.String(Widgets_DisplayTags,override)">
                         <param name="prefix" value="SquarePoster" />
                     </include>
@@ -1381,8 +1406,8 @@
                 <include>SquarePosterPanelLayoutFocus</include>
                 <control type="group">
                     <description>widget label overlay</description>
-                    <include condition="!Skin.String(Widgets_DisplayTags,disable)">SquarePosterLabelOverlay</include>
-                    <include condition="Skin.String(Widgets_DisplayTags,auto)">SquarePosterLabelOverlayVisibility</include>
+                    <include condition="!Skin.String(Widgets_DisplayTags,disable)">SquarePosterTagOverlay</include>
+                    <include condition="Skin.String(Widgets_DisplayTags,auto)">SquarePosterTagOverlayVisibility</include>
                     <include name="$PARAM[widgetLabelVisibility]" content="$PARAM[widgetLabelVisibility]" condition="Skin.String(Widgets_DisplayTags,override)">
                         <param name="prefix" value="SquarePoster" />
                     </include>
@@ -1396,7 +1421,6 @@
 		
 	</include>
     <include name="widget_layout_vertical_square">
-		<top>50</top>
         <right>25</right>
 		<width>1315</width>
 		<height>789</height>
@@ -1404,6 +1428,8 @@
         <onleft>300</onleft>
         <ondown>300</ondown>
         <onup>511</onup>
+        <animation effect="slide" start="0" end="0,263" time="0" condition="Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).Numitems,14) + StringCompare(Container(300).ListItem.Property(lowerwidgets),enable) + !SubString(Container(300).ListItem.Property(multiwidget),multi)">Conditional</animation>
+        <animation effect="slide" start="0" end="0,263" time="0" condition="Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).Numitems,7) + StringCompare(Container(300).ListItem.Property(lowerwidgets),enable) + !SubString(Container(300).ListItem.Property(multiwidget),multi)">Conditional</animation>
 	</include>
     <include name="widget_layout_vertical_square_multi">
         <right>30</right>
@@ -1427,13 +1453,15 @@
     
     <!-- widget square layout -->
     <include name="widget_layout_minisquare">
-        <include condition="[Skin.String(HomeLayout, simplever) | Skin.String(HomeLayout, simplever_tiles) | Skin.String(HomeLayout, verticalbig)]">widget_layout_vertical_minisquare$PARAM[multiprefix]</include>
-        <include condition="![Skin.String(HomeLayout, simplever) | Skin.String(HomeLayout, simplever_tiles) | Skin.String(HomeLayout, verticalbig)]">widget_layout_horizontal_minisquare</include>
+        <include condition="SubString(Skin.String(HomeLayout),ver)" name="widget_layout_vertical_minisquare$PARAM[multiprefix]" content="widget_layout_vertical_minisquare$PARAM[multiprefix]">
+            <param name="widgetid" value="$PARAM[widgetid]" />
+        </include>
+        <include condition="!SubString(Skin.String(HomeLayout),ver)">widget_layout_horizontal_minisquare</include>
         <include>widget_layout_general</include>
-        <animation effect="slide" start="0" end="130" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,13) + ![Skin.String(HomeLayout, simplever) | Skin.String(HomeLayout, simplever_tiles) | Skin.String(HomeLayout, verticalbig)]">Conditional</animation>
-        <animation effect="slide" start="0" end="130" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,12) + ![Skin.String(HomeLayout, simplever) | Skin.String(HomeLayout, simplever_tiles) | Skin.String(HomeLayout, verticalbig)]">Conditional</animation>
-        <animation effect="slide" start="0" end="130" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,11) + ![Skin.String(HomeLayout, simplever) | Skin.String(HomeLayout, simplever_tiles) | Skin.String(HomeLayout, verticalbig)]">Conditional</animation>
-        <animation effect="slide" start="0" end="130" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,10) + ![Skin.String(HomeLayout, simplever) | Skin.String(HomeLayout, simplever_tiles) | Skin.String(HomeLayout, verticalbig)]">Conditional</animation>
+        <animation effect="slide" start="0" end="130" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,13) + !SubString(Skin.String(HomeLayout),ver)">Conditional</animation>
+        <animation effect="slide" start="0" end="130" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,12) + !SubString(Skin.String(HomeLayout),ver)">Conditional</animation>
+        <animation effect="slide" start="0" end="130" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,11) + !SubString(Skin.String(HomeLayout),ver)">Conditional</animation>
+        <animation effect="slide" start="0" end="130" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,10) + !SubString(Skin.String(HomeLayout),ver)">Conditional</animation>
         
 		<animation effect="slide" start="0" end="130" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) +  !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,9)">Conditional</animation>
 		<animation effect="slide" start="0" end="130" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) +  !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,8)">Conditional</animation>
@@ -1449,9 +1477,6 @@
                 <width>120</width>
                 <height>120</height>
                 <include>SquarePosterPanelLayout</include>
-                <control type="group">
-                    <description>widget label overlay</description>
-                </control>
             </control>
         </itemlayout>
         <focusedlayout height="131" width="130">
@@ -1459,9 +1484,6 @@
                 <width>120</width>
                 <height>120</height>
                 <include>SquarePosterPanelLayoutFocus</include>
-                <control type="group">
-                    <description>widget label overlay</description>
-                </control>
                 <include name="HiddenWidgetButton" content="HiddenWidgetButton">
                     <param name="widgetstyle" value="minisquare" />
                     <param name="widgetid" value="$PARAM[widgetid]" />
@@ -1471,17 +1493,21 @@
 		
 	</include>
     <include name="widget_layout_vertical_minisquare">
-		<top>50</top>
-        <right>45</right>
+        <right>40</right>
 		<width>1300</width>
-		<height>131</height>
+		<height>786</height>
 		<orientation>vertical</orientation>
         <onleft>300</onleft>
         <ondown>300</ondown>
         <onup>511</onup>
+        <animation effect="slide" start="0" end="0,131" time="0" condition="Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).Numitems,50) + StringCompare(Container(300).ListItem.Property(lowerwidgets),enable) + !SubString(Container(300).ListItem.Property(multiwidget),multi)">Conditional</animation>
+        <animation effect="slide" start="0" end="0,131" time="0" condition="Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).Numitems,40) + StringCompare(Container(300).ListItem.Property(lowerwidgets),enable) + !SubString(Container(300).ListItem.Property(multiwidget),multi)">Conditional</animation>
+        <animation effect="slide" start="0" end="0,131" time="0" condition="Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).Numitems,30) + StringCompare(Container(300).ListItem.Property(lowerwidgets),enable) + !SubString(Container(300).ListItem.Property(multiwidget),multi)">Conditional</animation>
+        <animation effect="slide" start="0" end="0,131" time="0" condition="Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).Numitems,20) + StringCompare(Container(300).ListItem.Property(lowerwidgets),enable) + !SubString(Container(300).ListItem.Property(multiwidget),multi)">Conditional</animation>
+        <animation effect="slide" start="0" end="0,131" time="0" condition="Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).Numitems,10) + StringCompare(Container(300).ListItem.Property(lowerwidgets),enable) + !SubString(Container(300).ListItem.Property(multiwidget),multi)">Conditional</animation>
 	</include>
     <include name="widget_layout_vertical_minisquare_multi">
-        <right>45</right>
+        <right>40</right>
 		<width>1300</width>
 		<height>131</height>
 		<orientation>horizontal</orientation>
@@ -1500,40 +1526,39 @@
         <orientation>horizontal</orientation>
 	</include>
     
-    
     <!-- widget landscape layout -->
     <include name="widget_layout_landscape">
-        <include condition="[[Skin.String(HomeLayout, simplever) | Skin.String(HomeLayout, simplever_tiles) | Skin.String(HomeLayout, verticalbig)]]" name="widget_layout_vertical_landscape$PARAM[multiprefix]" content="widget_layout_vertical_landscape$PARAM[multiprefix]">
+        <include condition="SubString(Skin.String(HomeLayout),ver)" name="widget_layout_vertical_landscape$PARAM[multiprefix]" content="widget_layout_vertical_landscape$PARAM[multiprefix]">
             <param name="widgetid" value="$PARAM[widgetid]" />
         </include>
-        <include condition="![Skin.String(HomeLayout, simplever) | Skin.String(HomeLayout, simplever_tiles) | Skin.String(HomeLayout, verticalbig)]" name="widget_layout_horizontal_landscape" content="widget_layout_horizontal_landscape">
+        <include condition="!SubString(Skin.String(HomeLayout),ver)" name="widget_layout_horizontal_landscape" content="widget_layout_horizontal_landscape">
             <param name="widgetid" value="$PARAM[widgetid]" />
         </include>
         <include>widget_layout_general</include>
-        <itemlayout width="366" height="210" condition="![SubString(Skin.String(HomeLayout),simplever) | Skin.String(HomeLayout,verticalbig)]">
+        <itemlayout width="366" height="210" condition="!SubString(Skin.String(HomeLayout),ver)">
 			<control type="group">
                 <width>354</width>
                 <height>200</height>
                 <include>ThumbsViewLayout</include>
                 <control type="group">
                     <description>widget label overlay</description>
-                    <include condition="!Skin.String(Widgets_DisplayTags,disable)">ThumbsLabelOverlay</include>
-                    <include condition="Skin.String(Widgets_DisplayTags,auto)">LandscapeLabelOverlayVisibility</include>
+                    <include condition="!Skin.String(Widgets_DisplayTags,disable)">ThumbsTagOverlay</include>
+                    <include condition="Skin.String(Widgets_DisplayTags,auto)">LandscapeTagOverlayVisibility</include>
                     <include name="$PARAM[widgetLabelVisibility]" content="$PARAM[widgetLabelVisibility]" condition="Skin.String(Widgets_DisplayTags,override)">
                         <param name="prefix" value="Landscape" />
                     </include>
                 </control>
             </control>
 		</itemlayout>
-		<focusedlayout width="366" height="210" condition="![SubString(Skin.String(HomeLayout),simplever) | Skin.String(HomeLayout,verticalbig)]">
+		<focusedlayout width="366" height="210" condition="!SubString(Skin.String(HomeLayout),ver)">
 			<control type="group">
                 <width>354</width>
                 <height>200</height>
                 <include>ThumbsViewLayoutFocus</include>
                 <control type="group">
                     <description>widget label overlay</description>
-                    <include condition="!Skin.String(Widgets_DisplayTags,disable)">ThumbsLabelOverlay</include>
-                    <include condition="Skin.String(Widgets_DisplayTags,auto)">LandscapeLabelOverlayVisibility</include>
+                    <include condition="!Skin.String(Widgets_DisplayTags,disable)">ThumbsTagOverlay</include>
+                    <include condition="Skin.String(Widgets_DisplayTags,auto)">LandscapeTagOverlayVisibility</include>
                     <include name="$PARAM[widgetLabelVisibility]" content="$PARAM[widgetLabelVisibility]" condition="Skin.String(Widgets_DisplayTags,override)">
                         <param name="prefix" value="Landscape" />
                     </include>
@@ -1544,30 +1569,30 @@
                 </include>
             </control>
 		</focusedlayout>
-		<itemlayout width="326" height="190" condition="[SubString(Skin.String(HomeLayout),simplever) | Skin.String(HomeLayout,verticalbig)]">
+		<itemlayout width="326" height="190" condition="SubString(Skin.String(HomeLayout),ver)">
 			<control type="group">
                 <width>320</width>
                 <height>180</height>
                 <include>ThumbsViewLayout</include>
                 <control type="group">
                     <description>widget label overlay</description>
-                    <include condition="!Skin.String(Widgets_DisplayTags,disable)">ThumbsLabelOverlay</include>
-                    <include condition="Skin.String(Widgets_DisplayTags,auto)">LandscapeLabelOverlayVisibility</include>
+                    <include condition="!Skin.String(Widgets_DisplayTags,disable)">ThumbsTagOverlay</include>
+                    <include condition="Skin.String(Widgets_DisplayTags,auto)">LandscapeTagOverlayVisibility</include>
                     <include name="$PARAM[widgetLabelVisibility]" content="$PARAM[widgetLabelVisibility]" condition="Skin.String(Widgets_DisplayTags,override)">
                         <param name="prefix" value="Landscape" />
                     </include>
                 </control>
             </control>
 		</itemlayout>
-		<focusedlayout width="326" height="190" condition="[SubString(Skin.String(HomeLayout),simplever) | Skin.String(HomeLayout,verticalbig)]">
+		<focusedlayout width="326" height="190" condition="SubString(Skin.String(HomeLayout),ver)">
 			<control type="group">
                 <width>320</width>
                 <height>180</height>
                 <include>ThumbsViewLayoutFocus</include>
                 <control type="group">
                     <description>widget label overlay</description>
-                    <include condition="!Skin.String(Widgets_DisplayTags,disable)">ThumbsLabelOverlay</include>
-                    <include condition="Skin.String(Widgets_DisplayTags,auto)">LandscapeLabelOverlayVisibility</include>
+                    <include condition="!Skin.String(Widgets_DisplayTags,disable)">ThumbsTagOverlay</include>
+                    <include condition="Skin.String(Widgets_DisplayTags,auto)">LandscapeTagOverlayVisibility</include>
                     <include name="$PARAM[widgetLabelVisibility]" content="$PARAM[widgetLabelVisibility]" condition="Skin.String(Widgets_DisplayTags,override)">
                         <param name="prefix" value="Landscape" />
                     </include>
@@ -1581,7 +1606,6 @@
 		
 	</include>
     <include name="widget_layout_vertical_landscape">
-		<top>50</top>
         <right>40</right>
 		<width>1305</width>
 		<height>760</height>
@@ -1589,6 +1613,10 @@
         <onleft>300</onleft>
         <ondown>300</ondown>
         <onup>511</onup>
+        <animation effect="slide" start="0" end="0,190" time="0" condition="Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).Numitems,12) + StringCompare(Container(300).ListItem.Property(lowerwidgets),enable) + !SubString(Container(300).ListItem.Property(multiwidget),multi)">Conditional</animation>
+        <animation effect="slide" start="0" end="0,190" time="0" condition="Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).Numitems,8) + StringCompare(Container(300).ListItem.Property(lowerwidgets),enable) + !SubString(Container(300).ListItem.Property(multiwidget),multi)">Conditional</animation>
+        <animation effect="slide" start="0" end="0,190" time="0" condition="Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).Numitems,4) + StringCompare(Container(300).ListItem.Property(lowerwidgets),enable) + !SubString(Container(300).ListItem.Property(multiwidget),multi)">Conditional</animation>
+        
         <animation effect="slide" start="0" end="326" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,3)">Conditional</animation>
 		<animation effect="slide" start="0" end="326" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,2)">Conditional</animation>
 		<animation effect="slide" start="0" end="326" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,1)">Conditional</animation>
@@ -1618,12 +1646,249 @@
 		<animation effect="slide" start="0" end="366" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,2)">Conditional</animation>
 		<animation effect="slide" start="0" end="366" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,1)">Conditional</animation>
 	</include>
+	
+    <!-- widget banner layout -->
+    <include name="widget_layout_banner">
+        <include condition="[SubString(Skin.String(HomeLayout),ver)]" name="widget_layout_vertical_banner$PARAM[multiprefix]" content="widget_layout_vertical_banner$PARAM[multiprefix]">
+            <param name="widgetid" value="$PARAM[widgetid]" />
+        </include>
+        <include condition="!SubString(Skin.String(HomeLayout),ver)" name="widget_layout_horizontal_banner" content="widget_layout_horizontal_banner">
+            <param name="widgetid" value="$PARAM[widgetid]" />
+        </include>
+        <include>widget_layout_general</include>
+        <itemlayout height="126" width="610" condition="!SubString(Skin.String(HomeLayout),ver)">
+            <control type="image">
+                <texture border="5">diffuse/banner.png</texture>
+                <colordiffuse>$VAR[ViewDetailsPanelColor]</colordiffuse>
+                <aspectratio scalediffuse="false" align="left">stretch</aspectratio>
+                <include condition="Skin.String(thumbsborder_unfocused, 0)">thumbborder_0</include>
+                <include condition="Skin.String(thumbsborder_unfocused, 2)">thumbborder_2</include>
+                <include condition="Skin.String(thumbsborder_unfocused, 4)">thumbborder_4</include>
+                <include condition="Skin.String(thumbsborder_unfocused, 6)">thumbborder_6</include>
+            </control>
+            <include>BannerLayout</include>
+        </itemlayout>
+        <focusedlayout height="126" width="610" condition="!SubString(Skin.String(HomeLayout),ver)">
+            <control type="image">
+                <texture border="5">diffuse/banner.png</texture>
+                <colordiffuse>$INFO[Skin.String(HomeViewDetailsFocusColor)]</colordiffuse>
+                <aspectratio scalediffuse="false" align="left">stretch</aspectratio>
+                <include condition="Skin.String(thumbsborder_focused, 2)">thumbborder_2</include>
+                <include condition="Skin.String(thumbsborder_focused, 4)">thumbborder_4</include>
+                <include condition="Skin.String(thumbsborder_focused, 6)">thumbborder_6</include>
+            </control>
+            <include>BannerLayout</include>
+            <include name="HiddenWidgetButton" content="HiddenWidgetButton">
+                <param name="widgetstyle" value="banner" />
+                <param name="widgetid" value="$PARAM[widgetid]" />
+            </include>
+        </focusedlayout>
+        <itemlayout height="146" width="650" condition="SubString(Skin.String(HomeLayout),ver)">
+            <control type="image">
+                <texture border="5">diffuse/banner.png</texture>
+                <colordiffuse>$VAR[ViewDetailsPanelColor]</colordiffuse>
+                <aspectratio scalediffuse="false" align="left">stretch</aspectratio>
+                <include condition="Skin.String(thumbsborder_unfocused, 0)">thumbborder_0</include>
+                <include condition="Skin.String(thumbsborder_unfocused, 2)">thumbborder_2</include>
+                <include condition="Skin.String(thumbsborder_unfocused, 4)">thumbborder_4</include>
+                <include condition="Skin.String(thumbsborder_unfocused, 6)">thumbborder_6</include>
+            </control>
+            <include>BannerLayout</include>
+        </itemlayout>
+        <focusedlayout height="146" width="650" condition="SubString(Skin.String(HomeLayout),ver)">
+            <control type="image">
+                <texture border="5">diffuse/banner.png</texture>
+                <colordiffuse>$INFO[Skin.String(HomeViewDetailsFocusColor)]</colordiffuse>
+                <aspectratio scalediffuse="false" align="left">stretch</aspectratio>
+                <include condition="Skin.String(thumbsborder_focused, 2)">thumbborder_2</include>
+                <include condition="Skin.String(thumbsborder_focused, 4)">thumbborder_4</include>
+                <include condition="Skin.String(thumbsborder_focused, 6)">thumbborder_6</include>
+            </control>
+            <include>BannerLayout</include>
+            <include name="HiddenWidgetButton" content="HiddenWidgetButton">
+                <param name="widgetstyle" value="banner" />
+                <param name="widgetid" value="$PARAM[widgetid]" />
+            </include>
+        </focusedlayout>
+	</include>
+    <include name="widget_layout_vertical_banner">
+        <right>45</right>
+		<width>1300</width>
+		<height>730</height>
+		<orientation>vertical</orientation>
+        <onleft>300</onleft>
+        <ondown>300</ondown>
+        <onup>511</onup>
+        
+        <animation effect="slide" start="0" end="0,146" time="0" condition="Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).Numitems,8) + StringCompare(Container(300).ListItem.Property(lowerwidgets),enable) + !SubString(Container(300).ListItem.Property(multiwidget),multi)">Conditional</animation>
+        <animation effect="slide" start="0" end="0,146" time="0" condition="Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).Numitems,6) + StringCompare(Container(300).ListItem.Property(lowerwidgets),enable) + !SubString(Container(300).ListItem.Property(multiwidget),multi)">Conditional</animation>
+        <animation effect="slide" start="0" end="0,146" time="0" condition="Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).Numitems,4) + StringCompare(Container(300).ListItem.Property(lowerwidgets),enable) + !SubString(Container(300).ListItem.Property(multiwidget),multi)">Conditional</animation>
+        <animation effect="slide" start="0" end="0,146" time="0" condition="Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).Numitems,2) + StringCompare(Container(300).ListItem.Property(lowerwidgets),enable) + !SubString(Container(300).ListItem.Property(multiwidget),multi)">Conditional</animation>
+        
+        
+        <animation effect="slide" start="0" end="326" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,3)">Conditional</animation>
+		<animation effect="slide" start="0" end="326" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,2)">Conditional</animation>
+		<animation effect="slide" start="0" end="326" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,1)">Conditional</animation>
+	</include>
+    <include name="widget_layout_vertical_banner_multi">
+        <right>50</right>
+		<width>1300</width>
+		<height>155</height>
+		<orientation>horizontal</orientation>
+        <onleft>300</onleft>
+        <ondown>511</ondown>
+        <animation effect="slide" start="0" end="326" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,3)">Conditional</animation>
+		<animation effect="slide" start="0" end="326" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,2)">Conditional</animation>
+		<animation effect="slide" start="0" end="326" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,1)">Conditional</animation>
+	</include>
+    <include name="widget_layout_horizontal_banner">
+		<posx>50</posx>
+		<posy>500</posy>
+		<width>1830</width>
+		<height>210</height>
+        <ondown condition="!Skin.String(HomeLayout, netflix) + !Skin.String(HomeLayout, simplever) + !Skin.String(HomeLayout, simplever_tiles)">300</ondown>
+        <onup condition="!Skin.String(HomeLayout, netflix) + !Skin.String(HomeLayout, simplever) + !Skin.String(HomeLayout, simplever_tiles)">$VAR[toggleNextWidget]</onup>
+        <onup condition="!Skin.String(HomeLayout, netflix) + !Skin.String(HomeLayout, simplever) + !Skin.String(HomeLayout, simplever_tiles)">$VAR[focusNextWidget]</onup>
+        <orientation>horizontal</orientation>
+        <animation effect="slide" start="0" end="366" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,4)">Conditional</animation>
+		<animation effect="slide" start="0" end="366" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,3)">Conditional</animation>
+		<animation effect="slide" start="0" end="366" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,2)">Conditional</animation>
+		<animation effect="slide" start="0" end="366" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,1)">Conditional</animation>
+	</include>
+	    
+    <!-- widget landscapesmall layout -->
+    <include name="widget_layout_landscapesmall">
+        <include condition="[SubString(Skin.String(HomeLayout),ver)]" name="widget_layout_vertical_landscapesmall$PARAM[multiprefix]" content="widget_layout_vertical_landscapesmall$PARAM[multiprefix]">
+            <param name="widgetid" value="$PARAM[widgetid]" />
+        </include>
+        <include condition="!SubString(Skin.String(HomeLayout),ver)" name="widget_layout_horizontal_landscapesmall" content="widget_layout_horizontal_landscapesmall">
+            <param name="widgetid" value="$PARAM[widgetid]" />
+        </include>
+        <include>widget_layout_general</include>
+        <itemlayout width="262" height="148">
+			<control type="group">
+                <width>99%</width>
+                <height>100%</height>
+                <include>ThumbsViewLayout</include>
+                <control type="group">
+                    <description>widget label overlay</description>
+                    <include condition="!Skin.String(Widgets_DisplayTags,disable)">ThumbsTagOverlaySmall</include>
+                    <include condition="Skin.String(Widgets_DisplayTags,auto)">LandscapeTagOverlayVisibility</include>
+                    <include name="$PARAM[widgetLabelVisibility]" content="$PARAM[widgetLabelVisibility]" condition="Skin.String(Widgets_DisplayTags,override)">
+                        <param name="prefix" value="Landscape" />
+                    </include>
+                </control>
+            </control>
+		</itemlayout>
+		<focusedlayout width="262" height="148">
+			<control type="group">
+                <width>99%</width>
+                <height>100%</height>
+                <include>ThumbsViewLayoutFocus</include>
+                <control type="group">
+                    <description>widget label overlay</description>
+                    <include condition="!Skin.String(Widgets_DisplayTags,disable)">ThumbsTagOverlaySmall</include>
+                    <include condition="Skin.String(Widgets_DisplayTags,auto)">LandscapeTagOverlayVisibility</include>
+                    <include name="$PARAM[widgetLabelVisibility]" content="$PARAM[widgetLabelVisibility]" condition="Skin.String(Widgets_DisplayTags,override)">
+                        <param name="prefix" value="Landscape" />
+                    </include>
+                </control>
+                <include name="HiddenWidgetButton" content="HiddenWidgetButton">
+                    <param name="widgetstyle" value="landscapesmall" />
+                    <param name="widgetid" value="$PARAM[widgetid]" />
+                </include>
+            </control>
+		</focusedlayout>
+	</include>
+    <include name="widget_layout_vertical_landscapesmall">
+        <right>42</right>
+		<width>1310</width>
+		<height>740</height>
+		<orientation>vertical</orientation>
+        <onleft>300</onleft>
+        <ondown>300</ondown>
+        <onup>511</onup>
+        
+        <animation effect="slide" start="0" end="0,148" time="0" condition="Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).Numitems,20) + StringCompare(Container(300).ListItem.Property(lowerwidgets),enable) + !SubString(Container(300).ListItem.Property(multiwidget),multi)">Conditional</animation>
+        <animation effect="slide" start="0" end="0,148" time="0" condition="Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).Numitems,15) + StringCompare(Container(300).ListItem.Property(lowerwidgets),enable) + !SubString(Container(300).ListItem.Property(multiwidget),multi)">Conditional</animation>
+        <animation effect="slide" start="0" end="0,148" time="0" condition="Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).Numitems,10) + StringCompare(Container(300).ListItem.Property(lowerwidgets),enable) + !SubString(Container(300).ListItem.Property(multiwidget),multi)">Conditional</animation>
+        <animation effect="slide" start="0" end="0,148" time="0" condition="Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).Numitems,5) + StringCompare(Container(300).ListItem.Property(lowerwidgets),enable) + !SubString(Container(300).ListItem.Property(multiwidget),multi)">Conditional</animation>
+        
+        <animation effect="slide" start="0" end="262" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,4)">Conditional</animation>
+        <animation effect="slide" start="0" end="262" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,3)">Conditional</animation>
+		<animation effect="slide" start="0" end="262" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,2)">Conditional</animation>
+		<animation effect="slide" start="0" end="262" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,1)">Conditional</animation>
+	</include>
+    <include name="widget_layout_vertical_landscapesmall_multi">
+        <right>42</right>
+		<width>1310</width>
+		<height>155</height>
+		<orientation>horizontal</orientation>
+        <onleft>300</onleft>
+        <ondown>511</ondown>
+        <animation effect="slide" start="0" end="262" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,4)">Conditional</animation>
+        <animation effect="slide" start="0" end="262" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,3)">Conditional</animation>
+		<animation effect="slide" start="0" end="262" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,2)">Conditional</animation>
+		<animation effect="slide" start="0" end="262" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,1)">Conditional</animation>
+	</include>
+    <include name="widget_layout_horizontal_landscapesmall">
+		<posx>50</posx>
+		<posy>500</posy>
+		<width>1834</width>
+		<height>148</height>
+        <ondown condition="!Skin.String(HomeLayout, netflix) + !Skin.String(HomeLayout, simplever) + !Skin.String(HomeLayout, simplever_tiles)">300</ondown>
+        <onup condition="!Skin.String(HomeLayout, netflix) + !Skin.String(HomeLayout, simplever) + !Skin.String(HomeLayout, simplever_tiles)">$VAR[toggleNextWidget]</onup>
+        <onup condition="!Skin.String(HomeLayout, netflix) + !Skin.String(HomeLayout, simplever) + !Skin.String(HomeLayout, simplever_tiles)">$VAR[focusNextWidget]</onup>
+        <orientation>horizontal</orientation>
+        <animation effect="slide" start="0" end="262" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,6)">Conditional</animation>
+        <animation effect="slide" start="0" end="262" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,5)">Conditional</animation>
+        <animation effect="slide" start="0" end="262" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,4)">Conditional</animation>
+		<animation effect="slide" start="0" end="262" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,3)">Conditional</animation>
+		<animation effect="slide" start="0" end="262" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,2)">Conditional</animation>
+		<animation effect="slide" start="0" end="262" time="0" condition="!Skin.HasSetting(AutoWidgetAlignDisabled) + !SubString(Skin.String(HomeLayout), netflix) + Control.IsVisible($PARAM[widgetid]) + !IntegerGreaterThan(Container($PARAM[widgetid]).NumItems,1)">Conditional</animation>
+	</include>
 	    
     <!-- widget singlebox layout -->
     <include name="widget_layout_singlebox">
-        <include condition="[[Skin.String(HomeLayout, simplever) | Skin.String(HomeLayout, simplever_tiles) | Skin.String(HomeLayout, verticalbig)]]">widget_layout_vertical_singlebox$PARAM[multiprefix]</include>
-        <include condition="![Skin.String(HomeLayout, simplever) | Skin.String(HomeLayout, simplever_tiles) | Skin.String(HomeLayout, verticalbig)]">widget_layout_horizontal_singlebox</include>
+        <include condition="SubString(Skin.String(HomeLayout),ver)" name="widget_layout_vertical_singlebox$PARAM[multiprefix]" content="widget_layout_vertical_singlebox$PARAM[multiprefix]">
+            <param name="widgetid" value="$PARAM[widgetid]" />
+        </include>
+        <include condition="!SubString(Skin.String(HomeLayout),ver)">widget_layout_horizontal_singlebox</include>
         <include>widget_layout_general</include>
+    </include>
+    <include name="widget_layout_vertical_singlebox">
+        <width>940</width>
+        <height>760</height>
+        <right>45</right>
+        <onleft>300</onleft>
+        <ondown>300</ondown>
+        <onup>511</onup>
+        <orientation>horizontal</orientation>
+        <animation effect="slide" start="0" end="0,400" time="0" condition="Control.IsVisible($PARAM[widgetid]) + StringCompare(Container(300).ListItem.Property(lowerwidgets),enable) + !SubString(Container(300).ListItem.Property(multiwidget),multi)">Conditional</animation>
+        <itemlayout height="760" width="940">
+            <include>itemlayout_singlebox</include>
+        </itemlayout>
+        <focusedlayout height="760" width="940">
+            <include name="HiddenWidgetButton" content="HiddenWidgetButton">
+                <param name="widgetstyle" value="single box" />
+                <param name="widgetid" value="$PARAM[widgetid]" />
+            </include>
+            <control type="image">
+                <bordersize>0</bordersize>
+                <height>340</height>
+                <texture border="15">diffuse/bgpanel.png</texture>
+                <colordiffuse>$VAR[ViewDetailsFocusColor]</colordiffuse>
+            </control>
+            <include name="itemlayout_singlebox" content="itemlayout_singlebox">
+                <param name="widgetid" value="$PARAM[widgetid]" />
+            </include>
+        </focusedlayout>
+    </include>
+    <include name="widget_layout_vertical_singlebox_multi">
+        <width>940</width>
+        <height>340</height>
+        <right>45</right>
+        <orientation>horizontal</orientation>
         <itemlayout height="340" width="940">
             <include>itemlayout_singlebox</include>
         </itemlayout>
@@ -1632,31 +1897,15 @@
                 <param name="widgetstyle" value="single box" />
                 <param name="widgetid" value="$PARAM[widgetid]" />
             </include>
+            <control type="image">
+                <bordersize>0</bordersize>
+                <texture border="15">diffuse/bgpanel.png</texture>
+                <colordiffuse>$VAR[ViewDetailsFocusColor]</colordiffuse>
+            </control>
             <include name="itemlayout_singlebox" content="itemlayout_singlebox">
                 <param name="widgetid" value="$PARAM[widgetid]" />
             </include>
-            <control type="image">
-                <bordersize>0</bordersize>
-                <texture border="5">diffuse/border.png</texture>
-                <colordiffuse>$VAR[ViewDetailsFocusColor]</colordiffuse>
-            </control>
         </focusedlayout>
-    </include>
-    <include name="widget_layout_vertical_singlebox">
-        <width>940</width>
-        <height>340</height>
-        <right>55</right>
-        <top>50</top>
-        <onleft>300</onleft>
-        <ondown>300</ondown>
-        <onup>511</onup>
-        <orientation>horizontal</orientation>
-    </include>
-    <include name="widget_layout_vertical_singlebox_multi">
-        <width>940</width>
-        <height>340</height>
-        <right>55</right>
-        <orientation>horizontal</orientation>
     </include>
     <include name="widget_layout_horizontal_singlebox">
         <width>940</width>
@@ -1671,13 +1920,17 @@
     <include name="itemlayout_singlebox">
         <!-- single box widget -->
         <control type="group">
+            <height>340</height>
             <control type="image">
-                <texture border="5">diffuse/panel.png</texture>
+                <bordersize>4</bordersize>
+                <texture border="15">diffuse/bgpanel.png</texture>
                 <colordiffuse>$INFO[Skin.String(ViewDetailsPanelColor)]</colordiffuse>
             </control>
             <control type="image">
                 <texture border="5">diffuse/thinborder.png</texture>
                 <colordiffuse>darkgrey</colordiffuse>
+                <bordersize>4</bordersize>
+                <visible>skin.hastheme(skindefault)</visible>
             </control>
             <!-- poster image -->
             <control type="image">
@@ -1685,7 +1938,7 @@
                 <height>339</height>
                 <texture border="1" background="true" diffuse="diffuse/poster.png" fallback="DefaultVideo.png">$VAR[PosterThumbList]</texture>
                 <aspectratio scalediffuse="true" aligny="top" align="left">keep</aspectratio>
-                <bordersize>8</bordersize>
+                <bordersize>12</bordersize>
             </control> 
             <control type="button">
 				<left>251</left>
@@ -1771,55 +2024,58 @@
     
     <!-- widget widebox layout -->
     <include name="widget_layout_widebox">
-        <include condition="[[Skin.String(HomeLayout, simplever) | Skin.String(HomeLayout, simplever_tiles) | Skin.String(HomeLayout, verticalbig)]]">widget_layout_vertical_widebox$PARAM[multiprefix]</include>
-        <include condition="![Skin.String(HomeLayout, simplever) | Skin.String(HomeLayout, simplever_tiles) | Skin.String(HomeLayout, verticalbig)]">widget_layout_horizontal_widebox</include>
+        <include condition="SubString(Skin.String(HomeLayout),ver)" name="widget_layout_vertical_widebox$PARAM[multiprefix]" content="widget_layout_vertical_widebox$PARAM[multiprefix]">
+            <param name="widgetid" value="$PARAM[widgetid]" />
+        </include>
+        <include condition="!SubString(Skin.String(HomeLayout),ver)">widget_layout_horizontal_widebox</include>
     </include>
     <include name="widget_layout_vertical_widebox">
-        <width>1280</width>
-        <height>255</height>
-        <right>55</right>
-        <top>50</top>
+        <width>1300</width>
+        <height>760</height>
+        <right>50</right>
         <onleft>300</onleft>
         <ondown>300</ondown>
         <onup>511</onup>
         <orientation>horizontal</orientation>
         <include>widget_layout_general</include>
-        <itemlayout height="255" width="1280">
+        <animation effect="slide" start="0" end="0,500" time="0" condition="Control.IsVisible($PARAM[widgetid]) + StringCompare(Container(300).ListItem.Property(lowerwidgets),enable) + !SubString(Container(300).ListItem.Property(multiwidget),multi)">Conditional</animation>
+        <itemlayout height="760" width="1300">
             <include>itemlayout_widebox</include>
         </itemlayout>
-        <focusedlayout height="255" width="1280">
+        <focusedlayout height="760" width="1300">
             <include name="HiddenWidgetButton" content="HiddenWidgetButton">
                 <param name="widgetstyle" value="wide box" />
                 <param name="widgetid" value="$PARAM[widgetid]" />
             </include>
-            <include>itemlayout_widebox</include>
             <control type="image">
                 <bordersize>0</bordersize>
-                <texture border="5">diffuse/border.png</texture>
+                <height>255</height>
+                <texture border="15">diffuse/bgpanel.png</texture>
                 <colordiffuse>$VAR[ViewDetailsFocusColor]</colordiffuse>
             </control>
+            <include>itemlayout_widebox</include>
         </focusedlayout>
     </include>
     <include name="widget_layout_vertical_widebox_multi">
-        <width>1305</width>
+        <width>1300</width>
         <height>255</height>
-        <right>55</right>
+        <right>50</right>
         <orientation>horizontal</orientation>
         <include>widget_layout_general</include>
-        <itemlayout height="255" width="1305">
+        <itemlayout height="255" width="1300">
             <include>itemlayout_widebox</include>
         </itemlayout>
-        <focusedlayout height="255" width="1305">
+        <focusedlayout height="255" width="1300">
+            <control type="image">
+                <bordersize>0</bordersize>
+                <texture border="15">diffuse/bgpanel.png</texture>
+                <colordiffuse>$VAR[ViewDetailsFocusColor]</colordiffuse>
+            </control>
+            <include>itemlayout_widebox</include>
             <include name="HiddenWidgetButton" content="HiddenWidgetButton">
                 <param name="widgetstyle" value="wide box" />
                 <param name="widgetid" value="$PARAM[widgetid]" />
             </include>
-            <include>itemlayout_widebox</include>
-            <control type="image">
-                <bordersize>0</bordersize>
-                <texture border="5">diffuse/border.png</texture>
-                <colordiffuse>$VAR[ViewDetailsFocusColor]</colordiffuse>
-            </control>
         </focusedlayout>
     </include>
     <include name="widget_layout_horizontal_widebox">
@@ -1840,24 +2096,28 @@
                 <param name="widgetstyle" value="wide box" />
                 <param name="widgetid" value="$PARAM[widgetid]" />
             </include>
-            <include>itemlayout_widebox</include>
             <control type="image">
                 <bordersize>0</bordersize>
-                <texture border="5">diffuse/border.png</texture>
+                <texture border="15">diffuse/bgpanel.png</texture>
                 <colordiffuse>$VAR[ViewDetailsFocusColor]</colordiffuse>
             </control>
+            <include>itemlayout_widebox</include>
         </focusedlayout>
     </include>
     <include name="itemlayout_widebox">
         <!-- wide box widget -->
         <control type="group">
+            <height>255</height>
             <control type="image">
-                <texture border="5">diffuse/panel.png</texture>
+                <bordersize>4</bordersize>
+                <texture border="15">diffuse/bgpanel.png</texture>
                 <colordiffuse>$INFO[Skin.String(ViewDetailsPanelColor)]</colordiffuse>
             </control>
             <control type="image">
                 <texture border="5">diffuse/thinborder.png</texture>
                 <colordiffuse>darkgrey</colordiffuse>
+                <bordersize>4</bordersize>
+                <visible>skin.hastheme(skindefault)</visible>
             </control>
             <!-- poster image -->
             <control type="image">
@@ -1865,7 +2125,7 @@
                 <height>100%</height>
                 <texture border="1" background="true" diffuse="diffuse/poster.png" fallback="DefaultVideo.png">$VAR[PosterThumbList]</texture>
                 <aspectratio scalediffuse="true" aligny="top" align="left">keep</aspectratio>
-                <bordersize>8</bordersize>
+                <bordersize>12</bordersize>
             </control> 
             <control type="button">
 				<right>30</right>
@@ -1952,6 +2212,7 @@
     </variable>
     
     <variable name="focusWidget">
+        <value condition="SubString(Skin.String(HomeLayout),ver) + SubString(Container(300).ListItem.Property(multiwidget),multi)">SetFocus(77777)</value>
         <value condition="!IsEmpty(Container(300).ListItem.Property(widget)) + StringCompare(Control.GetLabel(600),widget-0) + IntegerGreaterThan(Container(510).NumItems,0)">SetFocus(510)</value>
         <value condition="!IsEmpty(Container(300).ListItem.Property(widget.1)) + StringCompare(Control.GetLabel(600),widget-1) + IntegerGreaterThan(Container(520).NumItems,0)">SetFocus(520)</value>
         <value condition="!IsEmpty(Container(300).ListItem.Property(widget.2)) + StringCompare(Control.GetLabel(600),widget-2) + IntegerGreaterThan(Container(530).NumItems,0)">SetFocus(530)</value>
@@ -1990,8 +2251,8 @@
                 <textcolor>$INFO[Skin.String(ViewDetailsTextColor)]</textcolor>
                 <shadowcolor>$INFO[Skin.String(ViewDetailsTextShadowColor)]</shadowcolor>
                 <onclick>$VAR[toggleNextWidget]</onclick>
-                <onup condition="![Skin.String(HomeLayout, simplever) | Skin.String(HomeLayout, simplever_tiles) | Skin.String(HomeLayout, verticalbig)]">$VAR[toggleNextWidget]</onup>
-                <onup condition="[Skin.String(HomeLayout, simplever) | Skin.String(HomeLayout, simplever_tiles) | Skin.String(HomeLayout, verticalbig)]">$VAR[focusWidget]</onup>
+                <onup condition="!SubString(Skin.String(HomeLayout),ver)">$VAR[toggleNextWidget]</onup>
+                <onup condition="SubString(Skin.String(HomeLayout),ver)">$VAR[focusWidget]</onup>
                 <texturenofocus>-</texturenofocus>
 			</control>
 			<control type="image">
@@ -2007,31 +2268,31 @@
     <variable name="widget510">
         <value condition="!IsEmpty(Window(Home).property(skinhelper-refreshvideowidgetsbusy))">special://skin/extras/emptywidget.xsp</value>
         <value condition="!IsEmpty(Window(Home).property(favwidgetrefresh))">special://skin/extras/emptywidget.xsp</value>
-        <value condition="Window.IsActive(fullscreenvideo)">special://skin/extras/emptywidget.xsp</value>
+        <value condition="window.isactive(fullscreenvideo)">special://skin/extras/emptywidget.xsp</value>
         <value>$INFO[Container(300).ListItem.Property(widgetPath)]</value>
     </variable>
     <variable name="widget520">
         <value condition="!IsEmpty(Window(Home).property(skinhelper-refreshvideowidgetsbusy))">special://skin/extras/emptywidget.xsp</value>
         <value condition="!IsEmpty(Window(Home).property(favwidgetrefresh))">special://skin/extras/emptywidget.xsp</value>
-        <value condition="Window.IsActive(fullscreenvideo)">special://skin/extras/emptywidget.xsp</value>
+        <value condition="window.isactive(fullscreenvideo)">special://skin/extras/emptywidget.xsp</value>
         <value>$INFO[Container(300).ListItem.property(widgetPath.1)]</value>
     </variable>
     <variable name="widget530">
         <value condition="!IsEmpty(Window(Home).property(skinhelper-refreshvideowidgetsbusy))">special://skin/extras/emptywidget.xsp</value>
         <value condition="!IsEmpty(Window(Home).property(favwidgetrefresh))">special://skin/extras/emptywidget.xsp</value>
-        <value condition="Window.IsActive(fullscreenvideo)">special://skin/extras/emptywidget.xsp</value>
+        <value condition="window.isactive(fullscreenvideo)">special://skin/extras/emptywidget.xsp</value>
         <value>$INFO[Container(300).ListItem.property(widgetPath.2)]</value>
     </variable>
     <variable name="widget540">
         <value condition="!IsEmpty(Window(Home).property(skinhelper-refreshvideowidgetsbusy))">special://skin/extras/emptywidget.xsp</value>
         <value condition="!IsEmpty(Window(Home).property(favwidgetrefresh))">special://skin/extras/emptywidget.xsp</value>
-        <value condition="Window.IsActive(fullscreenvideo)">special://skin/extras/emptywidget.xsp</value>
+        <value condition="window.isactive(fullscreenvideo)">special://skin/extras/emptywidget.xsp</value>
         <value>$INFO[Container(300).ListItem.property(widgetPath.3)]</value>
     </variable>
     <variable name="widget1508">
         <value condition="!IsEmpty(Window(Home).property(skinhelper-refreshvideowidgetsbusy))">special://skin/extras/emptywidget.xsp</value>
         <value condition="!IsEmpty(Window(Home).property(favwidgetrefresh))">special://skin/extras/emptywidget.xsp</value>
-        <value condition="Window.IsActive(fullscreenvideo)">special://skin/extras/emptywidget.xsp</value>
+        <value condition="window.isactive(fullscreenvideo)">special://skin/extras/emptywidget.xsp</value>
         <value>$INFO[Container(300).ListItem.property(widgetPath.99)]</value>
     </variable>
 
