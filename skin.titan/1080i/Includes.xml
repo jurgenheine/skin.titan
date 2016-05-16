@@ -11,7 +11,7 @@
     <include file="View_50_List.xml" />
 	<include file="View_51_BigList.xml" />
     <include file="View_55_BannerList.xml" />
-    <include file="View_500_Showcase.xml" />
+    <include file="View_524_Showcase.xml" />
 	<include file="View_52_HorizontalPanel.xml" />
     <include file="View_53_PanelDetails.xml" />
 	<include file="View_54_Panel.xml" />
@@ -43,7 +43,11 @@
     <include file="View_522_RightList.xml" />
     <include file="View_523_Netflix.xml" />
     <include file="IncludesViews.xml" />
-	<include file="IncludesSideBladeMenu.xml" />
+    <include file="IncludesMediaFlags.xml" />
+    <include file="IncludesViewsLayoutPoster.xml" />
+    <include file="IncludesViewsLayoutLandscape.xml" />
+    <include file="IncludesViewsLayoutSquare.xml" />
+    <include file="IncludesViewsLayoutBanner.xml" />
     <include file="IncludesOSD.xml" />
     <include file="IncludesSkinSetings.xml" />
     <include file="IncludesContextMenu.xml" />

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--Titan-->
-<window id="2001">
+<window>
     <defaultcontrol always="true">9000</defaultcontrol>
 	<onload>SetProperty(resetMusicArtCache,reset,home)</onload>
     <onunload>SetProperty(resetMusicArtCache,reset,home)</onunload>
     <controls>
         <!--Dialog Overlay-->
 		<control type="group">
-			<visible>!Window.IsActive(fullscreenvideo) + !Window.IsActive(filebrowser)</visible>
+			<visible>!window.isactive(fullscreenvideo) + !Window.IsActive(filebrowser)</visible>
 			<include>DialogOverlayExtra</include>
 			<animation effect="fade" time="250" start="0" end="100" reversible="false">WindowOpen</animation>
         </control>

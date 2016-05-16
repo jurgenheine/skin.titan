@@ -60,7 +60,7 @@
                     <visible>!Skin.HasSetting(PVRGuideHidepanel)</visible>
 					<visible>!Skin.HasSetting(GuideShowInfo) + IsEmpty(Window(home).Property(pvrGuideOnFullscreenVideo))</visible>
 				</control>
-                         <!-- background panel EPG when active as half guide on top of video -->
+                <!-- background panel EPG when active as half guide on top of video -->
                 <control type="image">
 					<posy>760</posy>
 					<posx>-10</posx>
@@ -126,7 +126,6 @@
 					<visible>Skin.HasSetting(HideChannelNamesInGuide) + IsEmpty(Window(home).Property(pvrGuideOnFullscreenVideo))</visible>
 				</control>
 				
-				
 				<control type="image">
 					<!--Seperator-->
 					<posy>307</posy>
@@ -157,27 +156,27 @@
 						<!--Icon-->
 						<right>60</right>
 						<posy>0</posy>
-						<width>250</width>
+						<width>300</width>
 						<height>210</height>
-						<texture fallback="DefaultAddonTvInfo.png">$VAR[PVRThumb]</texture>
+						<texture fallback="DefaultAddonTvInfo.png" diffuse="home/home_matte2.png">$VAR[PVRThumb]</texture>
 						<aspectratio align="right">keep</aspectratio>
 						<visible>![VideoPlayer.Content(livetv) + Skin.HasSetting(PVRShowPreview)]</visible>
 					</control>
                     <!-- black background behind video -->
                     <control type="image">
                         <texture>colors/color_black.png</texture>
-                        <right>45</right>
+                        <right>60</right>
 						<posy>0</posy>
-						<width>250</width>
-						<height>160</height>
+						<width>300</width>
+						<height>210</height>
 						<visible>VideoPlayer.Content(livetv) + Skin.HasSetting(PVRShowPreview)</visible>
                     </control>
 					<!--Video Window -->
 					<control type="videowindow">
-						<right>45</right>
+						<right>60</right>
 						<posy>0</posy>
-						<width>250</width>
-						<height>160</height>
+						<width>300</width>
+						<height>210</height>
 						<visible>VideoPlayer.Content(livetv) + Skin.HasSetting(PVRShowPreview)</visible>
 					</control>
 					<control type="label">
@@ -188,7 +187,7 @@
 						<height>80</height>
 						<font>Reg28</font>
 						<textcolor>$INFO[Skin.String(ViewDetailsHighlightTextColor)]</textcolor>
-						<label>$INFO[ListItem.Label] $INFO[ListItem.EpisodeName,(,)]</label>
+						<label>$INFO[ListItem.Label]</label>
 						<aligny>top</aligny>
 					</control>
 					<control type="label">

@@ -28,29 +28,9 @@ msgctxt "#31003"
 msgid "Bordersize for unfocused thumbs/tiles"
 msgstr "Dimensione bordo per anteprime/tile non evidenziate"
 
-msgctxt "#31004"
-msgid "Skin mode"
-msgstr "Modalità skin"
-
 msgctxt "#31005"
 msgid "General skin settings"
 msgstr "Impostazioni generali skin"
-
-msgctxt "#31006"
-msgid "NetfliKodi Plugin"
-msgstr "Plugin NetfliKodi"
-
-msgctxt "#31007"
-msgid "MediaBrowser Mode"
-msgstr "Modalità MediaBrowser"
-
-msgctxt "#31008"
-msgid "Use MediaBrowser mode for"
-msgstr "Usa la modalità MediaBrowser per"
-
-msgctxt "#31009"
-msgid "Custom tiles for MediaBrowser collections"
-msgstr "Tiles personalizzate per le raccolte MediaBrowser"
 
 msgctxt "#31010"
 msgid "--- Use random fanart for tile image"
@@ -59,10 +39,6 @@ msgstr "Usa Fanart casuale per l'immagine della tile"
 msgctxt "#31011"
 msgid "Set custom tile image"
 msgstr "Imposta immagine tile personalizzata"
-
-msgctxt "#31012"
-msgid "Mediabrowser integration (XBMB3C)"
-msgstr "Integrazione MediaBrowser (XBMB3C)"
 
 msgctxt "#31013"
 msgid "Configure shortcuts"
@@ -460,10 +436,6 @@ msgctxt "#31111"
 msgid "Auto show the widget for the selected home tile"
 msgstr "Mostra automaticamente Widget per la tile selezionata"
 
-msgctxt "#31112"
-msgid "Finishes at"
-msgstr "Termina alle"
-
 msgctxt "#31113"
 msgid "Auto show the submenu for the selected home tile"
 msgstr "Mostra automaticamente Sottomenù per la tile selezionata"
@@ -569,8 +541,8 @@ msgid "Cancel recording of all episodes"
 msgstr "Cancella la registrazione di tutti gli Episodi"
 
 msgctxt "#31140"
-msgid "Disable the Now Playing background"
-msgstr "Disabilita lo sfondo In Esecuzione"
+msgid "Disable the Now Playing video background"
+msgstr "Disabilita lo sfondo video In Esecuzione"
 
 msgctxt "#31141"
 msgid "Show Fanart background"
@@ -705,7 +677,7 @@ msgid "Use custom overlay"
 msgstr "Usa sfumatura personalizzata"
 
 msgctxt "#31174"
-msgid "Focuscolor for home tiles"
+msgid "Focuscolor for home tiles and widgets"
 msgstr "Colore selezione per tiles della Home"
 
 msgctxt "#31175"
@@ -1432,6 +1404,10 @@ msgctxt "#31409"
 msgid "[B]SYSTEM INFO[/B][CR][CR]Summary · Storage · Network · Video · Hardware"
 msgstr "[B]INFO SISTEMA[/B][CR][CR]Sommario · Archiviazione · Rete · Video · Hardware"
 
+msgctxt "#31410"
+msgid "[B]Live-TV[/B][CR][CR]Configure PVR settings"
+msgstr "[B]TV[/B][CR][CR]Configura le impostazioni del PVR"
+
 msgctxt "#31421"
 msgid "[B]SELECT YOUR KODI USER PROFILE[/B][CR][CR]to login and continue"
 msgstr "[B]SCEGLI IL TUO PROFILO UTENTE KODI[/B][CR][CR] per fare login e continuare"
@@ -1746,7 +1722,7 @@ msgstr "Usa DiskArt fasulla quando non ne esiste una per l'elemento"
 
 msgctxt "#31499"
 msgid "Widget"
-msgstr "Widgets"
+msgstr "Widget"
 
 msgctxt "#31500"
 msgid "Image"
@@ -1962,7 +1938,7 @@ msgstr "Popolari"
 
 msgctxt "#31564"
 msgid "Widgets"
-msgstr "Widgets"
+msgstr "Widget"
 
 msgctxt "#31565"
 msgid "Open submenu"
@@ -2145,8 +2121,8 @@ msgid "Enable mini guide on fullscreen Live TV"
 msgstr "Abilita mini guida per TV a schermo intero"
 
 msgctxt "#31617"
-msgid "Animate music wall background"
-msgstr "Animazione sfondo Muro Musicale"
+msgid "Animate music background"
+msgstr "Animazione sfondo Musica"
 
 msgctxt "#31618"
 msgid "Align logo image"
@@ -2213,7 +2189,7 @@ msgid "Auto lookup missing actor thumbs in videoinfo dialog"
 msgstr "Ricerca automatica per anteprime attori mancanti in finestra info video"
 
 msgctxt "#31634"
-msgid "Disable discart in Now Playing info bar (music playback)"
+msgid "Disable discart in Now Playing info bar"
 msgstr "Disabilita DiscArt nella barra informazioni In Esecuzione (riproduz. musicale)"
 
 msgctxt "#31635"
@@ -2543,3 +2519,115 @@ msgstr "Film aggiunti di recente (includi visti)"
 msgctxt "#31717"
 msgid "Enable widget force refresh"
 msgstr "Abilita forza aggiornamento Widget"
+
+msgctxt "#31718"
+msgid "Apply the per-shortcut background to homescreen only"
+msgstr "Applica lo sfondo per collegamento solo alla schermata home"
+
+msgctxt "#31719"
+msgid "Big plot overlay"
+msgstr "Abilita sovrimpressione info"
+
+msgctxt "#31720"
+msgid "Use small context/sidebar menu"
+msgstr "Usa menù contestuale/sidebar piccolo"
+
+msgctxt "#31721"
+msgid "Only show one shortcut at a time in the menu"
+msgstr "Mostra solo un collegamento alla volta nel menù"
+
+msgctxt "#31722"
+msgid "Right List"
+msgstr "Lista Destra"
+
+msgctxt "#31723"
+msgid "Enable auto rotate"
+msgstr "Abilita rotazione automatica"
+
+msgctxt "#31724"
+msgid "Do not display hour representation of the duration"
+msgstr "Non mostrare la rappresentazione in ore della durata"
+
+msgctxt "#31725"
+msgid "Focus the homemenu when entering homescreen"
+msgstr "Seleziona il menù home quando entri nella schermata home"
+
+msgctxt "#31726"
+msgid "Enable playlist at startup"
+msgstr "Abilita Playlist all'avvio"
+
+msgctxt "#31727"
+msgid "Default position to focus in home menu"
+msgstr "Posizione predefinita da selezionare nel menù home"
+
+msgctxt "#31728"
+msgid "Position %s"
+msgstr "Posizione %s"
+
+msgctxt "#31729"
+msgid "%s pixels"
+msgstr "%s pixel"
+
+msgctxt "#31730"
+msgid "All widgets"
+msgstr "Tutti i Widget"
+
+msgctxt "#31731"
+msgid "Configure individually per-widget"
+msgstr "Configura individualmente per Widget"
+
+msgctxt "#31732"
+msgid "Show large scrolling text while music playback"
+msgstr "Mostra testo scorrevole largo durante la riproduzione musicale"
+
+msgctxt "#31733"
+msgid "Show clearart (if available) at top-right if OSD-panel active"
+msgstr "Mostra clearart (se disponibile) in alto a destra se il pannello OSD è attivo"
+
+msgctxt "#31734"
+msgid "Disable the Now Playing music background/visualization"
+msgstr "Disabilita sfondo/effetto In Esecuzione per la Musica"
+
+msgctxt "#31735"
+msgid "Bordercolor for (unfocused) widgets/tiles on home"
+msgstr "Colore bordo per Widget/Tiles nella home (non selezionato)"
+
+msgctxt "#31736"
+msgid "Disable clearart in Now Playing info bar"
+msgstr "Disabilita clearart nella barra info In Esecuzione"
+
+msgctxt "#31737"
+msgid "Enable square submenu"
+msgstr "Abilita sottomenù a quadri"
+
+msgctxt "#31738"
+msgid "Disable letters popup while scrolling"
+msgstr "Disabilita popup lettere durante lo scorrimento"
+
+msgctxt "#31739"
+msgid "Title of current (random) background (if available)"
+msgstr "Titolo dello sfondo (casuale) attuale (se disponibile)"
+
+msgctxt "#31740"
+msgid "Show logo of current (random) background on home"
+msgstr "Mostra logo dello sfondo (casuale) attuale nella home"
+
+msgctxt "#31741"
+msgid "Use large widget details panel"
+msgstr "Usa pannello dettagli Widget largo"
+
+msgctxt "#31742"
+msgid "Home mainmenu/submenu panel color"
+msgstr "Colore pannello menù principale/sottomenù home"
+
+msgctxt "#31743"
+msgid "Home mainmenu/submenu unfocused text color"
+msgstr "Colore testo non selezionato menù principale/sottomenù home"
+
+msgctxt "#31744"
+msgid "Home mainmenu/submenu focused text color"
+msgstr "Colore testo selezionato menù principale/sottomenù home"
+
+msgctxt "#31745"
+msgid "Video playback"
+msgstr "Riproduzione Video"

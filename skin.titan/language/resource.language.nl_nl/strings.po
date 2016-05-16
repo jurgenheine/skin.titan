@@ -28,29 +28,9 @@ msgctxt "#31003"
 msgid "Bordersize for unfocused thumbs/tiles"
 msgstr "Bordergrootte voor niet geselecteerde miniaturen/tegels"
 
-msgctxt "#31004"
-msgid "Skin mode"
-msgstr "Skinmodus"
-
 msgctxt "#31005"
 msgid "General skin settings"
 msgstr "Algemene instellingen"
-
-msgctxt "#31006"
-msgid "NetfliKodi Plugin"
-msgstr "NetfliKodi Plugin"
-
-msgctxt "#31007"
-msgid "MediaBrowser Mode"
-msgstr "Emby modus"
-
-msgctxt "#31008"
-msgid "Use MediaBrowser mode for"
-msgstr "Gebruik Emby-modus voor"
-
-msgctxt "#31009"
-msgid "Custom tiles for MediaBrowser collections"
-msgstr "Aangepaste tegels voor Emby collecties"
 
 msgctxt "#31010"
 msgid "--- Use random fanart for tile image"
@@ -59,10 +39,6 @@ msgstr "--- Gebruik willekeurige fanart voor tegel afbeelding"
 msgctxt "#31011"
 msgid "Set custom tile image"
 msgstr "Gebruik eigen afbeelding voor tegel"
-
-msgctxt "#31012"
-msgid "Mediabrowser integration (XBMB3C)"
-msgstr "Emby integratie"
 
 msgctxt "#31013"
 msgid "Configure shortcuts"
@@ -460,10 +436,6 @@ msgctxt "#31111"
 msgid "Auto show the widget for the selected home tile"
 msgstr "Automatisch de widget tonen voor de geselecteerde tile"
 
-msgctxt "#31112"
-msgid "Finishes at"
-msgstr "Eindigd om"
-
 msgctxt "#31113"
 msgid "Auto show the submenu for the selected home tile"
 msgstr "Automatisch het submenu tonen voor de geselecteerde home tile"
@@ -569,7 +541,7 @@ msgid "Cancel recording of all episodes"
 msgstr "Annuleer de opname van alle afleveringen"
 
 msgctxt "#31140"
-msgid "Disable the Now Playing background"
+msgid "Disable the Now Playing video background"
 msgstr "Geen Live achtergrond bij Nu Afspelen"
 
 msgctxt "#31141"
@@ -705,7 +677,7 @@ msgid "Use custom overlay"
 msgstr "Gebruik eigen overlay"
 
 msgctxt "#31174"
-msgid "Focuscolor for home tiles"
+msgid "Focuscolor for home tiles and widgets"
 msgstr "Focuskleur voor start tegels"
 
 msgctxt "#31175"
@@ -1432,6 +1404,10 @@ msgctxt "#31409"
 msgid "[B]SYSTEM INFO[/B][CR][CR]Summary · Storage · Network · Video · Hardware"
 msgstr "[B]SYSTEEM INFO[/B][CR][CR]Samenvatting · Opslag · Netwerk · Video · Hardware"
 
+msgctxt "#31410"
+msgid "[B]Live-TV[/B][CR][CR]Configure PVR settings"
+msgstr "[B]Live-TV[/B][CR][CR]Configureer PVR instellingen"
+
 msgctxt "#31421"
 msgid "[B]SELECT YOUR KODI USER PROFILE[/B][CR][CR]to login and continue"
 msgstr "[B]SELECTEER UW KODI GEBRUIKERS PROFIEL[/B][CR][CR]om in te loggen en door te gaan"
@@ -2145,8 +2121,8 @@ msgid "Enable mini guide on fullscreen Live TV"
 msgstr "Activeer mini gids op volledig scherm Live TV"
 
 msgctxt "#31617"
-msgid "Animate music wall background"
-msgstr "Animeer \"music wall\" achtergrond"
+msgid "Animate music background"
+msgstr "Animeer muziek achtergrond"
 
 msgctxt "#31618"
 msgid "Align logo image"
@@ -2213,7 +2189,7 @@ msgid "Auto lookup missing actor thumbs in videoinfo dialog"
 msgstr "Zoek automatisch ontbrekende acteur miniaturen in videoinfo dialoog "
 
 msgctxt "#31634"
-msgid "Disable discart in Now Playing info bar (music playback)"
+msgid "Disable discart in Now Playing info bar"
 msgstr "De-activeer Disk-art in Nu Afspelen info bar (muziek afspelen)"
 
 msgctxt "#31635"
@@ -2543,3 +2519,111 @@ msgstr "Onlangs toegevoegde films (inclusief bekeken)"
 msgctxt "#31717"
 msgid "Enable widget force refresh"
 msgstr "Activeer geforceerde widget vernieuwing"
+
+msgctxt "#31718"
+msgid "Apply the per-shortcut background to homescreen only"
+msgstr "Activeer de per-snelkoppeling achtergrond alleen op het startscherm"
+
+msgctxt "#31719"
+msgid "Big plot overlay"
+msgstr "Activeer info overlay"
+
+msgctxt "#31720"
+msgid "Use small context/sidebar menu"
+msgstr "Gebruik kleine inhouds/zijbalk menu"
+
+msgctxt "#31721"
+msgid "Only show one shortcut at a time in the menu"
+msgstr "Toon slechts één snelkoppeling per keer op het menu"
+
+msgctxt "#31722"
+msgid "Right List"
+msgstr "Rechter lijst"
+
+msgctxt "#31723"
+msgid "Enable auto rotate"
+msgstr "Activeer automatisch roteren"
+
+msgctxt "#31724"
+msgid "Do not display hour representation of the duration"
+msgstr "Uur weergave van de speelduur wordt niet weergegeven"
+
+msgctxt "#31725"
+msgid "Focus the homemenu when entering homescreen"
+msgstr "Focus de startmenu bij het invoeren van startscherm"
+
+msgctxt "#31726"
+msgid "Enable playlist at startup"
+msgstr "Afspeellijst inschakelen bij opstart"
+
+msgctxt "#31727"
+msgid "Default position to focus in home menu"
+msgstr "Standaard positie voor focussen in hoofdmenu"
+
+msgctxt "#31728"
+msgid "Position %s"
+msgstr "Positie %s"
+
+msgctxt "#31729"
+msgid "%s pixels"
+msgstr "%s pixels"
+
+msgctxt "#31730"
+msgid "All widgets"
+msgstr "Alle widgets"
+
+msgctxt "#31731"
+msgid "Configure individually per-widget"
+msgstr "Individueel widgets configureren"
+
+msgctxt "#31732"
+msgid "Show large scrolling text while music playback"
+msgstr "Laat grote scrollende tekst zijn tijdens muziek afspelen"
+
+msgctxt "#31733"
+msgid "Show clearart (if available) at top-right if OSD-panel active"
+msgstr "Toon clearart (Indien beschikbaar) in the hoek rechtsboven, als OSD-paneel actief is"
+
+msgctxt "#31734"
+msgid "Disable the Now Playing music background/visualization"
+msgstr "Uitschakelen van Nu Afspelen muziek achtergrond/visualisatie "
+
+msgctxt "#31736"
+msgid "Disable clearart in Now Playing info bar"
+msgstr "Clearart uitschakelen in Nu Afspelen info bar"
+
+msgctxt "#31737"
+msgid "Enable square submenu"
+msgstr "Inschakelen van vierkant submenu"
+
+msgctxt "#31738"
+msgid "Disable letters popup while scrolling"
+msgstr "Uitschakelen pop-up van letters tijdens het scrollen"
+
+msgctxt "#31739"
+msgid "Title of current (random) background (if available)"
+msgstr "Titel van huidige (willekeurige) achtergrond (Indien beschikbaar)"
+
+msgctxt "#31740"
+msgid "Show logo of current (random) background on home"
+msgstr "Toon logo van huidige (willekeurige) achtergrond op home"
+
+msgctxt "#31741"
+msgid "Use large widget details panel"
+msgstr "Gebruik groter widget detail paneel"
+
+msgctxt "#31742"
+msgid "Home mainmenu/submenu panel color"
+msgstr "Home hoofdmenu/submenu paneel kleur"
+
+msgctxt "#31743"
+msgid "Home mainmenu/submenu unfocused text color"
+msgstr "Home hoofdmenu/submenu onscherpte tekst kleur"
+
+msgctxt "#31744"
+msgid "Home mainmenu/submenu focused text color"
+msgstr "Home hoofdmenu/submenu scherpe tekst kleur"
+
+msgctxt "#31745"
+msgid "Video playback"
+msgstr "Video afspelen"

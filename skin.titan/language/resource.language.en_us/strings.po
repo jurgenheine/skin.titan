@@ -28,29 +28,9 @@ msgctxt "#31003"
 msgid "Bordersize for unfocused thumbs/tiles"
 msgstr "Bordersize for unfocused thumbs/tiles"
 
-msgctxt "#31004"
-msgid "Skin mode"
-msgstr "Skin mode"
-
 msgctxt "#31005"
 msgid "General skin settings"
 msgstr "General skin settings"
-
-msgctxt "#31006"
-msgid "NetfliKodi Plugin"
-msgstr "NetfliKodi Plugin"
-
-msgctxt "#31007"
-msgid "MediaBrowser Mode"
-msgstr "MediaBrowser Mode"
-
-msgctxt "#31008"
-msgid "Use MediaBrowser mode for"
-msgstr "Use MediaBrowser mode for"
-
-msgctxt "#31009"
-msgid "Custom tiles for MediaBrowser collections"
-msgstr "Custom tiles for MediaBrowser collections"
 
 msgctxt "#31010"
 msgid "--- Use random fanart for tile image"
@@ -59,10 +39,6 @@ msgstr "--- Use random fanart for tile image"
 msgctxt "#31011"
 msgid "Set custom tile image"
 msgstr "Set custom tile image"
-
-msgctxt "#31012"
-msgid "Mediabrowser integration (XBMB3C)"
-msgstr "Mediabrowser integration (XBMB3C)"
 
 msgctxt "#31013"
 msgid "Configure shortcuts"
@@ -460,10 +436,6 @@ msgctxt "#31111"
 msgid "Auto show the widget for the selected home tile"
 msgstr "Auto show the widget for the selected home tile"
 
-msgctxt "#31112"
-msgid "Finishes at"
-msgstr "Finishes at"
-
 msgctxt "#31113"
 msgid "Auto show the submenu for the selected home tile"
 msgstr "Auto show the submenu for the selected home tile"
@@ -569,8 +541,8 @@ msgid "Cancel recording of all episodes"
 msgstr "Cancel recording of all episodes"
 
 msgctxt "#31140"
-msgid "Disable the Now Playing background"
-msgstr "Disable the Now Playing background"
+msgid "Disable the Now Playing video background"
+msgstr "Disable the Now Playing video background"
 
 msgctxt "#31141"
 msgid "Show Fanart background"
@@ -705,8 +677,8 @@ msgid "Use custom overlay"
 msgstr "Use custom overlay"
 
 msgctxt "#31174"
-msgid "Focuscolor for home tiles"
-msgstr "Focuscolor for home tiles"
+msgid "Focuscolor for home tiles and widgets"
+msgstr "Focuscolor for home tiles and widgets"
 
 msgctxt "#31175"
 msgid "Change Shortcut"
@@ -2140,10 +2112,6 @@ msgctxt "#31616"
 msgid "Enable mini guide on fullscreen Live TV"
 msgstr "Enable mini guide on fullscreen Live TV"
 
-msgctxt "#31617"
-msgid "Animate music wall background"
-msgstr "Animate music wall background"
-
 msgctxt "#31618"
 msgid "Align logo image"
 msgstr "Align logo image"
@@ -2209,8 +2177,8 @@ msgid "Auto lookup missing actor thumbs in videoinfo dialog"
 msgstr "Auto lookup missing actor thumbs in videoinfo dialog"
 
 msgctxt "#31634"
-msgid "Disable discart in Now Playing info bar (music playback)"
-msgstr "Disable discart in Now Playing info bar (music playback)"
+msgid "Disable discart in Now Playing info bar"
+msgstr "Disable discart in Now Playing info bar"
 
 msgctxt "#31635"
 msgid "Horizontal navigation"

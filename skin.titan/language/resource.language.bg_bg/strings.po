@@ -24,29 +24,13 @@ msgctxt "#31002"
 msgid "Enable/disable tiles"
 msgstr "Включване / Изключване на изгледи"
 
-msgctxt "#31004"
-msgid "Skin mode"
-msgstr "Режим на облика"
-
 msgctxt "#31005"
 msgid "General skin settings"
 msgstr "Основни настройки"
 
-msgctxt "#31007"
-msgid "MediaBrowser Mode"
-msgstr "Режим MediaBrowser"
-
-msgctxt "#31008"
-msgid "Use MediaBrowser mode for"
-msgstr "Ползвай режим MediaBrowser за"
-
 msgctxt "#31011"
 msgid "Set custom tile image"
 msgstr "Изображение за плочката"
-
-msgctxt "#31012"
-msgid "Mediabrowser integration (XBMB3C)"
-msgstr "Интеграция с Mediabrowser (XBMB3C)"
 
 msgctxt "#31013"
 msgid "Configure shortcuts"
@@ -345,7 +329,7 @@ msgid "Settings for recordings"
 msgstr "Настройки за записване"
 
 msgctxt "#31140"
-msgid "Disable the Now Playing background"
+msgid "Disable the Now Playing video background"
 msgstr "Не ползвай възпроизвежданото в момента за фон"
 
 msgctxt "#31141"
@@ -445,7 +429,7 @@ msgid "One of the main advantages of using the skinshortcuts-script is that your
 msgstr "Основно предимство на ползването на скрипта skinshortcuts е че конфигурацията на менюто може да се ползва от различни облици. Но не винаги това е добре - няма да можете да ползвате стандартните конфигурации на отделните облици. Ако поради някаква причина с менюто се случи нещо, което не ви допада можете да се върнете към първоначалната подредба чрез долния бутон."
 
 msgctxt "#31174"
-msgid "Focuscolor for home tiles"
+msgid "Focuscolor for home tiles and widgets"
 msgstr "Цвят на плочникте от началния екран, които са на фокус"
 
 msgctxt "#31175"

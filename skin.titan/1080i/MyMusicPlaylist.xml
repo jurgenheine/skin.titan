@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--Titan-->
-<window id="500">
+<window>
     <defaultcontrol always="true">5000</defaultcontrol>
-    <allowoverlay>yes</allowoverlay>
+    <allowoverlay>no</allowoverlay>
 	<onunload>ClearProperty(ShowViewSubMenu, Home)</onunload>
     <onunload>ClearProperty(playlistdialog, Home)</onunload>
     
@@ -111,12 +111,6 @@
                     <align>left</align>
                     <texture>common/menu-space.png</texture>
                 </control>
-                <control type="button" id="400">
-                    <!--Set View-->
-                    <include>SideBladeMenuButton</include>
-                    <label>$LOCALIZE[31305]: $INFO[Container.Viewmode]</label>
-					<onclick>XBMC.RunScript(script.skin.helper.service,action=SETVIEW)</onclick>
-				</control>
             </control>
         </control>
         

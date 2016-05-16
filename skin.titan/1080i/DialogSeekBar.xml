@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <window>
-    <visible>[Window.IsActive(videoosd) | Player.ShowInfo | Player.Seeking | Player.DisplayAfterSeek | Player.Paused | Player.Forwarding | Player.Rewinding] + Window.IsActive(fullscreenvideo)</visible>
+    <visible>[Window.IsActive(videoosd) | Player.ShowInfo | Player.Seeking | Player.DisplayAfterSeek | Player.Paused | Player.Forwarding | Player.Rewinding] + window.isactive(fullscreenvideo)</visible>
 	<controls>
         <control type="group">
             
@@ -25,6 +25,7 @@
                 <visible>!Window.IsActive(sliderdialog)</visible>
                 <animation effect="slide" start="0,400" end="0,0" time="200" condition="!Skin.HasSetting(LowPerformanceMode)">WindowOpen</animation>
                 <animation effect="slide" start="0,0" end="0,400" time="200" condition="!Skin.HasSetting(LowPerformanceMode)">WindowClose</animation>
+                <animation effect="slide" start="0,0" end="0,400" tween="cubic" easing="out" delay="300" time="250" reversible="false" condition="!Skin.HasSetting(LowPerformanceMode)">Hidden</animation>
                 <include condition="!Skin.HasTheme(classic) + !Skin.HasSetting(UseSlimOSDPanel)">OSDPanelModern</include>
                 <include condition="!Skin.HasTheme(classic) + Skin.HasSetting(UseSlimOSDPanel)">OSDPanelModernSlim</include>
                 <include condition="Skin.HasTheme(classic)">OSDPanelClassic</include>
@@ -53,7 +54,7 @@
             
             <!-- small panel if OSD disabled on seek -->
             <control type="group" id="662244">
-                <visible>!VideoPlayer.Content(livetv)</visible>
+                <visible>!VideoPlayer.Content(livetv) + !Control.IsVisible(552233)</visible>
                 <visible>!Skin.HasSetting(OSDShowInfoOnPause) + !Window.IsActive(videoosd) + [Player.Seeking | Player.DisplayAfterSeek | Player.Paused | Player.Forwarding | Player.Rewinding]</visible>
                 <include condition="!Skin.HasSetting(OSDShowInfoOnPause)">Small_OSD_Seek_Panel</include>
                 <include>HideOsdConditions</include>

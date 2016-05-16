@@ -4,21 +4,19 @@
 
 	<include name="HomeMenuSubMenuHorizontal">
 		
-		<control type="group" id="4446">
-			<visible allowhiddenfocus="true">Control.IsVisible(4444)</visible>
-			<control type="image">
-				<!--Panel Shadow-->
-				<posx>-120</posx>
-				<bottom>-120</bottom>
-				<width>2130</width>
-				<height>220</height>
-				<texture border="15">diffuse/bgpanel.png</texture>
-				<colordiffuse>$VAR[ViewDetailsPanelColor]</colordiffuse>
-				<visible>skin.hastheme(classic) | Skin.HasSetting(NoFooterBarOnHome)</visible>
-				<animation effect="slide" start="0,200" end="0,0" time="250">Visible</animation>
-                <animation effect="slide" start="0,0" end="0,200" time="50">Hidden</animation>
-			</control>
-		</control>
+        <control type="image">
+            <!--Panel Shadow-->
+            <posx>-120</posx>
+            <bottom>-120</bottom>
+            <width>2130</width>
+            <height>220</height>
+            <texture border="15">diffuse/bgpanel.png</texture>
+            <colordiffuse>$VAR[ViewDetailsPanelColor]</colordiffuse>
+            <visible>skin.hastheme(classic) | Skin.HasSetting(NoFooterBarOnHome)</visible>
+            <animation effect="slide" start="0,200" end="0,0" time="250">Visible</animation>
+            <animation effect="slide" start="0,0" end="0,200" time="50">Hidden</animation>
+            <visible>Control.IsVisible(4444)</visible>
+        </control>
 		
 		<control type="list" id="4444">
 			<posx>48</posx>
@@ -31,15 +29,18 @@
 			<itemgap>0</itemgap>
 			<onback>SetFocus(300)</onback>
 			<onup>SetFocus(300)</onup>
-            <onback>SetProperty(submenu,hide,home)</onback>
-            <onup>SetProperty(submenu,hide,home)</onup>
 			<onfocus>SetProperty(submenu,show,home)</onfocus>
 			<onback condition="!Skin.HasSetting(AutoShowSubmenu)">ClearProperty(submenu, Home)</onback>
 			<onup condition="!Skin.HasSetting(AutoShowSubmenu)">ClearProperty(submenu, Home)</onup>
 			<ondown condition="!Skin.HasSetting(DisablePowerMenu)">ActivateWindow(111)</ondown>   
-			<animation effect="slide" start="0,0" end="0,-205" time="250">Visible</animation>
-            <animation effect="slide" start="-205,0" end="0,0" time="250">Hidden</animation>
-			<visible allowhiddenfocus="true">[SubString(Window(Home).Property(submenu),show) | Control.HasFocus(4444)] + !StringCompare(Window(Home).Property(ShowWidget),show) + !Control.HasFocus(2) + IntegerGreaterThan(Container(4444).NumItems,0)</visible>
+			<animation effect="slide" start="0,0" end="0,-205" time="125">Visible</animation>
+            <animation effect="slide" start="-205,0" end="0,0" time="125">Hidden</animation>
+			<visible allowhiddenfocus="true">
+                [SubString(Window(Home).Property(submenu),show) | Control.HasFocus(4444)] 
+                + !StringCompare(Window(Home).Property(ShowWidget),show) 
+                + !Control.HasFocus(2) 
+                + IntegerGreaterThan(Container(4445).NumItems,0)
+            </visible>
 			<itemlayout width="368" height="185">
 				<control type="group">
 					<posy>120</posy>
@@ -445,8 +446,8 @@
                         <include>ThumbsViewLayout</include>
                         <control type="group">
                             <description>label overlay</description>
-                            <include>ThumbsLabelOverlay</include>
-                            <include>LandscapeLabelOverlayVisibility</include>
+                            <include>ThumbsTagOverlay</include>
+                            <include>LandscapeTagOverlayVisibility</include>
                         </control>
                     </control>
 				</itemlayout>
@@ -457,8 +458,8 @@
                         <include>ThumbsViewLayoutFocus</include>
                         <control type="group">
                             <description>label overlay</description>
-                            <include>ThumbsLabelOverlay</include>
-                            <include>LandscapeLabelOverlayVisibility</include>
+                            <include>ThumbsTagOverlay</include>
+                            <include>LandscapeTagOverlayVisibility</include>
                         </control>
                         <visible>Control.HasFocus(4444)</visible>
                     </control>
@@ -468,8 +469,8 @@
                         <include>ThumbsViewLayout</include>
                         <control type="group">
                             <description>label overlay</description>
-                            <include>ThumbsLabelOverlay</include>
-                            <include>LandscapeLabelOverlayVisibility</include>
+                            <include>ThumbsTagOverlay</include>
+                            <include>LandscapeTagOverlayVisibility</include>
                         </control>
                         <visible>!Control.HasFocus(4444)</visible>
                     </control>
@@ -506,9 +507,7 @@
 					<label>$VAR[value_header]</label>
 					<shadowcolor>$INFO[Skin.String(HeaderTextShadowColor)]</shadowcolor>
 				</control>
-			</control>
-			<include condition="Skin.HasSetting(EnableTouchSupport)">TouchScreenWorkaround</include>
-			
+			</control>		
 	
 			<!--submenu panel -->
 			<control type="panel" id="4444">
@@ -529,8 +528,8 @@
                         <include>ThumbsViewLayout</include>
                         <control type="group">
                             <description>label overlay</description>
-                            <include>ThumbsLabelOverlay</include>
-                            <include>LandscapeLabelOverlayVisibility</include>
+                            <include>ThumbsTagOverlay</include>
+                            <include>LandscapeTagOverlayVisibility</include>
                         </control>
                     </control>
 				</itemlayout>
@@ -542,8 +541,8 @@
                             <include>ThumbsViewLayoutFocus</include>
                             <control type="group">
                                 <description>label overlay</description>
-                                <include>ThumbsLabelOverlay</include>
-                                <include>LandscapeLabelOverlayVisibility</include>
+                                <include>ThumbsTagOverlay</include>
+                                <include>LandscapeTagOverlayVisibility</include>
                             </control>
                         </control>
 					</control>
@@ -662,7 +661,7 @@
                 <bordersize>8</bordersize>
                 <texture diffuse="home/home_matte2.png">diffuse/home_overlay.png</texture>
                 <visible>!Skin.HasSetting(NoTitleOnHomeMenuTiles) + !StringCompare(Container(300).ListItem.Property(disableLabel), disable)</visible>
-                <colordiffuse>$INFO[Skin.String(LabelOverlaysPanelColor)]</colordiffuse>
+                <colordiffuse>$INFO[Skin.String(TagOverlaysPanelColor)]</colordiffuse>
             </control>
             <control type="label">
                 <!--Label with title-->
@@ -675,7 +674,7 @@
                 <align>left</align>
                 <aligny>center</aligny>
                 <label>$INFO[Container(300).ListItem.Label]</label>
-                <textcolor>$INFO[Skin.String(LabelOverlaysTextColor)]</textcolor>
+                <textcolor>$INFO[Skin.String(TagOverlaysTextColor)]</textcolor>
                 <visible>!Skin.HasSetting(NoTitleOnHomeMenuTiles) + !StringCompare(Container(300).ListItem.Property(disableLabel), disable)</visible>
             </control>
         </control>

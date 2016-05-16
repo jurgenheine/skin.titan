@@ -32,29 +32,13 @@ msgctxt "#31003"
 msgid "Bordersize for unfocused thumbs/tiles"
 msgstr ""
 
-msgctxt "#31004"
-msgid "Skin mode"
-msgstr ""
+#empty string with id 31004
 
 msgctxt "#31005"
 msgid "General skin settings"
 msgstr ""
 
-msgctxt "#31006"
-msgid "NetfliKodi Plugin"
-msgstr ""
-
-msgctxt "#31007"
-msgid "MediaBrowser Mode"
-msgstr ""
-
-msgctxt "#31008"
-msgid "Use MediaBrowser mode for"
-msgstr ""
-
-msgctxt "#31009"
-msgid "Custom tiles for MediaBrowser collections"
-msgstr ""
+#empty strings from id 31006 to 31009
 
 msgctxt "#31010"
 msgid "--- Use random fanart for tile image"
@@ -64,9 +48,7 @@ msgctxt "#31011"
 msgid "Set custom tile image"
 msgstr ""
 
-msgctxt "#31012"
-msgid "Mediabrowser integration (XBMB3C)"
-msgstr ""
+#empty string with id 31012
 
 msgctxt "#31013"
 msgid "Configure shortcuts"
@@ -575,7 +557,7 @@ msgid "Cancel recording of all episodes"
 msgstr ""
 
 msgctxt "#31140"
-msgid "Disable the Now Playing background"
+msgid "Disable the Now Playing video background"
 msgstr ""
 
 msgctxt "#31141"
@@ -711,7 +693,7 @@ msgid "Use custom overlay"
 msgstr ""
 
 msgctxt "#31174"
-msgid "Focuscolor for home tiles"
+msgid "Focuscolor for home tiles and widgets"
 msgstr ""
 
 msgctxt "#31175"
@@ -1442,7 +1424,11 @@ msgctxt "#31409"
 msgid "[B]SYSTEM INFO[/B][CR][CR]Summary · Storage · Network · Video · Hardware"
 msgstr ""
 
-#empty strings from id 31410 to 31420
+msgctxt "#31410"
+msgid "[B]Live-TV[/B][CR][CR]Configure PVR settings"
+msgstr ""
+
+#empty strings from id 31411 to 31420
 
 msgctxt "#31421"
 msgid "[B]SELECT YOUR KODI USER PROFILE[/B][CR][CR]to login and continue"
@@ -2233,7 +2219,7 @@ msgid "Auto lookup missing actor thumbs in videoinfo dialog"
 msgstr ""
 
 msgctxt "#31634"
-msgid "Disable discart in Now Playing info bar (music playback)"
+msgid "Disable discart in Now Playing info bar"
 msgstr ""
 
 msgctxt "#31635"
@@ -2571,7 +2557,7 @@ msgid "Apply the per-shortcut background to homescreen only"
 msgstr ""
 
 msgctxt "#31719"
-msgid "Enable info overlay"
+msgid "Big plot overlay"
 msgstr ""
 
 msgctxt "#31720"
@@ -2627,5 +2613,93 @@ msgid "Show large scrolling text while music playback"
 msgstr ""
 
 msgctxt "#31733"
-msgid "Show clearart (if available) above the OSD-panel"
+msgid "Show clearart (if available) at top-right if OSD-panel active"
+msgstr ""
+
+msgctxt "#31734"
+msgid "Disable the Now Playing music background/visualization"
+msgstr ""
+
+msgctxt "#31735"
+msgid "Bordercolor for (unfocused) widgets/tiles on home"
+msgstr ""
+
+msgctxt "#31736"
+msgid "Disable clearart in Now Playing info bar"
+msgstr ""
+
+msgctxt "#31737"
+msgid "Enable square submenu"
+msgstr ""
+
+msgctxt "#31738"
+msgid "Disable letters popup while scrolling"
+msgstr ""
+
+msgctxt "#31739"
+msgid "Title of current (random) background (if available)"
+msgstr ""
+
+msgctxt "#31740"
+msgid "Show logo of current (random) background on home"
+msgstr ""
+
+msgctxt "#31741"
+msgid "Use large widget details panel"
+msgstr ""
+
+msgctxt "#31742"
+msgid "Home mainmenu/submenu panel color"
+msgstr ""
+
+msgctxt "#31743"
+msgid "Home mainmenu/submenu unfocused text color"
+msgstr ""
+
+msgctxt "#31744"
+msgid "Home mainmenu/submenu focused text color"
+msgstr ""
+
+msgctxt "#31745"
+msgid "Video playback"
+msgstr ""
+
+msgctxt "#31746"
+msgid "Enable Quick-Jump alphabet navigation strip"
+msgstr ""
+
+msgctxt "#31747"
+msgid "Randomize images (multi-image only)"
+msgstr ""
+
+msgctxt "#31748"
+msgid "Show mediaflags under the plot"
+msgstr ""
+
+msgctxt "#31749"
+msgid "Show info"
+msgstr ""
+
+msgctxt "#31750"
+msgid "Widget rows"
+msgstr ""
+
+msgctxt "#31751"
+msgid "Single widget"
+msgstr ""
+
+msgctxt "#31752"
+msgid "Single widget large"
+msgstr ""
+
+msgctxt "#31753"
+msgid "Multiple widgets"
+msgstr ""
+
+msgctxt "#31754"
+msgid "Multiple widgets - multiple rows"
+msgstr ""
+
+msgctxt "#31755"
+msgid "Colorize mainmenu tile images"
 msgstr ""

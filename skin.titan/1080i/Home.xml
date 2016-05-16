@@ -11,6 +11,8 @@
     <onunload>ClearProperty(ShowWidget,Home)</onunload>
     <onunload>ClearProperty(ShowViewSubMenu,Home)</onunload>
     <onunload>ClearProperty(SkinHelper.WidgetContainer,Home)</onunload>
+    <onload condition="Skin.String(HomeLayout,netflix2)">SetProperty(netflixview,active,Home)</onload>
+    <onunload>ClearProperty(netflixview, Home)</onunload>
     <menucontrol>300</menucontrol>
 	<controls>
 	
@@ -70,6 +72,9 @@
 		<include condition="!Skin.HasTheme(classic)">NowPlayingInfoBar</include>
         
         <include condition="Skin.HasSetting(DebugGrid) | Skin.HasSetting(DebugInfo)">DebugInfo</include>
+        
+        <!-- PVR recording icon -->
+        <include condition="Skin.HasSetting(Home_RecordingIndicator)">NowRecordingIcon</include>
 
 	</controls>
 </window>

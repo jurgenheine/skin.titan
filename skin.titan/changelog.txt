@@ -1,20 +1,43 @@
-v.3.6.48-0.1
-- updated language files from Transifex
-
-v.3.6.47-0.1
-- updated language files from Transifex
-
-v 3.6.46-0.1
+v 3.6.60-0.1
 - Inital mod to support skin.skinsubtitlechecker
 
-v.3.6.46
+v.3.6.60
 - updated language files from Transifex
 
-v.3.6.45
-- updated language files from Transifex
+v.3.6.59
+- FIX for watched indicators
+- FIX for tags settings
+- ADD seperated color settings for mainmenu
+- FIX some code cleanup and optimizations
+- FIX several layour changes to netflix home layouts, view and hubs
+- FIX several small glitches in classic and rounded theme
+- FIX missing trailers button in info dialog
+- FIX pvr sideblade deleted recordings button
+- ADD latest translations from Transifex
 
-v.3.6.44
-- updated language files from Transifex
+v.3.6.55
+- FIX a whole bunch of small alignment issues and graphical glitches resolved
+- ADD seperated color settings for the mainmenu panels
+- ADD options to display title/logo of current random background
+- ADD special square submenu to vertical home
+- ADD option to disable scrolling letter
+- ADD seperate border volor option for home widgets
+- ADD seperated setting for now playing music background
+- FIX color issues for PVR and subtitles OSD panels 
+- FIX custom info panel playback
+- FIX extendedinfo for seasons and episodes
+- ADD option to set widget rotation on per-widget based
+- ADD new rounded theme
+- ADD info/plot overlay in media library
+- FIX banner views
+- FIX music discart on OSD and now playing
+- ADD option to disable section backgrounds
+- ADD widget force refresh option
+- FIX rotten tomatoes ratings wrong
+- FIX discart for music and moviesets not available in all views
+- FIX custom movie search
+- ADD animation settings for music playback
+- ADD small contextmenu option
 
 v.3.6.42
 - several fixes for home widgets
