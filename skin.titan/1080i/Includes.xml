@@ -64,6 +64,7 @@
     <include file="IncludesHeader.xml" />
     <include file="IncludesFooter.xml" />
 	<include file="script-skinshortcuts-includes.xml"/>
+    <include file="script-skin_helper_service-includes.xml"/>
     <include file="IncludesDebugInfo.xml" condition="Skin.HasSetting(DebugGrid) | Skin.HasSetting(DebugInfo)" />
 
 	<!--Titan Version-->
@@ -227,6 +228,8 @@
         <pulseonselect>false</pulseonselect>
         <texturefocus colordiffuse="$INFO[Skin.String(ButtonFocusColor)]" border="20">dialogs/keyboard/key-nf.png</texturefocus>
         <texturenofocus colordiffuse="$INFO[Skin.String(ButtonColor)]" border="20">dialogs/keyboard/key-nf.png</texturenofocus>
+        <alttexturefocus colordiffuse="$INFO[Skin.String(ButtonFocusColor)]" border="20">dialogs/keyboard/key-nf.png</alttexturefocus>
+        <alttexturenofocus colordiffuse="$INFO[Skin.String(ButtonColor)]" border="20">dialogs/keyboard/key-nf.png</alttexturenofocus>
     </include>
     <include name="SmallKey">
         <width>130</width>
@@ -361,9 +364,20 @@
     <include name="align_right">
         <align>right</align>
     </include>
+    <include name="align_left">
+        <align>left</align>
+    </include>
     
     <include name="height">
         <height>$PARAM[height]</height>
+    </include>
+    
+    <include name="width">
+        <width>$PARAM[width]</width>
+    </include>
+    
+    <include name="top">
+        <top>$PARAM[top]</top>
     </include>
     
     <include name="ImageAlignCenter">

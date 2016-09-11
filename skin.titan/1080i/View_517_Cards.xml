@@ -14,7 +14,8 @@
                     <onup>517</onup>
                     <ondown>517</ondown>
                     <onleft>9000</onleft>
-                    <onright>6000</onright>
+                    <onright condition="Skin.HasSetting(EnableQuickJump)">6000</onright>
+        <onright condition="!Skin.HasSetting(EnableQuickJump)">60</onright>
                     <orientation>vertical</orientation>
                     <pagecontrol>60</pagecontrol>
                     <preloaditems>2</preloaditems>
@@ -123,7 +124,7 @@
                                 <textcolor>$INFO[Skin.String(ViewDetailsListItemTextFocusColor)]</textcolor>
                                 <selectedcolor>$INFO[Skin.String(ViewDetailsListItemTextFocusColor)]</selectedcolor>
                                 <label>$INFO[ListItem.Plot]</label>
-                                <autoscroll delay="4000" time="4000" repeat="2000">true</autoscroll>
+                                <autoscroll delay="4000" time="4000" repeat="2000">!Skin.HasSetting(DisablePlotAutoScroll)</autoscroll>
                             </control>
                             <control type="label">
                                 <width>420</width>
@@ -248,7 +249,7 @@
                                 <textcolor>$INFO[Skin.String(ViewDetailsListItemTextFocusColor)]</textcolor>
                                 <selectedcolor>$INFO[Skin.String(ViewDetailsListItemTextFocusColor)]</selectedcolor>
                                 <label>$VAR[Plots]</label>
-                                <autoscroll delay="4000" time="4000" repeat="2000">true</autoscroll>
+                                <autoscroll delay="4000" time="4000" repeat="2000">!Skin.HasSetting(DisablePlotAutoScroll)</autoscroll>
                             </control>
                             <control type="label">
                                 <width>600</width>

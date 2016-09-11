@@ -86,6 +86,41 @@
                 <visible>!IsEmpty(ListItem.MPAA) + ![Skin.HasSetting(EnableTouchSupport) + Skin.String(mediaflagsstyle,large_color) + !Skin.HasSetting(CompactHeader)]</visible>
             </control>
             <include>mediaflags_sets</include>
+            <!-- next aired info-->
+            <control type="group">
+                <visible>!IsEmpty(Control.GetLabel(44228))</visible>
+                <visible>Container.content(tvshows) | Container.content(seasons)</visible>
+                <width>40</width>
+                <height>80</height>
+                <control type="image">
+                    <width>40</width>
+                    <height>40</height>
+                    <posy>22</posy>
+                    <colordiffuse>$VAR[mediaFlagsFontColor]</colordiffuse>
+                    <texture>dialogs/videoinfo/time-icon.png</texture>
+                </control>
+            </control>
+            <control type="label" id="44227">
+                <font>flags</font>
+                <width>auto</width>
+                <height>80</height>
+                <aligny>center</aligny>
+                <textcolor>$VAR[mediaFlagsFontColor]</textcolor>
+                <label>$INFO[Window(Home).Property(NextAired.NextDate)]</label>
+                <visible>Container.content(tvshows) | Container.content(seasons)</visible>
+                <visible>!IsEmpty(Window(Home).Property(NextAired.NextDate))</visible>
+            </control>
+            <control type="label" id="44228">
+                <font>flags</font>
+                <width>auto</width>
+                <height>80</height>
+                <aligny>center</aligny>
+                <textcolor>$VAR[mediaFlagsFontColor]</textcolor>
+                <label>$INFO[Window(Home).Property(NextAired.Status)]</label>
+                <visible>Container.content(tvshows) | Container.content(seasons)</visible>
+                <visible>IsEmpty(Window(Home).Property(NextAired.NextDate)) + !IsEmpty(Window(Home).Property(NextAired.Status))</visible>
+            </control>
+            
         </control>
     </include>
     
@@ -993,7 +1028,7 @@
 					<height>36</height>
 				</control>
 			</control>
-                 <control type="label">
+            <control type="label">
                 <!-- whitespace -->
                 <width>auto</width>
                 <height>30</height>
@@ -1002,16 +1037,6 @@
                 <visible>!IsEmpty(Control.GetLabel(44229))</visible>
                 <visible>window.isactive(fullscreenvideo)</visible>
             </control>
-            <!-- OSD label 3 -->
-            <control type="label" id="54229">
-                <font>flags</font>
-                <width>auto</width>
-                <height>30</height>
-                <textcolor>$VAR[mediaFlagsFontColor]</textcolor>
-                <label>$VAR[OSDLabel3]</label>
-                <visible>window.isactive(fullscreenvideo)</visible>
-            </control>
-			
              <!-- nextaired info -->
             <control type="group">
 				<width>400</width>
@@ -1036,7 +1061,8 @@
 					<height>36</height>
 				</control>
 			</control>
-     		</control>
+        
+        </control>
     </include>
  
     <include name="mediaflags_text">
@@ -1051,7 +1077,7 @@
                 <bordersize>3</bordersize>
                 <visible>!IsEmpty(Control.GetLabel(44223))</visible>
             </control>
-                 <control type="label" id="44223">
+            <control type="label" id="44223">
                 <font>flags</font>
                 <width>auto</width>
                 <height>30</height>
@@ -1084,7 +1110,7 @@
                 <label>$VAR[AudioCodecVar,, • ]$VAR[AudioChannelsVar]$VAR[AudioLanguageVar, • ]</label>
                 <visible>!IsEmpty(Control.GetLabel(44224))</visible>
             </control>
-                 <control type="label">
+            <control type="label">
                 <!-- whitespace -->
                 <width>8</width>
                 <height>30</height>
@@ -1092,7 +1118,7 @@
                 <visible>!IsEmpty(Control.GetLabel(44224))</visible>
                 <visible>!SubString(ListItem.Path,videodb://movies/sets/,left)</visible>
             </control>
-                 <control type="image">
+            <control type="image">
                 <width>36</width>
                 <height>36</height>
                 <colordiffuse>$VAR[mediaFlagsFontColor]</colordiffuse>
@@ -1110,7 +1136,7 @@
                 <visible>!IsEmpty(Control.GetLabel(44230))</visible>
                 <visible>![Window.IsActive(home) + Skin.String(widgetstyle, single box)]</visible>
             </control>
-                 <control type="label">
+            <control type="label">
                 <!-- whitespace -->
                 <width>8</width>
                 <height>30</height>
@@ -1161,14 +1187,15 @@
                 <label>$VAR[FooterRatingLabel]</label>
                 <visible>!SubString(ListItem.Path,videodb://movies/sets/,left) + !substring(Window.Property(xmlfile),My,left) + !SubString(Container(510).ListItem.Rating,songrating,left) + ![Window.IsActive(Home) + Skin.String(HomeLayout,netflix2)]</visible>
             </control>
-                 <control type="label">
+            <control type="label">
                 <!-- whitespace -->
                 <width>10</width>
                 <height>30</height>
                 <label></label>
                 <visible>!IsEmpty(Control.GetLabel(44228))</visible>
             </control>
-     
+            
+            <!-- next aired info-->
             <control type="group">
                 <visible>!IsEmpty(Control.GetLabel(44228))</visible>
                 <visible>Container.content(tvshows) | Container.content(seasons)</visible>
@@ -1199,24 +1226,6 @@
                 <label>$INFO[Window(Home).Property(NextAired.Status)]</label>
                 <visible>Container.content(tvshows) | Container.content(seasons)</visible>
                 <visible>IsEmpty(Window(Home).Property(NextAired.NextDate)) + !IsEmpty(Window(Home).Property(NextAired.Status))</visible>
-            </control>
-            <control type="label">
-                <!-- whitespace -->
-                <width>auto</width>
-                <height>30</height>
-                <label>• </label>
-                <textcolor>$VAR[mediaFlagsFontColor]</textcolor>
-                <visible>!IsEmpty(Control.GetLabel(44229))</visible>
-                <visible>window.isactive(fullscreenvideo)</visible>
-            </control>
-            <!-- OSD label 3 -->
-            <control type="label" id="44229">
-                <font>flags</font>
-                <width>auto</width>
-                <height>30</height>
-                <textcolor>$VAR[mediaFlagsFontColor]</textcolor>
-                <label>$VAR[OSDLabel3]</label>
-                <visible>window.isactive(fullscreenvideo)</visible>
             </control>
             <include>mediaflags_sets</include>
         </control>
@@ -1899,15 +1908,6 @@
                 <textcolor>$VAR[mediaFlagsFontColor]</textcolor>
                 <visible>Window.IsActive(visualisation)</visible>
             </control>
-            <!-- OSD label 3 -->
-            <control type="label" id="44229">
-                <font>flags</font>
-                <width>830</width>
-                <height>30</height>
-                <textcolor>$VAR[mediaFlagsFontColor]</textcolor>
-                <label>$VAR[OSDLabel3]</label>
-                <visible>Window.IsActive(visualisation)</visible>
-            </control>
 		</control>
     </include>
 	
@@ -2326,6 +2326,7 @@
 		
 		<value condition="StringCompare(ListItem.AudioCodec,ac3)">DOLBY D</value>
 		<value condition="StringCompare(ListItem.AudioCodec,dca)">DTS</value>
+        <value condition="SubString(ListItem.AudioCodec,atmos)">ATMOS</value>
 		<value condition="SubString(ListItem.AudioCodec,dts-hd)">DTS HD</value>
 		<value condition="SubString(ListItem.AudioCodec,dtshd)">DTS HD</value>
 		<value condition="SubString(ListItem.AudioCodec,pcm)">PCM</value>
@@ -2334,6 +2335,7 @@
 		<value condition="window.isactive(visualisation) + !IsEmpty(MusicPlayer.Codec)">$INFO[MusicPlayer.Codec]</value>
 		<value condition="window.isactive(fullscreenvideo) + StringCompare(VideoPlayer.AudioCodec,ac3)">DOLBY D</value>
 		<value condition="window.isactive(fullscreenvideo) + StringCompare(VideoPlayer.AudioCodec,dca)">DTS</value>
+        <value condition="window.isactive(fullscreenvideo) + SubString(VideoPlayer.AudioCodec,atmos)">ATMOS</value>
 		<value condition="window.isactive(fullscreenvideo) + SubString(VideoPlayer.AudioCodec,dts-hd)">DTS HD</value>
 		<value condition="window.isactive(fullscreenvideo) + SubString(VideoPlayer.AudioCodec,dtshd)">DTS HD</value>
 		<value condition="window.isactive(fullscreenvideo) + SubString(VideoPlayer.AudioCodec,pcm)">PCM</value>
@@ -2341,24 +2343,28 @@
 		
 		<value condition="Control.HasFocus(510) + StringCompare(Container(510).ListItem.AudioCodec,ac3)">DOLBY D</value>
 		<value condition="Control.HasFocus(510) + StringCompare(Container(510).ListItem.AudioCodec,dca)">DTS</value>
+        <value condition="Control.HasFocus(510) + SubString(Container(510).ListItem.AudioCodec,atmos)">ATMOS</value>
 		<value condition="Control.HasFocus(510) + SubString(Container(510).ListItem.AudioCodec,dts-hd)">DTS HD</value>
 		<value condition="Control.HasFocus(510) + SubString(Container(510).ListItem.AudioCodec,dtshd)">DTS HD</value>
 		<value condition="Control.HasFocus(510) + SubString(Container(510).ListItem.AudioCodec,pcm)">PCM</value>
 		<value condition="Control.HasFocus(510) + !IsEmpty(Container(510).ListItem.AudioCodec)">$INFO[Container(510).ListItem.AudioCodec]</value>
         <value condition="Control.HasFocus(520) + StringCompare(Container(520).ListItem.AudioCodec,ac3)">DOLBY D</value>
 		<value condition="Control.HasFocus(520) + StringCompare(Container(520).ListItem.AudioCodec,dca)">DTS</value>
+        <value condition="Control.HasFocus(520) + SubString(Container(520).ListItem.AudioCodec,atmos)">ATMOS</value>
 		<value condition="Control.HasFocus(520) + SubString(Container(520).ListItem.AudioCodec,dts-hd)">DTS HD</value>
 		<value condition="Control.HasFocus(520) + SubString(Container(520).ListItem.AudioCodec,dtshd)">DTS HD</value>
 		<value condition="Control.HasFocus(520) + SubString(Container(520).ListItem.AudioCodec,pcm)">PCM</value>
 		<value condition="Control.HasFocus(520) + !IsEmpty(Container(520).ListItem.AudioCodec)">$INFO[Container(520).ListItem.AudioCodec]</value>
         <value condition="Control.HasFocus(530) + StringCompare(Container(530).ListItem.AudioCodec,ac3)">DOLBY D</value>
 		<value condition="Control.HasFocus(530) + StringCompare(Container(530).ListItem.AudioCodec,dca)">DTS</value>
+        <value condition="Control.HasFocus(530) + SubString(Container(530).ListItem.AudioCodec,atmos)">ATMOS</value>
 		<value condition="Control.HasFocus(530) + SubString(Container(530).ListItem.AudioCodec,dts-hd)">DTS HD</value>
 		<value condition="Control.HasFocus(530) + SubString(Container(530).ListItem.AudioCodec,dtshd)">DTS HD</value>
 		<value condition="Control.HasFocus(530) + SubString(Container(530).ListItem.AudioCodec,pcm)">PCM</value>
 		<value condition="Control.HasFocus(530) + !IsEmpty(Container(530).ListItem.AudioCodec)">$INFO[Container(530).ListItem.AudioCodec]</value>
         <value condition="Control.HasFocus(540) + StringCompare(Container(540).ListItem.AudioCodec,ac3)">DOLBY D</value>
 		<value condition="Control.HasFocus(540) + StringCompare(Container(540).ListItem.AudioCodec,dca)">DTS</value>
+        <value condition="Control.HasFocus(540) + SubString(Container(540).ListItem.AudioCodec,atmos)">ATMOS</value>
 		<value condition="Control.HasFocus(540) + SubString(Container(540).ListItem.AudioCodec,dts-hd)">DTS HD</value>
 		<value condition="Control.HasFocus(540) + SubString(Container(540).ListItem.AudioCodec,dtshd)">DTS HD</value>
 		<value condition="Control.HasFocus(540) + SubString(Container(540).ListItem.AudioCodec,pcm)">PCM</value>

@@ -11,6 +11,7 @@
 			<control type="group">
 				<visible>Skin.HasSetting(ShowCaseViewShowInfo)</visible>
 				<include>MovieDetailsTop</include>
+                <visible>Control.IsVisible(524) + IntegerGreaterThan(Container.NumItems,0)</visible>
 			</control>
 			
 			<!--Showcase-->
@@ -22,7 +23,8 @@
                 <onleft>524</onleft>
                 <onright>524</onright>
                 <onup>9000</onup>
-                <ondown>7000</ondown>
+                <ondown condition="Skin.HasSetting(EnableQuickJump)">7000</ondown>
+                <ondown condition="!Skin.HasSetting(EnableQuickJump)">60</ondown>
                 <viewtype label="31429">posterwrap</viewtype>
                 <pagecontrol>60</pagecontrol>
                 <orientation>horizontal</orientation>
@@ -40,6 +42,7 @@
 					<effect type="slide" start="0,0" end="0,110" time="0" />
 				</animation>
                 <include>ShowcaseMovies</include>
+                <visible>Control.IsVisible(524) + IntegerGreaterThan(Container.NumItems,0)</visible>
             </control>
             <!--horizontal Scrollbar-->
 			<control type="group">
@@ -67,8 +70,8 @@
         <width>300</width>
         <height>421</height>
         <align>center</align>
-        <aspectratio scalediffuse="false">scale</aspectratio>
-		<bordertexture border="20" colordiffuse="black">diffuse/poster_shadow.png</bordertexture>
+        <aspectratio stretchdiffuse="false">stretch</aspectratio>
+		<include condition="!Skin.HasSetting(EmbyCovertArtEnabled)">poster_shadow</include>
 		<bordersize>20</bordersize>
     </include>
     <include name="MovieShowcaseWatchedPos">
@@ -86,8 +89,8 @@
         <width>300</width>
         <height>421</height>
         <align>center</align>
-        <aspectratio scalediffuse="false">scale</aspectratio>
-		<bordertexture border="20" colordiffuse="black">diffuse/poster_shadow.png</bordertexture>
+        <aspectratio stretchdiffuse="false">stretch</aspectratio>
+		<include condition="!Skin.HasSetting(EmbyCovertArtEnabled)">poster_shadow</include>
 		<bordersize>20</bordersize>
     </include>
     <include name="MovieShowcaseThumbReflectionMain">
@@ -96,7 +99,7 @@
         <width>260</width>
         <height>381</height>
         <colordiffuse>52FFFFFF</colordiffuse>
-        <aspectratio scalediffuse="false">scale</aspectratio>
+        <aspectratio stretchdiffuse="false">stretch</aspectratio>
     </include>
     <include name="MovieShowcaseThumbReflection">
         <posx>74</posx>
@@ -104,7 +107,7 @@
         <width>260</width>
         <height>381</height>
         <colordiffuse>52FFFFFF</colordiffuse>
-        <aspectratio scalediffuse="false">scale</aspectratio>
+        <aspectratio stretchdiffuse="false">stretch</aspectratio>
     </include>
     <!--ShowcaseMovies-->
     <include name="ShowcaseMovies">
@@ -979,6 +982,10 @@
                 <!-- 0 -->
                 <posx>758</posx>
                 <control type="group">
+                    <!-- Workaround for camera bug. As soon as the camera tag is applied to the group, label will be invisible --> 
+                    <animation effect="rotatey" center="0" start="1" end="1" time="0" condition="true">Conditional</animation>
+                    <animation effect="rotatey" center="0" start="-1" end="-1" time="10" condition="true">Conditional</animation>
+                    <!-- end of workaround -->
                     <control type="image">
                         <include>MovieShowcaseThumbMain</include>
                         <texture background="true" diffuse="diffuse/poster.png" fallback="colors/color_keyboard.png">$VAR[ShowcaseItem0Var]</texture>

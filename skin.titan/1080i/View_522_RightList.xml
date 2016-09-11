@@ -31,7 +31,8 @@
                 <width>800</width>
                 <height>690</height>
                 <onleft>9000</onleft>
-                <onright>6000</onright>
+                <onright condition="Skin.HasSetting(EnableQuickJump)">6000</onright>
+                <onright condition="!Skin.HasSetting(EnableQuickJump)">60</onright>
                 <onup>522</onup>
                 <ondown>522</ondown>
                 <pagecontrol>60</pagecontrol>
@@ -112,6 +113,7 @@
                 <width>500</width>
                 <bottom>13%</bottom>
                 <height>736</height>
+                <visible>IntegerGreaterThan(Container.NumItems,0)</visible>
                 <control type="image">
 					<!--cdart image-->
                     <width>500</width>
@@ -123,17 +125,35 @@
 					<animation effect="fade" start="0" end="100" delay="600" time="800" pulse="false" condition="Skin.HasSetting(View522_ShowCDart)">Conditional</animation>
 					<animation effect="rotate" end="-360" center="auto" time="20000" loop="true" reversible="false" condition="Skin.HasSetting(AnimateDiscArt)">Conditional</animation>
 					<visible>Skin.HasSetting(View522_ShowCDart) + [!IsEmpty(ListItem.Art(poster)) | !IsEmpty(Window(Home).Property(SkinHelper.PVR.Poster))]</visible>
-                    <visible>Window.IsActive(videolibrary)</visible>
+                    <visible>![ListItem.IsCollection + Skin.HasSetting(EmbyCovertArtEnabled)]</visible>
+                    <visible>Window.IsActive(Videos)</visible>
 				</control>
                 <control type="image">
-                    <bordersize>8</bordersize>
-                    <texture diffuse="diffuse/poster.png" border="5" fallback="DefaultVideo.png" background="true">$VAR[PosterThumb]</texture>
-                    <aspectratio align="right" aligny="top" scalediffuse="false">scale</aspectratio>
-                </control>
+					<aspectratio align="center" aligny="center" scalediffuse="true">stretch</aspectratio>
+					<texture background="true" diffuse="diffuse/poster.png" fallback="DefaultVideo.png">$VAR[PosterThumb]</texture>
+					<bordersize>8</bordersize>
+                    <visible>[!IsEmpty(ListItem.Art(poster)) | !IsEmpty(ListItem.Art(tvshow.poster))]</visible>
+                    <visible>![ListItem.IsCollection + Skin.HasSetting(EmbyCovertArtEnabled)]</visible>
+				</control>
+                <control type="image">
+					<aspectratio align="left" aligny="center" scalediffuse="true">keep</aspectratio>
+					<texture background="true" diffuse="diffuse/poster.png" fallback="DefaultVideo.png">$VAR[PosterThumb]</texture>
+					<bordersize>8</bordersize>
+                    <width>700</width>
+                    <visible>[ListItem.IsCollection + Skin.HasSetting(EmbyCovertArtEnabled)]</visible>
+				</control>
+                <control type="image">
+					<aspectratio align="center" aligny="bottom" scalediffuse="true">keep</aspectratio>
+					<texture background="true" diffuse="diffuse/poster.png" fallback="DefaultVideo.png">$VAR[PosterThumb]</texture>
+					<bordersize>8</bordersize>
+                    <visible>![ListItem.IsCollection + Skin.HasSetting(EmbyCovertArtEnabled)]</visible>
+                    <visible>IsEmpty(ListItem.Art(poster)) + IsEmpty(ListItem.Art(tvshow.poster))</visible>
+				</control>
                 <control type="group">
                     <right>8</right>
                     <posy>8</posy>
                     <include>WatchedIndicatorLarge</include>
+                    <visible>![ListItem.IsCollection + Skin.HasSetting(EmbyCovertArtEnabled)]</visible>
                 </control>
             </control>
         

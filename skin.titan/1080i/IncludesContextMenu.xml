@@ -233,6 +233,13 @@
 			<texture border="15">diffuse/bgpanel.png</texture>
             <colordiffuse>$INFO[Skin.String(SideBladePanelColor)]</colordiffuse>
 		</control>
+        <control type="button">
+			<posy>150</posy>
+			<width>500</width>
+			<height>840</height>
+			<description>Hidden button to prevent unwanted focus while hovering the menu</description>
+            <visible allowhiddenfocus="true">false</visible>
+		</control>
 	</include>	
     
     <include name="SideBladeViewCommands">
@@ -553,9 +560,12 @@
             <onclick condition="Control.IsVisible(508)">Skin.ToggleSetting(View508_ShowCDart)</onclick>
             <onclick condition="Control.IsVisible(513)">Skin.ToggleSetting(View513_ShowCDart)</onclick>
             <onclick condition="Control.IsVisible(514)">Skin.ToggleSetting(View514_ShowCDart)</onclick>
+            <onclick condition="Control.IsVisible(516)">Skin.ToggleSetting(View516_ShowCDart)</onclick>
             <onclick condition="Control.IsVisible(522)">Skin.ToggleSetting(View522_ShowCDart)</onclick>
             <onclick condition="Control.IsVisible(523)">Skin.ToggleSetting(View523_ShowCDart)</onclick>
+            <onclick condition="Control.IsVisible(50)">Skin.ToggleSetting(View50_ShowCDart)</onclick>
 			<selected>
+            [Control.IsVisible(50) + Skin.HasSetting(View50_ShowCDart)] | 
             [Control.IsVisible(51) + Skin.HasSetting(View51_ShowCDart)] | 
             [Control.IsVisible(52) + Skin.HasSetting(View52_ShowCDart)] | 
             [Control.IsVisible(58) + Skin.HasSetting(View58_ShowCDart)] | 
@@ -564,13 +574,15 @@
             [Control.IsVisible(508) + Skin.HasSetting(View508_ShowCDart)] | 
             [Control.IsVisible(513) + Skin.HasSetting(View513_ShowCDart)] | 
             [Control.IsVisible(514) + Skin.HasSetting(View514_ShowCDart)] | 
+            [Control.IsVisible(516) + Skin.HasSetting(View516_ShowCDart)] | 
             [Control.IsVisible(522) + Skin.HasSetting(View522_ShowCDart)] | 
             [Control.IsVisible(523) + Skin.HasSetting(View523_ShowCDart)]
             </selected>
 			<visible>
             Control.IsVisible(504) | Control.IsVisible(58) | Control.IsVisible(508) | Control.IsVisible(522) | 
             Control.IsVisible(513) | Control.IsVisible(514) | Control.IsVisible(51) | Control.IsVisible(52) | 
-            Control.IsVisible(502) | Control.IsVisible(523)
+            Control.IsVisible(502) | Control.IsVisible(523) | [Control.IsVisible(50) + Container.Content(movies)] |
+            [Control.IsVisible(516) + [Container.Content(albums) | Container.Content(songs)] + !IsEmpty(ListItem.Album) + !IsEmpty(ListItem.Thumb)]
             </visible>
             <visible>!Control.IsVisible(88882) + !Control.IsVisible(88883)</visible>
 		</control>
@@ -712,7 +724,7 @@
             [Skin.HasSetting(View514_DisableFanArt) + Control.IsVisible(514)] |
             [Skin.HasSetting(View515_DisableFanArt) + Control.IsVisible(515)]
             </selected>
-			<visible>Skin.HasSetting(ShowFanartBackground)</visible>
+			<visible>Skin.HasSetting(ShowFanartBackground) + !IsEmpty(ListItem.Art(FanArt))</visible>
 			<visible>
             Control.IsVisible(10) | Control.IsVisible(50) | Control.IsVisible(51) | 
             Control.IsVisible(52) | Control.IsVisible(53) | Control.IsVisible(54) | 
@@ -781,7 +793,7 @@
             [Skin.HasSetting(View514_DisableExtraFanArt) + Control.IsVisible(514)] |
             [Skin.HasSetting(View515_DisableExtraFanArt) + Control.IsVisible(515)]
             </selected>
-			<visible>Skin.HasSetting(ShowFanartBackground) + Skin.HasSetting(SkinHelper.EnableExtraFanart)</visible>
+			<visible>Skin.HasSetting(ShowFanartBackground) + Skin.HasSetting(SkinHelper.EnableExtraFanart) + !IsEmpty(ListItem.Art(FanArt))</visible>
 			<visible>
             Control.IsVisible(10) | Control.IsVisible(50) | Control.IsVisible(51) | 
             Control.IsVisible(52) | Control.IsVisible(53) | Control.IsVisible(54) | 

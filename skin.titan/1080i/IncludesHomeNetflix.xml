@@ -216,6 +216,7 @@
             <aspectratio aligny="top">scale</aspectratio>
             <animation effect="zoom" start="110" end="130" center="auto" time="12000" tween="cubic" easing="inout" pulse="true" condition="Skin.HasSetting(BackgroundAnimation)">Conditional</animation>
             <animation effect="slide" start="-10,-10" end="10,10" time="8000" tween="cubic" easing="inout" pulse="true" condition="Skin.HasSetting(BackgroundAnimation)">Conditional</animation>
+            <visible>!Skin.HasSetting(NetflixHomeShowLargeThumb)</visible>
         </control>
         <control type="image">
             <width>100%</width>
@@ -358,7 +359,7 @@
                 <right>0</right>
                 <height>50</height>
                 <top>490</top>
-                <include>AltRatingFooter</include>
+                <include condition="!Skin.HasSetting(NetflixHomeDisableRating)">AltRatingFooter</include>
             </control>
             
         </control>
@@ -923,6 +924,7 @@
                 <control type="group">
                     <width>430</width>
                     <height>260</height>
+                    <animation effect="zoom" center="auto" start="100" end="105" time="160" tween="quadratic" condition="Skin.HasSetting(WidgetsZoomFocus)">Focus</animation>
                     <include>ThumbsViewLayoutFocus</include>
                     <control type="group">
                         <description>widget label overlay</description>
@@ -1071,8 +1073,8 @@
                 <height>145</height>
                 <font>Reg24</font>
                 <align>justify</align>
-                <autoscroll delay="4000" time="3000" repeat="10000" condition="!Control.HasFocus(510)" />
-                <autoscroll delay="4000" time="3000" repeat="10000" condition="Control.HasFocus(510)" />
+                <autoscroll delay="4000" time="3000" repeat="10000" condition="!Control.HasFocus(510) + !Skin.HasSetting(DisablePlotAutoScroll)" />
+                <autoscroll delay="4000" time="3000" repeat="10000" condition="Control.HasFocus(510) + !Skin.HasSetting(DisablePlotAutoScroll)" />
                 <textcolor>$INFO[Skin.String(ViewDetailsTextColor)]</textcolor>
                 <label>$VAR[HomeMenuWidgetInfoPlotAlt]</label>
             </control>
@@ -1113,8 +1115,8 @@
                 <bottom>20</bottom>
                 <font>Reg24</font>
                 <align>justify</align>
-                <autoscroll delay="4000" time="3000" repeat="10000" condition="!Control.HasFocus(510)" />
-                <autoscroll delay="4000" time="3000" repeat="10000" condition="Control.HasFocus(510)" />
+                <autoscroll delay="4000" time="3000" repeat="10000" condition="!Control.HasFocus(510) + !Skin.HasSetting(DisablePlotAutoScroll)" />
+                <autoscroll delay="4000" time="3000" repeat="10000" condition="Control.HasFocus(510) + !Skin.HasSetting(DisablePlotAutoScroll)" />
                 <textcolor>$INFO[Skin.String(ViewDetailsTextColor)]</textcolor>
                 <label>$VAR[HomeMenuWidgetInfoPlotAlt]</label>
             </control>
