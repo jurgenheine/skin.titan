@@ -9,6 +9,7 @@
 	<onunload>ClearProperty(TrailerPlaying,Home)</onunload>
     <onunload>ClearProperty(filename_formatted,Home)</onunload>
     <controls>
+    <include file="IncludesSubtitleVariables.xml" />
         <!--fake list used as container -->
 		<!-- use Container(999).ListItem to get all info -->
 		<!-- all normal listitem properties will be available -->
@@ -620,7 +621,7 @@
 									<shadowcolor>$INFO[Skin.String(ViewDetailsTextShadowColor)]</shadowcolor>
 									<scroll>false</scroll>
 								</control>
-                                <control type="image">
+                         								<control type="image">
 									<posx>560</posx>
 									<posy>15</posy>
 									<width>36</width>
@@ -644,7 +645,7 @@
 								<!--MPAA RATING and SUBTITLES-->
 								<width>1150</width>
 								<height>40</height>
-								<visible>!IsEmpty(Window(Home).Property(SkinHelper.ListItemSubtitles)) | !IsEmpty(Container(999).ListItem.mpaa) | !IsEmpty(Container(999).ListItem.Rating)</visible>
+                <visible>!IsEmpty(Window(Home).Property(SkinHelper.ListItemSubtitles)) | !IsEmpty(Container(999).ListItem.mpaa) | !IsEmpty(Container(999).ListItem.Rating) | !IsEmpty(window.Property(skinsubtitlechecker.language.iso_639_2t))</visible>
 								<control type="image">
 									<posx>8</posx>
 									<posy>15</posy>
@@ -665,6 +666,28 @@
 									<shadowcolor>$INFO[Skin.String(ViewDetailsTextShadowColor)]</shadowcolor>
 									<scroll>false</scroll>
 								</control>
+                <!--SUBTITLE CHECK-->
+                <control type="image">
+                  <posx>8</posx>
+                  <posy>15</posy>
+                  <width>36</width>
+                  <height>36</height>
+                  <colordiffuse>$INFO[Skin.String(ViewDetailsTextColor)]</colordiffuse>
+                  <texture>$VAR[skinsubtitlechecker.available,flags/subtitles/,.png]</texture>
+                  <visible>!IsEmpty(window.Property(skinsubtitlechecker.language.iso_639_2t))</visible>
+                </control>
+                <control type="label">
+                  <posx>60</posx>
+                  <posy>0</posy>
+                  <width>500</width>
+                  <font>Reg26</font>
+                  <align>left</align>
+                  <label>[UPPERCASE]$INFO[window.Property(skinsubtitlechecker.language.iso_639_2t)][/UPPERCASE]</label>
+                  <textcolor>$INFO[Skin.String(ViewDetailsTextColor)]</textcolor>
+                  <shadowcolor>$INFO[Skin.String(ViewDetailsTextShadowColor)]</shadowcolor>
+                  <scroll>false</scroll>
+                  <visible>!IsEmpty(window.Property(skinsubtitlechecker.language.iso_639_2t))</visible>
+                </control>
                                 <control type="image">
 									<posx>560</posx>
 									<posy>15</posy>
@@ -940,7 +963,7 @@
                         <texturefocus>-</texturefocus>
                         <texturenofocus>-</texturenofocus>
                     </control>
-                    
+					
                     <!-- Large Plot -->
                     <control type="textbox">
                         <posx>65</posx>

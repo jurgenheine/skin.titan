@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--Titan-->
 <window>
-    
+    <onload>RunScript(script.skinsubtitlechecker,availabereturnvalue=subavailable&notavailablereturnvalue=subnotavailable&searchreturnvalue=subunknown&year=$INFO[ListItem.Year]&season=$INFO[ListItem.Season]&episode=$INFO[ListItem.Episode]&tvshow=$INFO[ListItem.TVShowTitle]&originaltitle=$INFO[ListItem.OriginalTitle]&title=$INFO[ListItem.Title]&filename=$INFO[ListItem.FileName])</onload>
     <defaultcontrol always="true">9005</defaultcontrol>
     <onunload condition="!IsEmpty(Window(Home).Property(TrailerPlaying))">PlayerControl(Stop)</onunload>
 	<onunload>ClearProperty(AdditionalInfo)</onunload>
     <onload>ClearProperty(AdditionalInfo)</onload>
 	<onunload>ClearProperty(TrailerPlaying,Home)</onunload>
     <onunload>ClearProperty(filename_formatted,Home)</onunload>
-    <controls>
-    
+	<controls>
+		<include file="IncludesSubtitleVariables.xml" />
         <!-- fake button with actions -->
         <control type="button" id="9005">
             <visible allowhiddenfocus="true">false</visible>
@@ -176,32 +176,24 @@
 							<visible>ListItem.IsResumable</visible>
                             <visible>Skin.HasSetting(videoinfo_button_play)</visible>
 						</control>
-                        
-                        <control type="button" id="244">
-							<!--Go Fullscreen-->
-							<label>244</label>
-							<width>285</width>
-							<height>60</height>
-							<align>center</align>
-							<textoffsetx>0</textoffsetx>
-							<visible>Player.HasVideo</visible>
-                            <onclick>ClearProperty(TrailerPlaying,Home)</onclick>
-                            <onclick>FullScreen</onclick>
-						</control>
 						
-						<control type="button" id="103">
-							<!-- Local Trailer-->
+						<control type="togglebutton" id="103">
+							<!-- Trailer-->
 							<width>285</width>
 							<height>60</height>
 							<align>center</align>
 							<textoffsetx>0</textoffsetx>
 							<label>20410</label>
+                            <altlabel>244</altlabel>
+                            <usealttexture>!IsEmpty(Window(Home).Property(TrailerPlaying))</usealttexture>
                             <onclick condition="Skin.String(videoinfo_traileraction,fullscreen)">FullScreen</onclick>
 							<onclick condition="Skin.String(videoinfo_traileraction,fullscreen)">PlayMedia($ESCINFO[ListItem.Trailer])</onclick>
                             <onclick condition="!Skin.String(videoinfo_traileraction,fullscreen)">PlayMedia($ESCINFO[ListItem.Trailer],1)</onclick>
-                            <onclick>SetProperty(TrailerPlaying,Playing,Home)</onclick>
+                            <onclick condition="IsEmpty(Window(Home).Property(TrailerPlaying)">SetProperty(TrailerPlaying,Playing,Home)</onclick>
+                            <onclick condition="!IsEmpty(Window(Home).Property(TrailerPlaying)">ClearProperty(TrailerPlaying,Home)</onclick>
+                            <onclick condition="!IsEmpty(Window(Home).Property(TrailerPlaying)">FullScreen</onclick>
                             <visible>Skin.HasSetting(videoinfo_button_trailer)</visible>
-							<visible>!IsEmpty(ListItem.Trailer) + IsEmpty(Window(Home).Property(TrailerPlaying))</visible>
+							<visible>!IsEmpty(ListItem.Trailer) | !IsEmpty(Window(Home).Property(TrailerPlaying))</visible>
 						</control>
 						<control type="button" id="100">
 							<!--Search Trailer on Youtube-->
@@ -674,7 +666,7 @@
 								<!--MPAA RATING and SUBTITLES-->
 								<width>1150</width>
 								<height>40</height>
-								<visible>!IsEmpty(Window(Home).Property(SkinHelper.ListItemSubtitles)) | !IsEmpty(ListItem.mpaa) | !IsEmpty(ListItem.Rating)</visible>
+								<visible>!IsEmpty(Window(Home).Property(SkinHelper.ListItemSubtitles)) | !IsEmpty(ListItem.mpaa) | !IsEmpty(ListItem.Rating) | !IsEmpty(window.Property(skinsubtitlechecker.language.iso_639_2t))</visible>
 								<control type="image">
 									<posx>8</posx>
 									<posy>15</posy>
@@ -695,6 +687,27 @@
 									<shadowcolor>$INFO[Skin.String(ViewDetailsTextShadowColor)]</shadowcolor>
 									<scroll>false</scroll>
 								</control>
+								<control type="image">
+									<posx>8</posx>
+									<posy>15</posy>
+									<width>36</width>
+									<height>36</height>
+                                    <colordiffuse>$INFO[Skin.String(ViewDetailsTextColor)]</colordiffuse>
+									<texture>$VAR[skinsubtitlechecker.available,flags/subtitles/,.png]</texture>
+                                    <visible>!IsEmpty(window.Property(skinsubtitlechecker.language.iso_639_2t))</visible>
+								</control>
+								<control type="label">
+									<posx>60</posx>
+									<posy>0</posy>
+									<width>500</width>
+									<font>Reg26</font>
+									<align>left</align>
+									<label>[UPPERCASE]$INFO[window.Property(skinsubtitlechecker.language.iso_639_2t)][/UPPERCASE]</label>
+									<textcolor>$INFO[Skin.String(ViewDetailsTextColor)]</textcolor>
+									<shadowcolor>$INFO[Skin.String(ViewDetailsTextShadowColor)]</shadowcolor>
+									<scroll>false</scroll>
+									<visible>!IsEmpty(window.Property(skinsubtitlechecker.language.iso_639_2t))</visible>
+								</control>								
                                 <control type="image">
 									<posx>560</posx>
 									<posy>15</posy>
