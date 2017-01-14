@@ -1144,6 +1144,35 @@
                 <visible>!IsEmpty(Control.GetLabel(44230))</visible>
                 <visible>!SubString(ListItem.Path,videodb://movies/sets/,left)</visible>
             </control>
+			
+		
+			<!--SUBTITLE CHECK-->
+			<control type="image" >
+			  <width>36</width>
+			  <height>36</height>
+			  <colordiffuse>$VAR[mediaFlagsFontColor]</colordiffuse>
+			  <bordersize>3</bordersize>
+			  <texture>$VAR[skinsubtitlechecker.available,flags/subtitles/,.png]</texture>
+			  <visible>!IsEmpty(window.Property(skinsubtitlechecker.language.iso_639_2t))</visible>
+			</control>
+			<control type="label" id="44236">
+			  <font>flags</font>
+			  <width>auto</width>
+			  <height>30</height>
+			  <textcolor>$VAR[mediaFlagsFontColor]</textcolor>
+			  <label>[UPPERCASE]$INFO[window.Property(skinsubtitlechecker.language.iso_639_2t)][/UPPERCASE]</label>
+			  <visible>!IsEmpty(window.Property(skinsubtitlechecker.language.iso_639_2t))</visible>
+			</control>
+			<control type="label">
+                <!-- whitespace -->
+                <width>8</width>
+                <height>30</height>
+                <label></label>
+                <visible>!IsEmpty(Control.GetLabel(44236))</visible>
+                <visible>!IsEmpty(window.Property(skinsubtitlechecker.language.iso_639_2t))</visible>
+            </control>
+			
+			
             <control type="image">
                 <width>36</width>
                 <height>36</height>
@@ -2480,4 +2509,33 @@
 
 	</variable>
 	
+	<variable name="skinsubtitlechecker.available">
+		<value condition="System.HasAddon(script.skinsubtitlechecker)">$INFO[window.Property(skinsubtitlechecker.available)]</value>
+		<value></value>
+	</variable>
+	
+	<variable name="Sskinsubtitlechecker.language.full">
+		<value condition="System.HasAddon(script.skinsubtitlechecker)">$INFO[window.Property(skinsubtitlechecker.language.full)]</value>
+		<value></value>
+	</variable>
+
+    <variable name="skinsubtitlechecker.language.iso_639_1">
+		<value condition="System.HasAddon(script.skinsubtitlechecker)">$INFO[window.Property(skinsubtitlechecker.language.iso_639_1)]</value>
+		<value></value>
+    </variable>
+
+    <variable name="skinsubtitlechecker.language.iso_639_2b">
+		<value condition="System.HasAddon(script.skinsubtitlechecker)">$INFO[window.Property(skinsubtitlechecker.language.iso_639_2b)]</value>
+		<value></value>
+    </variable>
+
+    <variable name="skinsubtitlechecker.language.iso_639_2t">
+		<value condition="System.HasAddon(script.skinsubtitlechecker)">$INFO[window.Property(skinsubtitlechecker.language.iso_639_2t)]</value>
+		<value></value>
+    </variable>
+
+    <variable name="skinsubtitlechecker.language.iso_639_2_kodi">
+		<value condition="System.HasAddon(script.skinsubtitlechecker)">$INFO[window.Property(skinsubtitlechecker.language.iso_639_2_kodi)]</value>
+		<value></value>
+    </variable>
 </includes>
