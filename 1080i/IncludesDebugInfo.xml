@@ -74,7 +74,7 @@
                 <shadowcolor>black</shadowcolor>
                 <font>Reg24</font>
                 <align>justify</align>
-                <label>WIDGETCONTAINER --->: $INFO[Window(Home).Property(SkinHelper.WidgetContainer)]</label>
+                <label>ExtraFanart --->: $INFO[Window(Home).Property(SkinHelper.ListItem.Art.ExtraFanArt)]</label>
             </control>
             
             <control type="label">
@@ -84,7 +84,7 @@
                 <shadowcolor>black</shadowcolor>
                 <font>Reg24</font>
                 <align>justify</align>
-                <label>System.ScreenResolution : $INFO[System.ScreenResolution] -- $INFO[Skin.AspectRatio]</label>
+                <label>movieset : $INFO[Window(Home).Property(SkinHelper.ListItem.SongCount)]</label>
             </control>
             <control type="label">
                 <width>100%</width>

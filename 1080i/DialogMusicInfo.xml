@@ -187,7 +187,7 @@
             <height>60</height>
             <aspectratio aligny="center" align="center">keep</aspectratio>
             <colordiffuse>$INFO[Skin.String(GeneralTextColor)]</colordiffuse>
-            <texture fallback="leftrating/rating0.png">$INFO[ListItem.StarRating,leftrating/]</texture>
+            <texture fallback="leftrating/rating0.png">$VAR[musicrating_stars]</texture>
           </control>
         </control>
       </control>
@@ -217,7 +217,7 @@
         <align>justify</align>
         <pagecontrol>60</pagecontrol>
         <label fallback="19055">$INFO[Window(Home).Property(SkinHelper.ListItem.Plot)]</label>
-        <visible>IsEmpty(Control.GetLabel(4))</visible>
+        <visible>String.IsEmpty(Control.GetLabel(4))</visible>
       </control>
 
       <control type="scrollbar" id="60">

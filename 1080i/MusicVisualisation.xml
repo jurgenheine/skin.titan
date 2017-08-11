@@ -7,7 +7,7 @@
          <!--fallback background -->
         <control type="group">
 			<include>GlobalBackground</include>
-            <visible>[!Control.IsVisible(3333) | IsEmpty(Control.GetLabel(3333))] + [!Control.IsVisible(3334) | IsEmpty(Control.GetLabel(3334))]</visible>
+            <visible>[!Control.IsVisible(3333) | String.IsEmpty(Control.GetLabel(3333))] + [!Control.IsVisible(3334) | String.IsEmpty(Control.GetLabel(3334))]</visible>
 		</control>
          <include>NowPlayingBackground</include>
          
@@ -76,7 +76,7 @@
 			<height>180</height>
 			<fadetime>900</fadetime>
 			<aspectratio align="right" aligny="top">keep</aspectratio>
-			<texture>$INFO[Window(Home).Property(SkinHelper.Player.Art.ClearLogo)]</texture>
+			<texture background="true">$INFO[Window(Home).Property(SkinHelper.Player.Art.ClearLogo)]</texture>
             <visible>Skin.String(MusicArtistLogo,enabled) | [Skin.String(MusicArtistLogo,osd) + [Player.ShowInfo | Window.IsActive(MusicOSD)]]</visible>
             <include>animation_fade_visible_hidden_delayed</include>
 		</control>

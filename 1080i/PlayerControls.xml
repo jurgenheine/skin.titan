@@ -274,7 +274,7 @@
 						<altclick>Skin.SetAddon(LyricScript_Path,xbmc.python.lyrics)</altclick>
 						<altclick>Close</altclick>
 						<altclick>RunScript($INFO[Skin.String(LyricScript_Path)])</altclick>
-						<usealttexture>IsEmpty(Skin.String(LyricScript_Path))</usealttexture>
+						<usealttexture>String.IsEmpty(Skin.String(LyricScript_Path))</usealttexture>
 						<visible>Player.HasAudio</visible>
 						<visible>!VideoPlayer.Content(LiveTV)</visible>
 					</control>
@@ -414,7 +414,7 @@
 				<top>66</top>
 				<width>195</width>
 				<height>195</height>
-				<texture>$VAR[AudioPlayerCoverImage]</texture>
+				<texture background="true">$VAR[AudioPlayerCoverImage]</texture>
 			</control>
 			<control type="label">
 				<description>Artist label</description>

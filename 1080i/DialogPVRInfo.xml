@@ -54,7 +54,7 @@
 				<right>60</right>
                 <posy>40</posy>
 				<font>-</font>
-				<texture>$VAR[PVRInfoThumb]</texture>
+				<texture background="true">$VAR[PVRInfoThumb]</texture>
                 <aspectratio align="right" aligny="top">keep</aspectratio>
 				<visible>!Skin.HasSetting(EnableTouchSupport)</visible>
 			</control>
@@ -199,7 +199,7 @@
 				<shadowcolor>$INFO[Skin.String(ViewDetailsTextShadowColor)]</shadowcolor>
                 <pagecontrol>60</pagecontrol>
                 <label fallback="161">$VAR[Plots]</label>
-                <visible>IsEmpty(Window(home).Property(SkinHelper.ListItem.Art.Poster))</visible>
+                <visible>String.IsEmpty(Window(home).Property(SkinHelper.ListItem.Art.Poster))</visible>
             </control>
             <control type="textbox" id="400">
                 <description>Plot value with poster present</description>
@@ -212,14 +212,14 @@
 				<shadowcolor>$INFO[Skin.String(ViewDetailsTextShadowColor)]</shadowcolor>
                 <pagecontrol>60</pagecontrol>
                 <label fallback="161">$VAR[Plots]</label>
-                <visible>!IsEmpty(Window(home).Property(SkinHelper.ListItem.Art.Poster))</visible>
+                <visible>!String.IsEmpty(Window(home).Property(SkinHelper.ListItem.Art.Poster))</visible>
             </control>
             <control type="image">
                 <right>50</right>
                 <posy>555</posy>
                 <width>300</width>
                 <height>351</height>
-                <texture>$INFO[Window(home).Property(SkinHelper.ListItem.Art.Poster)]</texture>
+                <texture background="true">$INFO[Window(home).Property(SkinHelper.ListItem.Art.Poster)]</texture>
                 <aspectratio align="right" aligny="top">keep</aspectratio>
             </control>
             <!--Button Group-->
@@ -230,7 +230,7 @@
 				<orientation>horizontal</orientation>
 				<itemgap>20</itemgap>
                 <onup>60</onup>
-                    <ondown>60</ondown>
+                <ondown>60</ondown>
                 <defaultcontrol>5</defaultcontrol>
                 <control type="button" id="5">
                     <!--Switch-->
@@ -267,6 +267,24 @@
 					<include>DialogButtonOther</include>
 					<label>19003</label>
                     <visible>Window.IsActive(PVRGuideInfo)</visible> 
+				</control>
+                <control type="button" id="444">
+					<width>290</width>
+					<description>Trailer</description>
+					<include>DialogButtonOther</include>
+					<label>20410</label>
+                    <onclick>Close</onclick>
+                    <onclick>Playmedia($INFO[Window(Home).Property(SkinHelper.ListItem.Trailer)])</onclick> 
+                    <visible>!String.IsEmpty(Window(Home).Property(SkinHelper.ListItem.Trailer))</visible>
+                </control>
+                <control type="button" id="445">
+					<width>290</width>
+					<description>Youtube</description>
+					<include>DialogButtonOther</include>
+					<label>31797</label>
+                    <onclick condition="System.HasAddon(plugin.video.youtube)">RunScript(script.skin.helper.service,action=searchyoutube,title=$INFO[ListItem.Title] $INFO[ListItem.Year],header=$LOCALIZE[31797])</onclick>
+                    <onclick condition="!System.HasAddon(plugin.video.youtube)">ActivateWindow(Videos,plugin://plugin.video.youtube)</onclick>
+                    <visible>Skin.HasSetting(videoinfo_button_youtubevideos)</visible>
 				</control>
 				<control type="button" id="7">
                     <!--Cancel-->
